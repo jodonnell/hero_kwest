@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/class.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/control.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/constants.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/level_builder.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/sprite.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/game_init.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/images.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/player.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/player_animations.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/game_controller.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/collision_detector.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/onscreen_sprites.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/title_screen.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/solo_game.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/wall.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/stats.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<title>Game</title>
+	<body style="background-color: #010000">
+		<script type="text/javascript">
+var stats = new Stats();
+stats.setMode(0); // 0: fps, 1: ms
+
+// Align top-left
+stats.domElement.style.position = 'absolute';
+stats.domElement.style.right = '0px';
+stats.domElement.style.top = '0px';
+stats.domElement.style.float = 'right';
+
+document.body.appendChild( stats.domElement );
+
+window.requestAnimFrame = (function(){
+    return  window.requestAnimationFrame       || 
+        window.webkitRequestAnimationFrame || 
+        window.mozRequestAnimationFrame    || 
+        window.oRequestAnimationFrame      || 
+        window.msRequestAnimationFrame     || 
+        function( callback ){
+            window.setTimeout(callback, 1000 / 60);
+        };
+
+})();
+
+window.cancelAnimationFrame = (function(){
+    return  window.cancelAnimationFrame       || 
+        window.mozCancelRequestAnimationFrame
+
+})();
+
+
+var gameInit = new GameInit();
+var gameContext = $('#gameCanvas').get(0).getContext("2d");
+var titleScreen;
+var gameImages = new Images(function() {
+		titleScreen = new TitleScreen(new Control());
+
+		(function animloop(){
+        stats.begin();
+
+        var cancelId = requestAnimFrame(animloop);
+        titleScreen.update(cancelId);
+        titleScreen.draw();
+
+        stats.end();
+		})();
+});
+
+		</script>
+	</body>
+</html>

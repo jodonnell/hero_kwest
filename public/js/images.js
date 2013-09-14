@@ -15,7 +15,7 @@ var Images = Class.extend({
         this[prop] = {ready: false};
 
         this[prop] = new Image();
-        this[prop].src = "assets/" + imageFile;
+        this[prop].src = "images/" + imageFile;
         if (prop === 'bubRight')
             this[prop].onload = this._callback;
     }
