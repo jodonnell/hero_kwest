@@ -2,7 +2,7 @@
 
 var SoloGame = Class.extend({
     init: function() {
-        var bub = new Player(200, 100, 'bub', new Control());
+        var bub = new Player(10, 10);
 
         var gameController = new GameController(gameInit, bub);
 

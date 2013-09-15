@@ -4,8 +4,8 @@ var GameController = Class.extend({
     init: function (gameInit, players) {
         this.gameInit = gameInit;
 
-        this.onscreenSprites = new OnscreenSprites({players: players,
-                                                   walls: (new LevelBuilder(this.walls)).walls});
+        this.onscreenSprites = new OnscreenSprites({players: [players],
+                                                   floors: (new LevelBuilder()).floors});
 
         this.collisionDetector = new CollisionDetector();
     },
