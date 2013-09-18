@@ -7,7 +7,7 @@ var GameController = Class.extend({
         this.onscreenSprites = new OnscreenSprites({players: [players],
                                                    floors: (new LevelBuilder()).floors});
 
-        this.collisionDetector = new CollisionDetector();
+        this.mouse = new Mouse(players, this.onscreenSprites);
     },
 
     draw: function () {
@@ -26,7 +26,7 @@ var GameController = Class.extend({
 
     update: function () {
         var updateMethod = $.proxy(function (i, j) {
-            this.onscreenSprites.sprites[i][j].update({collisionDetector: this.collisionDetector, onscreenSprites: this.onscreenSprites});
+            this.onscreenSprites.sprites[i][j].update({onscreenSprites: this.onscreenSprites});
         }, this);
         this._eachSprite(updateMethod);
     },
