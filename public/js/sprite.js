@@ -3,7 +3,13 @@
 var Sprite = Class.extend({
     draw: function () {
         var image = gameImages[this.getCurrentImage()];
-        gameContext.drawImage(image, this.x * TILE_SIZE, this.y * TILE_SIZE);
+
+        if ((typeof this.spriteSheetX !== "undefined") && (typeof this.spriteSheetY !== "undefined")) {
+            gameContext.drawImage(image, this.spriteSheetX, this.spriteSheetY, TILE_SIZE, TILE_SIZE, this.x * TILE_SIZE, this.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        }
+        else {
+            gameContext.drawImage(image, this.x * TILE_SIZE, this.y * TILE_SIZE);
+        }
     },
 
     height: function () {
