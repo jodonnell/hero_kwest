@@ -15,6 +15,6 @@ var Player = Sprite.extend({
 
     draw: function () {
         var image = gameImages[this.getCurrentImage()];
-        gameContext.drawImage(image, this.x * 30 - 20, this.y * 30 - 24);
+        gameContext.drawImage(image, this.x * TILE_SIZE - 16, this.y * TILE_SIZE - 24);
     },
 });

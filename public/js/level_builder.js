@@ -7,10 +7,8 @@ var LevelBuilder = Class.extend({
     },
 
     buildLevel1: function () {
-        var i;
-        var k;
-        for (i = 0; i < 27; i++) {
-            for (k = 0; k < 27; k++)  {
+        for (var i = 0; i < 27; i++) {
+            for (var k = 0; k < 18; k++)  {
                 this.floors.push(new Floor(i, k));
             }
         }
