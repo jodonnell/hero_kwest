@@ -5,6 +5,7 @@ var GameController = Class.extend({
         this.gameInit = gameInit;
 
         this.onscreenSprites = new OnscreenSprites({players: [players],
+                                                   walls: (new LevelBuilder()).walls,
                                                    floors: (new LevelBuilder()).floors});
 
         this.mouse = new Mouse(players, this.onscreenSprites);

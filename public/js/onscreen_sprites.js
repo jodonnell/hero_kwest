@@ -10,11 +10,12 @@ var OnscreenSprites = Class.extend({
         this.enemies = sprites.enemies || [];
         this.movementTiles = sprites.movementTiles || [];
         this.floors = sprites.floors || [];
+        this.walls = sprites.walls || [];
         this.deadEnemies = sprites.deadEnemies || [];
         this.collectibles = sprites.collectibles || [];
         this.texts = sprites.texts || [];
 
-        this.sprites = [this.floors].concat([this.floors], [this.enemies], [this.deadEnemies], [this.collectibles], [this.texts], [this.movementTiles], [this.players]);
+        this.sprites = [this.walls].concat([this.floors], [this.enemies], [this.deadEnemies], [this.collectibles], [this.texts], [this.movementTiles], [this.players]);
 
         var remove = function (element) {
             var index = this.indexOf(element);
@@ -28,5 +29,6 @@ var OnscreenSprites = Class.extend({
         this.collectibles.remove = remove;
         this.texts.remove = remove;
         this.movementTiles.remove = remove;
+        this.walls.remove = remove;
     }
 });
