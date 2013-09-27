@@ -21,6 +21,12 @@ var LevelBuilder = Class.extend({
         this.walls.push(new Wall(0, 4, 'left'));
 
         this.floors.push(new Floor(0, 6, 'light grey'));
+        this.floors.push(new Floor(1, 6, 'navy'));
+        this.floors.push(new Floor(2, 6, 'light grey'));
+        this.floors.push(new Floor(3, 6, 'navy'));
+        this.floors.push(new Floor(4, 6, 'light grey'));
+
+
         this.floors.push(new Floor(0, 7, 'navy'));
         this.floors.push(new Floor(0, 8, 'light grey'));
         this.floors.push(new Floor(0, 9, 'navy'));
@@ -56,6 +62,27 @@ var LevelBuilder = Class.extend({
         this.floors.push(new Floor(21, 16, 'navy'));
         this.floors.push(new Floor(22, 16, 'light grey'));
         this.floors.push(new Floor(23, 16, 'navy'));
+
+        this.floors.push(new Floor(9, 15, 'light grey'));
+        this.floors.push(new Floor(10, 15, 'navy'));
+        this.floors.push(new Floor(9, 14, 'navy'));
+        this.floors.push(new Floor(10, 14, 'light grey'));
+        this.floors.push(new Floor(9, 13, 'light grey'));
+        this.floors.push(new Floor(10, 13, 'navy'));
+        this.floors.push(new Floor(9, 12, 'navy'));
+        this.floors.push(new Floor(10, 12, 'light grey'));
+        this.floors.push(new Floor(9, 11, 'light grey'));
+
+        this.floors.push(new Floor(4, 12, 'light grey'));
+        this.floors.push(new Floor(5, 12, 'navy'));
+        this.floors.push(new Floor(6, 12, 'light grey'));
+        this.floors.push(new Floor(7, 12, 'navy'));
+        this.floors.push(new Floor(8, 12, 'light grey'));
+
+        this.floors.push(new Floor(11, 12, 'navy'));
+        this.floors.push(new Floor(12, 12, 'light grey'));
+        this.floors.push(new Floor(13, 12, 'navy'));
+        this.floors.push(new Floor(14, 12, 'light grey'));
 
 
         this.walls.push(new Wall(1, 0, 'top'));
