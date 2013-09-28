@@ -55,6 +55,32 @@ var LevelBuilder = Class.extend({
         }
     },
 
+    fillWallSquare: function (startX, finishX, startY, finishY, color1, color2) {
+        for (var x = startX; x <= finishX; x++) {
+            for (var y = startY; y <= finishY; y++) {
+                var yEven = ((y - startY) % 2) === 0;
+                var xEven = ((x - startX) % 2) === 0;
+
+                if (yEven) {
+                    if (xEven) {
+                        this.walls.push(new Wall(x, y, color1));
+                    }
+                    else {
+                        this.walls.push(new Wall(x, y, color2));
+                    }
+                }
+                else {
+                    if (xEven) {
+                        this.walls.push(new Wall(x, y, color2));
+                    }
+                    else {
+                        this.walls.push(new Wall(x, y, color1));
+                    }
+                }
+            }
+        }
+    },
+
     buildLevel1: function () {
         // for (var i = 0; i < 27; i++) {
         //     for (var k = 0; k < 18; k++)  {
@@ -110,7 +136,30 @@ var LevelBuilder = Class.extend({
         this.floors.push(new Floor(22, 5, 'light blue'));
 
 
-        this.walls.push(new Wall(1, 0, 'top'));
-        this.walls.push(new Wall(2, 0, 'top2'));
+        this.fillWallSquare(1, 2, 1, 1, 'front1', 'front2');
+        this.fillWallSquare(3, 3, 2, 2, 'front1', 'front2');
+        this.fillWallSquare(4, 14, 1, 1, 'front1', 'front2');
+        this.fillWallSquare(16, 19, 1, 1, 'front1', 'front2');
+        this.fillWallSquare(21, 23, 1, 1, 'front1', 'front2');
+
+        this.fillWallSquare(0, 4, 6, 6, 'front1', 'front2');
+        this.fillWallSquare(6, 12, 4, 4, 'front1', 'front2');
+
+        this.fillWallSquare(15, 17, 6, 6, 'front1', 'front2');
+        this.fillWallSquare(19, 21, 6, 6, 'front1', 'front2');
+        this.fillWallSquare(23, 23, 6, 6, 'front1', 'front2');
+
+        this.fillWallSquare(5, 8, 12, 12, 'front1', 'front2');
+        this.fillWallSquare(10, 13, 12, 12, 'front1', 'front2');
+
+        this.fillWallSquare(16, 21, 9, 9, 'front1', 'front2');
+        this.fillWallSquare(22, 22, 11, 11, 'front1', 'front2');
+
+        this.fillWallSquare(1, 8, 16, 16, 'front1', 'front2');
+        this.fillWallSquare(11, 17, 16, 16, 'front1', 'front2');
+        this.fillWallSquare(19, 22, 16, 16, 'front1', 'front2');
+
+        this.fillWallSquare(0, 23, 0, 0, 'top1', 'top2');
+
     }
 });
