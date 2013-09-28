@@ -7,6 +7,28 @@ var LevelBuilder = Class.extend({
         this.buildLevel1();
     },
 
+    alternateTilesX: function (start, finish, x, color1, color2) {
+        for (var i = start; i <= finish; i++) {
+            if (((i - start) % 2) === 0) {
+                this.floors.push(new Floor(x, i, color1));
+            }
+            else {
+                this.floors.push(new Floor(x, i, color2));
+            }
+        }
+    },
+
+    alternateTilesY: function (start, finish, y, color1, color2) {
+        for (var i = start; i <= finish; i++) {
+            if (((i - start) % 2) === 0) {
+                this.floors.push(new Floor(i, y, color1));
+            }
+            else {
+                this.floors.push(new Floor(i, y, color2));
+            }
+        }
+    },
+
     buildLevel1: function () {
         // for (var i = 0; i < 27; i++) {
         //     for (var k = 0; k < 18; k++)  {
@@ -20,69 +42,30 @@ var LevelBuilder = Class.extend({
         this.walls.push(new Wall(0, 3, 'left'));
         this.walls.push(new Wall(0, 4, 'left'));
 
-        this.floors.push(new Floor(0, 6, 'light grey'));
-        this.floors.push(new Floor(1, 6, 'navy'));
-        this.floors.push(new Floor(2, 6, 'light grey'));
-        this.floors.push(new Floor(3, 6, 'navy'));
-        this.floors.push(new Floor(4, 6, 'light grey'));
+        
+        this.alternateTilesX(2, 12, 4, 'navy', 'light grey');
+        this.alternateTilesX(2, 12, 14, 'navy', 'light grey');
+
+        this.alternateTilesY(5, 13, 2, 'light grey', 'navy');
+
+        this.alternateTilesY(0, 4, 7, 'light grey', 'navy');
+        this.alternateTilesY(15, 22, 7, 'navy', 'light grey');
+
+        this.alternateTilesX(8, 17, 0, 'navy', 'light grey');
+        this.alternateTilesX(7, 16, 23, 'navy', 'light grey');
+
+        this.alternateTilesY(1, 23, 17, 'navy', 'light grey');
+
+        this.alternateTilesX(12, 16, 9, 'light grey', 'navy');
+        this.alternateTilesX(13, 16, 10, 'light grey', 'navy');
+
+        this.alternateTilesY(4, 8, 13, 'light grey', 'navy');
+        this.alternateTilesY(11, 14, 13, 'navy', 'light grey');
 
 
-        this.floors.push(new Floor(0, 7, 'navy'));
-        this.floors.push(new Floor(0, 8, 'light grey'));
-        this.floors.push(new Floor(0, 9, 'navy'));
-        this.floors.push(new Floor(0, 10, 'light grey'));
-        this.floors.push(new Floor(0, 11, 'navy'));
-        this.floors.push(new Floor(0, 12, 'light grey'));
-        this.floors.push(new Floor(0, 13, 'navy'));
-        this.floors.push(new Floor(0, 14, 'light grey'));
-        this.floors.push(new Floor(0, 15, 'navy'));
-        this.floors.push(new Floor(0, 16, 'light grey'));
-
-
-        this.floors.push(new Floor(1, 16, 'navy'));
-        this.floors.push(new Floor(2, 16, 'light grey'));
-        this.floors.push(new Floor(3, 16, 'navy'));
-        this.floors.push(new Floor(4, 16, 'light grey'));
-        this.floors.push(new Floor(5, 16, 'navy'));
-        this.floors.push(new Floor(6, 16, 'light grey'));
-        this.floors.push(new Floor(7, 16, 'navy'));
-        this.floors.push(new Floor(8, 16, 'light grey'));
-        this.floors.push(new Floor(9, 16, 'navy'));
-        this.floors.push(new Floor(10, 16, 'light grey'));
-        this.floors.push(new Floor(11, 16, 'navy'));
-        this.floors.push(new Floor(12, 16, 'light grey'));
-        this.floors.push(new Floor(13, 16, 'navy'));
-        this.floors.push(new Floor(14, 16, 'light grey'));
-        this.floors.push(new Floor(15, 16, 'navy'));
-        this.floors.push(new Floor(16, 16, 'light grey'));
-        this.floors.push(new Floor(17, 16, 'navy'));
-        this.floors.push(new Floor(18, 16, 'light grey'));
-        this.floors.push(new Floor(19, 16, 'navy'));
-        this.floors.push(new Floor(20, 16, 'light grey'));
-        this.floors.push(new Floor(21, 16, 'navy'));
-        this.floors.push(new Floor(22, 16, 'light grey'));
-        this.floors.push(new Floor(23, 16, 'navy'));
-
-        this.floors.push(new Floor(9, 15, 'light grey'));
-        this.floors.push(new Floor(10, 15, 'navy'));
-        this.floors.push(new Floor(9, 14, 'navy'));
-        this.floors.push(new Floor(10, 14, 'light grey'));
-        this.floors.push(new Floor(9, 13, 'light grey'));
-        this.floors.push(new Floor(10, 13, 'navy'));
-        this.floors.push(new Floor(9, 12, 'navy'));
-        this.floors.push(new Floor(10, 12, 'light grey'));
-        this.floors.push(new Floor(9, 11, 'light grey'));
-
-        this.floors.push(new Floor(4, 12, 'light grey'));
-        this.floors.push(new Floor(5, 12, 'navy'));
-        this.floors.push(new Floor(6, 12, 'light grey'));
-        this.floors.push(new Floor(7, 12, 'navy'));
-        this.floors.push(new Floor(8, 12, 'light grey'));
-
-        this.floors.push(new Floor(11, 12, 'navy'));
-        this.floors.push(new Floor(12, 12, 'light grey'));
-        this.floors.push(new Floor(13, 12, 'navy'));
-        this.floors.push(new Floor(14, 12, 'light grey'));
+        this.floors.push(new Floor(18, 16, 'navy'));
+        this.floors.push(new Floor(18, 6, 'navy'));
+        this.floors.push(new Floor(22, 6, 'navy'));
 
 
         this.walls.push(new Wall(1, 0, 'top'));
