@@ -82,20 +82,12 @@ var LevelBuilder = Class.extend({
     },
 
     buildLevel1: function () {
-        // for (var i = 0; i < 27; i++) {
-        //     for (var k = 0; k < 18; k++)  {
-        //         this.floors.push(new Floor(i, k, 'navy'));
-        //     }
-        // }
-        
-        this.walls.push(new Wall(0, 0, 'left'));
-        this.walls.push(new Wall(0, 1, 'left'));
-        this.walls.push(new Wall(0, 2, 'left'));
-        this.walls.push(new Wall(0, 3, 'left'));
-        this.walls.push(new Wall(0, 4, 'left'));
+        this.fillFloors();
+        this.fillWalls();
+    },
 
-        
-        this.alternateTilesX(2, 12, 4, 'navy', 'light grey');
+    fillFloors: function () {
+				this.alternateTilesX(2, 12, 4, 'navy', 'light grey');
         this.alternateTilesX(2, 12, 14, 'navy', 'light grey');
 
         this.alternateTilesY(5, 13, 2, 'light grey', 'navy');
@@ -134,9 +126,10 @@ var LevelBuilder = Class.extend({
 
         this.fillSquare(21, 23, 2, 4, 'light blue', 'dark blue');
         this.floors.push(new Floor(22, 5, 'light blue'));
+    },
 
-
-        this.fillWallSquare(1, 2, 1, 1, 'front1', 'front2');
+    fillWalls: function () {
+				this.fillWallSquare(1, 2, 1, 1, 'front1', 'front2');
         this.fillWallSquare(3, 3, 2, 2, 'front1', 'front2');
         this.fillWallSquare(4, 14, 1, 1, 'front1', 'front2');
         this.fillWallSquare(16, 19, 1, 1, 'front1', 'front2');
@@ -160,6 +153,55 @@ var LevelBuilder = Class.extend({
         this.fillWallSquare(19, 22, 16, 16, 'front1', 'front2');
 
         this.fillWallSquare(0, 23, 0, 0, 'top1', 'top2');
+        this.fillWallSquare(0, 0, 1, 4, 'left1', 'left2');
+        this.fillWallSquare(0, 0, 5, 5, 'bottomleft', 'bottomleft');
+        this.fillWallSquare(1, 2, 5, 5, 'bottom1', 'bottom1');
+        this.fillWallSquare(3, 3, 5, 5, 'bottomright', 'bottomright');
+        this.fillWallSquare(3, 3, 4, 4, 'top1', 'top1');
+        this.fillWallSquare(3, 3, 4, 4, 'topright', 'top1');
+        this.fillWallSquare(3, 3, 1, 1, 'bottomright', 'top1');
 
+        this.fillWallSquare(15, 15, 1, 4, 'left1', 'left2');
+        this.fillWallSquare(15, 15, 5, 5, 'bottomleft', 'top2');
+        this.fillWallSquare(16, 18, 5, 5, 'bottom1', 'bottom2');
+        
+        this.fillWallSquare(20, 20, 1, 4, 'left1', 'left2');
+        this.fillWallSquare(19, 21, 5, 5, 'bottom1', 'bottom2');
+
+        this.fillWallSquare(23, 23, 5, 5, 'bottom1', 'bottom2');
+
+
+        this.fillWallSquare(24, 24, 0, 0, 'topright', 'right2');
+        this.fillWallSquare(24, 24, 17, 17, 'bottomright', 'right2');
+        this.fillWallSquare(24, 24, 1, 16, 'right1', 'right2');
+
+        this.fillWallSquare(5, 5, 3, 3, 'topleft', 'right2');
+        this.fillWallSquare(6, 12, 3, 3, 'top1', 'top2');
+        this.fillWallSquare(13, 13, 3, 3, 'topright', 'topright');
+        this.fillWallSquare(5, 5, 4, 10, 'left1', 'left2');
+        this.fillWallSquare(13, 13, 4, 10, 'right1', 'right2');
+        this.fillWallSquare(5, 8, 11, 11, 'bottom1', 'bottom2');
+        this.fillWallSquare(10, 13, 11, 11, 'bottom1', 'bottom2');
+
+        this.fillWallSquare(1, 8, 15, 15, 'bottom1', 'bottom2');
+        this.fillWallSquare(4, 8, 14, 14, 'top1', 'top2');
+        this.fillWallSquare(1, 1, 8, 14, 'left1', 'left2');
+        this.fillWallSquare(3, 3, 8, 14, 'right1', 'right2');
+        this.fillWallSquare(2, 2, 8, 8, 'top1', 'top2');
+        this.fillWallSquare(2, 2, 9, 14, 'front1', 'front1');
+
+        this.fillWallSquare(11, 11, 15, 15, 'bottomleft', 'bottom2');
+        this.fillWallSquare(12, 17, 15, 15, 'bottom1', 'bottom2');
+        this.fillWallSquare(19, 21, 15, 15, 'bottom1', 'bottom2');
+        this.fillWallSquare(22, 22, 15, 15, 'bottomright', 'bottom2');
+
+        this.fillWallSquare(11, 11, 14, 14, 'topleft', 'bottom2');
+        this.fillWallSquare(12, 15, 14, 14, 'top1', 'top2');
+        this.fillWallSquare(15, 15, 9, 13, 'left1', 'left2');
+        this.fillWallSquare(15, 15, 8, 8, 'topleft', 'left2');
+        this.fillWallSquare(16, 22, 8, 8, 'top1', 'top2');
+
+        this.fillWallSquare(22, 22, 9, 10, 'right1', 'right2');
+        this.fillWallSquare(22, 22, 12, 14, 'right1', 'right2');
     }
 });
