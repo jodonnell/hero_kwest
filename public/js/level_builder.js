@@ -29,6 +29,32 @@ var LevelBuilder = Class.extend({
         }
     },
 
+    fillSquare: function (startX, finishX, startY, finishY, color1, color2) {
+        for (var x = startX; x <= finishX; x++) {
+            for (var y = startY; y <= finishY; y++) {
+                var yEven = ((y - startY) % 2) === 0;
+                var xEven = ((x - startX) % 2) === 0;
+
+                if (yEven) {
+                    if (xEven) {
+                        this.floors.push(new Floor(x, y, color1));
+                    }
+                    else {
+                        this.floors.push(new Floor(x, y, color2));
+                    }
+                }
+                else {
+                    if (xEven) {
+                        this.floors.push(new Floor(x, y, color2));
+                    }
+                    else {
+                        this.floors.push(new Floor(x, y, color1));
+                    }
+                }
+            }
+        }
+    },
+
     buildLevel1: function () {
         // for (var i = 0; i < 27; i++) {
         //     for (var k = 0; k < 18; k++)  {
@@ -62,10 +88,26 @@ var LevelBuilder = Class.extend({
         this.alternateTilesY(4, 8, 13, 'light grey', 'navy');
         this.alternateTilesY(11, 14, 13, 'navy', 'light grey');
 
-
         this.floors.push(new Floor(18, 16, 'navy'));
         this.floors.push(new Floor(18, 6, 'navy'));
         this.floors.push(new Floor(22, 6, 'navy'));
+
+
+        this.fillSquare(6, 12, 5, 10, 'yellow', 'dark brown');
+        this.floors.push(new Floor(9, 11, 'dark brown'));
+
+        this.fillSquare(16, 21, 10, 14, 'yellow', 'dark brown');
+        this.floors.push(new Floor(18, 15, 'dark brown'));
+        this.floors.push(new Floor(22, 12, 'yellow'));
+
+        this.fillSquare(1, 2, 2, 4, 'olive', 'light green');
+        this.floors.push(new Floor(3, 3, 'light green'));
+
+        this.fillSquare(16, 19, 2, 4, 'purple brown', 'purple');
+        this.floors.push(new Floor(18, 5, 'purple'));
+
+        this.fillSquare(21, 23, 2, 4, 'light blue', 'dark blue');
+        this.floors.push(new Floor(22, 5, 'light blue'));
 
 
         this.walls.push(new Wall(1, 0, 'top'));
