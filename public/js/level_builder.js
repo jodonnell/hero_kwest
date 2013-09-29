@@ -10,10 +10,10 @@ var LevelBuilder = Class.extend({
     alternateTilesX: function (start, finish, x, color1, color2) {
         for (var i = start; i <= finish; i++) {
             if (((i - start) % 2) === 0) {
-                this.floors.push(new Floor(x, i, color1));
+                this.floors.push(new Floor((new Position(x, i)), color1));
             }
             else {
-                this.floors.push(new Floor(x, i, color2));
+                this.floors.push(new Floor((new Position(x, i)), color2));
             }
         }
     },
@@ -21,10 +21,10 @@ var LevelBuilder = Class.extend({
     alternateTilesY: function (start, finish, y, color1, color2) {
         for (var i = start; i <= finish; i++) {
             if (((i - start) % 2) === 0) {
-                this.floors.push(new Floor(i, y, color1));
+                this.floors.push(new Floor((new Position(i, y)), color1));
             }
             else {
-                this.floors.push(new Floor(i, y, color2));
+                this.floors.push(new Floor((new Position(i, y)), color2));
             }
         }
     },
@@ -37,18 +37,18 @@ var LevelBuilder = Class.extend({
 
                 if (yEven) {
                     if (xEven) {
-                        this.floors.push(new Floor(x, y, color1));
+                        this.floors.push(new Floor((new Position(x, y)), color1));
                     }
                     else {
-                        this.floors.push(new Floor(x, y, color2));
+                        this.floors.push(new Floor((new Position(x, y)), color2));
                     }
                 }
                 else {
                     if (xEven) {
-                        this.floors.push(new Floor(x, y, color2));
+                        this.floors.push(new Floor((new Position(x, y)), color2));
                     }
                     else {
-                        this.floors.push(new Floor(x, y, color1));
+                        this.floors.push(new Floor((new Position(x, y)), color1));
                     }
                 }
             }
@@ -63,18 +63,18 @@ var LevelBuilder = Class.extend({
 
                 if (yEven) {
                     if (xEven) {
-                        this.walls.push(new Wall(x, y, color1));
+                        this.walls.push(new Wall((new Position(x, y)), color1));
                     }
                     else {
-                        this.walls.push(new Wall(x, y, color2));
+                        this.walls.push(new Wall((new Position(x, y)), color2));
                     }
                 }
                 else {
                     if (xEven) {
-                        this.walls.push(new Wall(x, y, color2));
+                        this.walls.push(new Wall((new Position(x, y)), color2));
                     }
                     else {
-                        this.walls.push(new Wall(x, y, color1));
+                        this.walls.push(new Wall((new Position(x, y)), color1));
                     }
                 }
             }
@@ -106,26 +106,26 @@ var LevelBuilder = Class.extend({
         this.alternateTilesY(4, 8, 13, 'light grey', 'navy');
         this.alternateTilesY(11, 14, 13, 'navy', 'light grey');
 
-        this.floors.push(new Floor(18, 16, 'navy'));
-        this.floors.push(new Floor(18, 6, 'navy'));
-        this.floors.push(new Floor(22, 6, 'navy'));
+        this.floors.push(new Floor((new Position(18, 16)), 'navy'));
+        this.floors.push(new Floor((new Position(18, 6)), 'navy'));
+        this.floors.push(new Floor((new Position(22, 6)), 'navy'));
 
 
         this.fillSquare(6, 12, 5, 10, 'yellow', 'dark brown');
-        this.floors.push(new Floor(9, 11, 'dark brown'));
+        this.floors.push(new Floor((new Position(9, 11)), 'dark brown'));
 
         this.fillSquare(16, 21, 10, 14, 'yellow', 'dark brown');
-        this.floors.push(new Floor(18, 15, 'dark brown'));
-        this.floors.push(new Floor(22, 12, 'yellow'));
+        this.floors.push(new Floor((new Position(18, 15)), 'dark brown'));
+        this.floors.push(new Floor((new Position(22, 12)), 'yellow'));
 
         this.fillSquare(1, 2, 2, 4, 'olive', 'light green');
-        this.floors.push(new Floor(3, 3, 'light green'));
+        this.floors.push(new Floor((new Position(3, 3)), 'light green'));
 
         this.fillSquare(16, 19, 2, 4, 'purple brown', 'purple');
-        this.floors.push(new Floor(18, 5, 'purple'));
+        this.floors.push(new Floor((new Position(18, 5)), 'purple'));
 
         this.fillSquare(21, 23, 2, 4, 'light blue', 'dark blue');
-        this.floors.push(new Floor(22, 5, 'light blue'));
+        this.floors.push(new Floor((new Position(22, 5)), 'light blue'));
     },
 
     fillWalls: function () {

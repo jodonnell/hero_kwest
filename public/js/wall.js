@@ -1,9 +1,8 @@
 "use strict";
 
 var Wall = Sprite.extend({
-    init: function (x, y, wallSide) {
-        this.x = x;
-        this.y = y;
+    init: function (position, wallSide) {
+        this.position = position;
         this.currentImage = 'tiles';
 
         if (wallSide === 'topleft') {

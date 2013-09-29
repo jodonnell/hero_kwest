@@ -1,9 +1,8 @@
 "use strict";
 
 var Player = Sprite.extend({
-    init: function (x, y) {
-        this.x = x;
-        this.y = y;
+    init: function (position) {
+        this.position = position;
     },
 
     update: function (args) {
@@ -15,6 +14,6 @@ var Player = Sprite.extend({
 
     draw: function () {
         var image = gameImages[this.getCurrentImage()];
-        gameContext.drawImage(image, this.x * TILE_SIZE - 16, this.y * TILE_SIZE - 24);
+        gameContext.drawImage(image, this.position.xPixels() - 16, this.position.yPixels() - 24);
     },
 });

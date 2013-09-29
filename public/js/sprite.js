@@ -5,10 +5,10 @@ var Sprite = Class.extend({
         var image = gameImages[this.getCurrentImage()];
 
         if ((typeof this.spriteSheetX !== "undefined") && (typeof this.spriteSheetY !== "undefined")) {
-            gameContext.drawImage(image, this.spriteSheetX, this.spriteSheetY, TILE_SIZE, TILE_SIZE, this.x * TILE_SIZE, this.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+            gameContext.drawImage(image, this.spriteSheetX, this.spriteSheetY, TILE_SIZE, TILE_SIZE, this.position.xPixels(), this.position.yPixels(), TILE_SIZE, TILE_SIZE);
         }
         else {
-            gameContext.drawImage(image, this.x * TILE_SIZE, this.y * TILE_SIZE);
+            gameContext.drawImage(image, this.position.xPixels(), this.position.yPixels());
         }
     },
 
@@ -22,14 +22,6 @@ var Sprite = Class.extend({
 
     getCurrentImage: function () {
         return this.currentImage;
-    },
-
-    rightSide: function () {
-        return this.x + this.width();
-    },
-
-    bottomSide: function () {
-        return this.y + this.height();
     },
 
     update: function () {

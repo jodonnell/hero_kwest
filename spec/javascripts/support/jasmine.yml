@@ -13,9 +13,14 @@
 src_files:
     - public/js/jquery.js
     - public/js/class.js
+    - public/js/position.js
     - public/js/sprite.js
+    - public/js/constants.js
+    - public/js/player.js
     - public/js/game_init.js
     - public/js/control.js
+    - public/js/wall.js
+    - public/js/onscreen_sprites.js
 
 
 # stylesheets
