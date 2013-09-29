@@ -153,6 +153,8 @@ var LevelBuilder = Class.extend({
         this.fillWallSquare(19, 22, 16, 16, 'front1', 'front2');
 
         this.fillWallSquare(0, 23, 0, 0, 'top1', 'top2');
+
+        //top left room
         this.fillWallSquare(0, 0, 1, 4, 'left1', 'left2');
         this.fillWallSquare(0, 0, 5, 5, 'bottomleft', 'bottomleft');
         this.fillWallSquare(1, 2, 5, 5, 'bottom1', 'bottom1');
@@ -161,20 +163,21 @@ var LevelBuilder = Class.extend({
         this.fillWallSquare(3, 3, 4, 4, 'topright', 'top1');
         this.fillWallSquare(3, 3, 1, 1, 'bottomright', 'top1');
 
+
+        // top right rooms
         this.fillWallSquare(15, 15, 1, 4, 'left1', 'left2');
         this.fillWallSquare(15, 15, 5, 5, 'bottomleft', 'top2');
-        this.fillWallSquare(16, 18, 5, 5, 'bottom1', 'bottom2');
-        
+        this.fillWallSquare(16, 17, 5, 5, 'bottom1', 'bottom2');
         this.fillWallSquare(20, 20, 1, 4, 'left1', 'left2');
         this.fillWallSquare(19, 21, 5, 5, 'bottom1', 'bottom2');
-
         this.fillWallSquare(23, 23, 5, 5, 'bottom1', 'bottom2');
 
 
-        this.fillWallSquare(24, 24, 0, 0, 'topright', 'right2');
-        this.fillWallSquare(24, 24, 17, 17, 'bottomright', 'right2');
-        this.fillWallSquare(24, 24, 1, 16, 'right1', 'right2');
+        // this.fillWallSquare(24, 24, 0, 0, 'topright', 'right2');
+        // this.fillWallSquare(24, 24, 17, 17, 'bottomright', 'right2');
+        // this.fillWallSquare(24, 24, 1, 16, 'right1', 'right2');
 
+        // middle large room
         this.fillWallSquare(5, 5, 3, 3, 'topleft', 'right2');
         this.fillWallSquare(6, 12, 3, 3, 'top1', 'top2');
         this.fillWallSquare(13, 13, 3, 3, 'topright', 'topright');
@@ -202,6 +205,6 @@ var LevelBuilder = Class.extend({
         this.fillWallSquare(16, 22, 8, 8, 'top1', 'top2');
 
         this.fillWallSquare(22, 22, 9, 10, 'right1', 'right2');
-        this.fillWallSquare(22, 22, 12, 14, 'right1', 'right2');
+        this.fillWallSquare(22, 22, 13, 14, 'right1', 'right2');
     }
 });
