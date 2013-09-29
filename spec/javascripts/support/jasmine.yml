@@ -12,6 +12,7 @@
 #
 src_files:
     - public/js/jquery.js
+    - public/js/underscore.js
     - public/js/class.js
     - public/js/position.js
     - public/js/sprite.js

@@ -24,9 +24,9 @@ var OnscreenSprites = Class.extend({
         }
 
         var isAtPosition = function (position) {
-            this.map(function (wall) {
-				        return position.isEqual(wall.position);
-            })
+            return _.any(this.map(function (wall) {
+                return position.isEqual(wall.position);
+            }));
         }
 
         this.players.remove = remove;
@@ -39,5 +39,6 @@ var OnscreenSprites = Class.extend({
         this.walls.remove = remove;
 
         this.walls.isAtPosition = isAtPosition;
+        this.movementTiles.isAtPosition = isAtPosition;
     }
 });
