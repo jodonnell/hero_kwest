@@ -135,7 +135,7 @@ var LevelBuilder = Class.extend({
         this.fillWallSquare(16, 19, 1, 1, 'front1', 'front2');
         this.fillWallSquare(21, 23, 1, 1, 'front1', 'front2');
 
-        this.fillWallSquare(0, 4, 6, 6, 'front1', 'front2');
+        this.fillWallSquare(0, 3, 6, 6, 'front1', 'front2');
         this.fillWallSquare(6, 12, 4, 4, 'front1', 'front2');
 
         this.fillWallSquare(15, 17, 6, 6, 'front1', 'front2');
