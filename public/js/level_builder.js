@@ -172,10 +172,10 @@ var LevelBuilder = Class.extend({
         this.fillWallSquare(19, 21, 5, 5, 'bottom1', 'bottom2');
         this.fillWallSquare(23, 23, 5, 5, 'bottom1', 'bottom2');
 
-
-        // this.fillWallSquare(24, 24, 0, 0, 'topright', 'right2');
-        // this.fillWallSquare(24, 24, 17, 17, 'bottomright', 'right2');
-        // this.fillWallSquare(24, 24, 1, 16, 'right1', 'right2');
+        // right most wall
+        this.fillWallSquare(24, 24, 0, 0, 'topright', 'right2');
+        this.fillWallSquare(24, 24, 17, 17, 'bottomright', 'right2');
+        this.fillWallSquare(24, 24, 1, 16, 'right1', 'right2');
 
         // middle large room
         this.fillWallSquare(5, 5, 3, 3, 'topleft', 'right2');
