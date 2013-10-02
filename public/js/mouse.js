@@ -20,20 +20,24 @@ var Mouse = Class.extend({
     },
 
     movePlayerIfClickedTile: function (position) {
-				if (this.onscreenSprites.movementTiles.isAtPosition(position)) {
-            this.onscreenSprites.player.position = position;
-            this.onscreenSprites.movementTiles.splice(0, this.onscreenSprites.movementTiles.length);
+				if (!this.onscreenSprites.movementTiles.isAtPosition(position)) {
+            return;
         }
+        
+        this.onscreenSprites.player.position = position;
+        this.onscreenSprites.movementTiles.splice(0, this.onscreenSprites.movementTiles.length);
     },
 
     createMovementTiles: function (position) {
-				if (position.isEqual(this.onscreenSprites.player.position)) {
-            for (var i = position.x() - 2; i < position.x() + 3; i++) {
-                for (var j = position.y() - 2; j < position.y() + 3; j++) {
-                    var movementTilePosition = new Position(i, j);
-                    if (!this.onscreenSprites.walls.isAtPosition(movementTilePosition))
-                        this.onscreenSprites.movementTiles.push(new MovementTile(movementTilePosition));
-                }
+				if (!position.isEqual(this.onscreenSprites.player.position)) {
+            return;
+        }
+
+        for (var i = position.x() - 2; i < position.x() + 3; i++) {
+            for (var j = position.y() - 2; j < position.y() + 3; j++) {
+                var movementTilePosition = new Position(i, j);
+                if (!this.onscreenSprites.walls.isAtPosition(movementTilePosition))
+                    this.onscreenSprites.movementTiles.push(new MovementTile(movementTilePosition));
             }
         }
     }
