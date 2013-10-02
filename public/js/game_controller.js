@@ -1,14 +1,17 @@
 "use strict";
 
 var GameController = Class.extend({
-    init: function (gameInit, players) {
+    init: function (gameInit) {
         this.gameInit = gameInit;
+        
+        var level = new LevelBuilder();
+        var player = new Player(new Position(10, 10));
 
-        this.onscreenSprites = new OnscreenSprites({players: [players],
-                                                   walls: (new LevelBuilder()).walls,
-                                                   floors: (new LevelBuilder()).floors});
+        this.onscreenSprites = new OnscreenSprites({player: player,
+                                                   walls: level.walls,
+                                                   floors: level.floors});
 
-        this.mouse = new Mouse(players, this.onscreenSprites);
+        this.mouse = new Mouse(player, this.onscreenSprites);
     },
 
     draw: function () {

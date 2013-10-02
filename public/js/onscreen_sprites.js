@@ -6,7 +6,7 @@ var OnscreenSprites = Class.extend({
             sprites = {};
         }
 
-        this.players = sprites.players || [new Player(new Position(10, 10))];
+        this.player = sprites.player || new Player(new Position(10, 10));
         this.enemies = sprites.enemies || [];
         this.movementTiles = sprites.movementTiles || [];
         this.floors = sprites.floors || [];
@@ -15,7 +15,7 @@ var OnscreenSprites = Class.extend({
         this.collectibles = sprites.collectibles || [];
         this.texts = sprites.texts || [];
 
-        this.sprites = [this.walls].concat([this.floors], [this.enemies], [this.deadEnemies], [this.collectibles], [this.texts], [this.movementTiles], [this.players]);
+        this.sprites = [this.walls].concat([this.floors], [this.enemies], [this.deadEnemies], [this.collectibles], [this.texts], [this.movementTiles], [[this.player]]);
 
         
         var remove = function (element) {
@@ -29,7 +29,7 @@ var OnscreenSprites = Class.extend({
             }));
         }
 
-        this.players.remove = remove;
+        this.player.remove = remove;
         this.deadEnemies.remove = remove;
         this.enemies.remove = remove;
         this.floors.remove = remove;
