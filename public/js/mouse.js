@@ -2,7 +2,6 @@
 
 var Mouse = Class.extend({
     init: function (player, onscreenSprites) {
-        this.clicked = false;
         this.onscreenSprites = onscreenSprites;
         $("#gameCanvas").click($.proxy(function (event) { this.onCanvasClick(event.pageX, event.pageY) }, this));
     },
@@ -12,22 +11,28 @@ var Mouse = Class.extend({
         var y = Math.floor((mouseY - $('#gameCanvas').offset().top) / TILE_SIZE);
         var position = new Position(x, y);
 
-        if (this.clicked) {
-            if (this.onscreenSprites.movementTiles.isAtPosition(position)) {
-                this.onscreenSprites.player.position = position;
-                this.clicked = false;
-                this.onscreenSprites.movementTiles.splice(0, this.onscreenSprites.movementTiles.length);
-            }
+        if (this.onscreenSprites.movementTiles.length > 0) {
+            this.movePlayerIfClickedTile(position);
         }
         else {
-            if (position.isEqual(this.onscreenSprites.player.position)) {
-                this.clicked = true;
-                for (var i = x - 2; i < x + 3; i++) {
-                    for (var j = y - 2; j < y + 3; j++) {
-                        var movementTilePosition = new Position(i, j);
-                        if (!this.onscreenSprites.walls.isAtPosition(movementTilePosition))
-                            this.onscreenSprites.movementTiles.push(new MovementTile(movementTilePosition));
-                    }
+            this.createMovementTiles(position);
+        }
+    },
+
+    movePlayerIfClickedTile: function (position) {
+				if (this.onscreenSprites.movementTiles.isAtPosition(position)) {
+            this.onscreenSprites.player.position = position;
+            this.onscreenSprites.movementTiles.splice(0, this.onscreenSprites.movementTiles.length);
+        }
+    },
+
+    createMovementTiles: function (position) {
+				if (position.isEqual(this.onscreenSprites.player.position)) {
+            for (var i = position.x() - 2; i < position.x() + 3; i++) {
+                for (var j = position.y() - 2; j < position.y() + 3; j++) {
+                    var movementTilePosition = new Position(i, j);
+                    if (!this.onscreenSprites.walls.isAtPosition(movementTilePosition))
+                        this.onscreenSprites.movementTiles.push(new MovementTile(movementTilePosition));
                 }
             }
         }
