@@ -35,7 +35,6 @@ var Mouse = Class.extend({
         }
 
         var movementSquares = player.movement;
-
         this.moveTiles(position, movementSquares);
     },
 
