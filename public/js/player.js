@@ -3,6 +3,7 @@
 var Player = Sprite.extend({
     init: function (position) {
         this.position = position;
+        this.movement = 5;
     },
 
     update: function (args) {

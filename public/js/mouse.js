@@ -29,16 +29,30 @@ var Mouse = Class.extend({
     },
 
     createMovementTiles: function (position) {
-				if (!position.isEqual(this.onscreenSprites.player.position)) {
+        var player = this.onscreenSprites.player;
+				if (!position.isEqual(player.position)) {
             return;
         }
 
-        for (var i = position.x() - 2; i < position.x() + 3; i++) {
-            for (var j = position.y() - 2; j < position.y() + 3; j++) {
-                var movementTilePosition = new Position(i, j);
-                if (!this.onscreenSprites.walls.isAtPosition(movementTilePosition))
-                    this.onscreenSprites.movementTiles.push(new MovementTile(movementTilePosition));
-            }
-        }
+        var movementSquares = player.movement;
+
+        this.moveTiles(position, movementSquares);
+    },
+
+    moveTiles: function (position, movement) {
+        if (this.onscreenSprites.walls.isAtPosition(position))
+            return;
+
+        if (!this.onscreenSprites.movementTiles.isAtPosition(position))
+            this.onscreenSprites.movementTiles.push(new MovementTile(position));
+
+        if (movement === 0)
+            return;
+
+        this.moveTiles(new Position(position.x() + 1, position.y()), movement - 1);
+        this.moveTiles(new Position(position.x() - 1, position.y()), movement - 1);
+        this.moveTiles(new Position(position.x(), position.y() + 1), movement - 1);
+        this.moveTiles(new Position(position.x(), position.y() - 1), movement - 1);
+				
     }
 });
