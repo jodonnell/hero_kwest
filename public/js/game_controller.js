@@ -5,13 +5,13 @@ var GameController = Class.extend({
         this.gameInit = gameInit;
         
         var level = new LevelBuilder();
-        var player = new Player(new Position(10, 10));
+        var playerUnits = [new Player(new Position(10, 10)), new Player(new Position(8, 8))];
 
-        this.onscreenSprites = new OnscreenSprites({player: player,
+        this.onscreenSprites = new OnscreenSprites({playerUnits: playerUnits,
                                                    walls: level.walls,
                                                    floors: level.floors});
 
-        this.mouse = new Mouse(player, this.onscreenSprites);
+        this.mouse = new Mouse(this.onscreenSprites);
     },
 
     draw: function () {

@@ -1,7 +1,7 @@
 "use strict";
 
 var Mouse = Class.extend({
-    init: function (player, onscreenSprites) {
+    init: function (onscreenSprites) {
         this.onscreenSprites = onscreenSprites;
         $("#gameCanvas").click($.proxy(function (event) { this.onCanvasClick(event.pageX, event.pageY) }, this));
     },
@@ -24,17 +24,20 @@ var Mouse = Class.extend({
             return;
         }
         
-        this.onscreenSprites.player.position = position;
+        this.selectedPlayerUnit.position = position;
         this.onscreenSprites.movementTiles.splice(0, this.onscreenSprites.movementTiles.length);
     },
 
     createMovementTiles: function (position) {
-        var player = this.onscreenSprites.player;
-				if (!position.isEqual(player.position)) {
+				if (!this.onscreenSprites.playerUnits.isAtPosition(position)) {
             return;
         }
 
-        var movementSquares = player.movement;
+        var playerUnit = this.onscreenSprites.playerUnits.atPosition(position);
+
+        this.selectedPlayerUnit = playerUnit;
+
+        var movementSquares = playerUnit.movement;
         this.moveTiles(position, movementSquares);
     },
 
