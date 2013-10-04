@@ -8,7 +8,7 @@ var MovementTile = Sprite.extend({
     draw: function () {
         gameContext.beginPath();
         gameContext.rect(this.position.xPixels() , this.position.yPixels(), TILE_SIZE, TILE_SIZE);
-        gameContext.fillStyle = 'rgba(200, 200, 200, 0.5)';
+        gameContext.fillStyle = 'rgba(51, 102, 255, 0.7)';
         gameContext.fill();
     }
 });
