@@ -9,7 +9,13 @@ var GameController = Class.extend({
                                                    walls: level.walls,
                                                    floors: level.floors});
 
-        this.mouse = new Mouse(this.onscreenSprites);
+        this.mouse = new Mouse(this);
+        this.playerTurn = new PlayerTurn(this.onscreenSprites);
+        this.currentTurn = this.playerTurn;
+    },
+
+    mouseClick: function(position) {
+        this.currentTurn.clicked(position);
     },
 
     draw: function () {
