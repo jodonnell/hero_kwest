@@ -38,18 +38,10 @@ var OnscreenSprites = Class.extend({
             return false;
         }
 
-        this.playerUnits.remove = remove;
-        this.deadEnemies.remove = remove;
-        this.enemies.remove = remove;
-        this.floors.remove = remove;
-        this.collectibles.remove = remove;
-        this.texts.remove = remove;
-        this.movementTiles.remove = remove;
-        this.walls.remove = remove;
-
-        this.playerUnits.atPosition = atPosition;
-        this.playerUnits.isAtPosition = isAtPosition;
-        this.walls.isAtPosition = isAtPosition;
-        this.movementTiles.isAtPosition = isAtPosition;
+        _.each(this.sprites, function(sprite) {
+            sprite.remove = remove;
+            sprite.atPosition = atPosition;
+            sprite.isAtPosition = isAtPosition;
+        })
     }
 });

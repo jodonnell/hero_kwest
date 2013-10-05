@@ -1,4 +1,14 @@
 describe("Onscreen sprites", function() {
+    it("can remove a wall", function() {
+        var wall = new Wall((new Position(1, 2)), 'left1');
+        var onscreenSprites = new OnscreenSprites({walls: [wall]});
+
+        expect(onscreenSprites.walls.length).toBe(1);
+
+        onscreenSprites.walls.remove(wall);
+        expect(onscreenSprites.walls.length).toBe(0);
+    });
+
     it("can tell if a wall is at a position", function() {
         var onscreenSprites = new OnscreenSprites({walls: [new Wall((new Position(1, 2)), 'left1')]});
 
