@@ -57,19 +57,21 @@ window.cancelAnimationFrame = (function(){
 
 var gameInit = new GameInit();
 var gameContext = $('#gameCanvas').get(0).getContext("2d");
-var titleScreen;
+
+// var titleScreen;
 var gameImages = new Images(function() {
-		titleScreen = new TitleScreen(new Control());
+    new SoloGame();
+		// titleScreen = new TitleScreen(new Control());
 
-		(function animloop(){
-        stats.begin();
+		// (function animloop(){
+    //     stats.begin();
 
-        var cancelId = requestAnimFrame(animloop);
-        titleScreen.update(cancelId);
-        titleScreen.draw();
+    //     var cancelId = requestAnimFrame(animloop);
+    //     titleScreen.update(cancelId);
+    //     titleScreen.draw();
 
-        stats.end();
-		})();
+    //     stats.end();
+		// })();
 });
 
 		</script>
