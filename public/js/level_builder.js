@@ -4,6 +4,7 @@ var LevelBuilder = Class.extend({
     init: function () {
         this.floors = [];
         this.walls = [];
+        this.playerUnits = [];
         this.buildLevel1();
     },
 
@@ -84,6 +85,7 @@ var LevelBuilder = Class.extend({
     buildLevel1: function () {
         this.fillFloors();
         this.fillWalls();
+        this.playerUnits = [new Player(new Position(10, 10)), new Player(new Position(8, 8))];
     },
 
     fillFloors: function () {

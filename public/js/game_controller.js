@@ -5,9 +5,7 @@ var GameController = Class.extend({
         this.gameInit = gameInit;
         
         var level = new LevelBuilder();
-        var playerUnits = [new Player(new Position(10, 10)), new Player(new Position(8, 8))];
-
-        this.onscreenSprites = new OnscreenSprites({playerUnits: playerUnits,
+        this.onscreenSprites = new OnscreenSprites({playerUnits: level.playerUnits,
                                                    walls: level.walls,
                                                    floors: level.floors});
 
