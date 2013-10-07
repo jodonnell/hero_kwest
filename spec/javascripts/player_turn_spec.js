@@ -1,5 +1,7 @@
 describe("Player Turn", function() {
     var playerTurn, onscreenSprites;
+    var playerPosition = new Position(10, 10);
+    var newPosition = new Position(11, 11);
 
     beforeEach(function() { 
         onscreenSprites = new OnscreenSprites();
@@ -12,7 +14,6 @@ describe("Player Turn", function() {
         });
     });
 
-
     it("when clicked not on a player nothing happens", function() {
         playerTurn.clicked(new Position(1, 1));
         expect(onscreenSprites.movementTiles.length).toBe(0);
@@ -24,7 +25,6 @@ describe("Player Turn", function() {
     });
 
     it("you have to click on movement tiles to move", function() {
-        var playerPosition = new Position(10, 10);
         playerTurn.clicked(playerPosition);
         playerTurn.clicked(new Position(20, 20));
         expect(onscreenSprites.playerUnits[0].position).toBeTheSamePosition(playerPosition);
@@ -32,8 +32,6 @@ describe("Player Turn", function() {
     });
 
     it("you can move", function() {
-        var playerPosition = new Position(10, 10);
-        var newPosition = new Position(11, 11);
         playerTurn.clicked(playerPosition);
         playerTurn.clicked(newPosition);
         expect(onscreenSprites.playerUnits[0].position).toBeTheSamePosition(newPosition);
@@ -41,8 +39,6 @@ describe("Player Turn", function() {
     });
 
     it("you cannot move into a wall", function() {
-        var playerPosition = new Position(10, 10);
-        var newPosition = new Position(11, 11);
         onscreenSprites.walls.push(new Wall(newPosition, 'top1'));
         playerTurn.clicked(playerPosition);
         playerTurn.clicked(newPosition);
