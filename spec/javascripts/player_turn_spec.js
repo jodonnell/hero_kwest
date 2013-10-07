@@ -6,12 +6,6 @@ describe("Player Turn", function() {
     beforeEach(function() { 
         onscreenSprites = new OnscreenSprites();
         playerTurn = new PlayerTurn(onscreenSprites);
-
-        this.addMatchers({
-            toBeTheSamePosition: function(expected) {
-                return this.actual.isEqual(expected);
-            }
-        });
     });
 
     it("when clicked not on a player nothing happens", function() {
