@@ -24,6 +24,8 @@ src_files:
     - public/js/onscreen_sprites.js
     - public/js/player_turn.js
     - public/js/movement_tile.js
+    - public/js/floor.js
+    - public/js/wall.js
 
 
 # stylesheets

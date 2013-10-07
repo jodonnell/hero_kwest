@@ -40,4 +40,13 @@ describe("Player Turn", function() {
         expect(onscreenSprites.movementTiles.length).toBe(0);
     });
 
+    it("you cannot move into a wall", function() {
+        var playerPosition = new Position(10, 10);
+        var newPosition = new Position(11, 11);
+        onscreenSprites.walls.push(new Wall(newPosition, 'top1'));
+        playerTurn.clicked(playerPosition);
+        playerTurn.clicked(newPosition);
+        expect(onscreenSprites.playerUnits[0].position).toBeTheSamePosition(playerPosition);
+    });
+
 });
