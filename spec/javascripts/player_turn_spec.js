@@ -3,6 +3,8 @@ describe("Player Turn", function() {
     var playerPosition = new Position(10, 10);
     var newPosition = new Position(11, 11);
     var waitPosition = new Position(0, 18);
+    var endPosition = new Position(1, 18);
+    var secondPosition = new Position(8, 8);
 
     beforeEach(function() { 
         onscreenSprites = new OnscreenSprites();
@@ -41,7 +43,6 @@ describe("Player Turn", function() {
     });
 
     it("you cannot move on top of another player unit", function() {
-        var secondPosition = new Position(8, 8);
         var players = [new Player(playerPosition), new Player(secondPosition)];
 
         onscreenSprites = new OnscreenSprites({playerUnits: players});
@@ -55,7 +56,7 @@ describe("Player Turn", function() {
     it("a menu pops up", function() {
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);
-        expect(onscreenSprites.menus.length).toBe(1);
+        expect(onscreenSprites.menus.length).toBe(2);
     });
 
     it("you can click on the wait icon to wait", function() {
@@ -102,4 +103,16 @@ describe("Player Turn", function() {
         expect(playerTurn.isTurnOver()).toBeTruthy();
     });
 
+    it("you can end the turn early", function() {
+        var players = [new Player(playerPosition), new Player(secondPosition)];
+
+        onscreenSprites = new OnscreenSprites({playerUnits: players});
+        playerTurn = new PlayerTurn(onscreenSprites);
+
+        playerTurn.clicked(true, playerPosition);
+        playerTurn.clicked(true, newPosition);
+        playerTurn.clicked(true, endPosition);
+
+        expect(playerTurn.isTurnOver()).toBeTruthy();
+    });
 });

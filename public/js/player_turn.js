@@ -6,6 +6,7 @@ var PlayerTurn = Class.extend({
         _.each(this.onscreenSprites.playerUnits, function (playerUnit) {
 				    playerUnit.disabled = false;
         });
+        this.onscreenSprites.menus.removeAll();
     },
 
     clicked: function (leftClicked, position) {
@@ -20,7 +21,8 @@ var PlayerTurn = Class.extend({
         }
 
         if (this.onscreenSprites.menus.isAtPosition(position)) {
-            this.wait();
+            var menu = this.onscreenSprites.menus.atPosition(position);
+            menu.action(this);
         }
 				else if (this.isPlayerSelected()) {
             this.movePlayerIfClickedTile(position);
@@ -28,12 +30,6 @@ var PlayerTurn = Class.extend({
         else if (!this.selectedPlayerUnit) {
             this.createMovementTiles(position);
         }
-    },
-
-    wait: function () {
-				this.onscreenSprites.menus.removeAll();
-        this.selectedPlayerUnit.disabled = true;
-        this.selectedPlayerUnit = null;
     },
 
     isPlayerSelected: function () {
@@ -60,6 +56,7 @@ var PlayerTurn = Class.extend({
         this.selectedPlayerUnit.position = position;
         this.onscreenSprites.movementTiles.removeAll();
         this.onscreenSprites.menus.push(new Wait());
+        this.onscreenSprites.menus.push(new EndTurn());
     },
 
     createMovementTiles: function (position) {

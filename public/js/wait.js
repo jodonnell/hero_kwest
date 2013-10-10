@@ -10,5 +10,12 @@ var Wait = Sprite.extend({
 
     getCurrentImage: function () {
         return 'wait';
+    },
+
+    action: function (playerTurn) {
+				playerTurn.onscreenSprites.menus.removeAll();
+        playerTurn.selectedPlayerUnit.disabled = true;
+        playerTurn.selectedPlayerUnit = null;
+
     }
 });

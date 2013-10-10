@@ -1,8 +1,8 @@
 "use strict";
 
 var EndTurn = Sprite.extend({
-    init: function (position) {
-        this.position = position;
+    init: function () {
+        this.position = new Position(1, 18);
     },
 
     update: function (args) {
@@ -10,5 +10,13 @@ var EndTurn = Sprite.extend({
 
     getCurrentImage: function () {
         return 'endTurn';
+    },
+
+    action: function (playerTurn) {
+				var playerUnits = playerTurn.onscreenSprites.playerUnits;
+				_.each(playerUnits, function (playerUnit) {
+				    playerUnit.disabled = true;
+        });
+
     }
 });
