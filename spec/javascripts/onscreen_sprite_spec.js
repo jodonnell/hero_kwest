@@ -30,4 +30,14 @@ describe("Onscreen sprites", function() {
         expect(onscreenSprites.playerUnits.atPosition(position)).toBe(player);
     });
 
+    it("can remove all sprites", function() {
+        var wall = new Wall((new Position(1, 2)), 'left1');
+        var wall2 = new Wall((new Position(2, 2)), 'left1');
+        var onscreenSprites = new OnscreenSprites({walls: [wall, wall2]});
+
+        onscreenSprites.walls.removeAll()
+
+        expect(onscreenSprites.walls.length).toBe(0);
+    });
+
 });

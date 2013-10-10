@@ -7,24 +7,26 @@ var PlayerTurn = Class.extend({
 
     clicked: function (leftClicked, position) {
         if (leftClicked == false) {
-            return
+            return;
         }
 
-				if (this.playerSelected()) {
+        if (this.onscreenSprites.menus.isAtPosition(position)) {
+            this.wait();
+        }
+				else if (this.isPlayerSelected()) {
             this.movePlayerIfClickedTile(position);
         }
         else {
-            if (this.onscreenSprites.menus.isAtPosition(position)) {
-                this.onscreenSprites.menus.splice(0, this.onscreenSprites.menus.length);
-                this.selectedPlayerUnit.disabled = true;
-            }
-            else {
-                this.createMovementTiles(position);
-            }
+            this.createMovementTiles(position);
         }
     },
 
-    playerSelected: function () {
+    wait: function () {
+				this.onscreenSprites.menus.removeAll();
+        this.selectedPlayerUnit.disabled = true;
+    },
+
+    isPlayerSelected: function () {
 				return this.onscreenSprites.movementTiles.length > 0;
     },
 
@@ -34,7 +36,7 @@ var PlayerTurn = Class.extend({
         }
         
         this.selectedPlayerUnit.position = position;
-        this.onscreenSprites.movementTiles.splice(0, this.onscreenSprites.movementTiles.length);
+        this.onscreenSprites.movementTiles.removeAll();
         this.onscreenSprites.menus.push(new Wait());
     },
 

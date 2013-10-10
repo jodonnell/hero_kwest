@@ -22,7 +22,7 @@ var GameInit = Class.extend({
         // $("#gameCanvas").css('width', '1066px');
         // $("#gameCanvas").css('height', '800px');
 
-        var canvasString = '<canvas id="effectsCanvas" width="' + TILE_SIZE * 2 + '" height="' + TILE_SIZE * 2 + '"></canvas>';
+        var canvasString = '<canvas id="effectsCanvas" style="display: none;" width="' + TILE_SIZE * 2 + '" height="' + TILE_SIZE * 2 + '"></canvas>';
         $('body').append(canvasString);
 
     },

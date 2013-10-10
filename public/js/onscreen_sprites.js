@@ -18,13 +18,17 @@ var OnscreenSprites = Class.extend({
         var remove = function (element) {
             var index = this.indexOf(element);
             this.splice(index, 1);
-        }
+        };
 
         var isAtPosition = function (position) {
             return _.any(this.map(function (wall) {
                 return position.isEqual(wall.position);
             }));
-        }
+        };
+
+        var removeAll = function (position) {
+            this.splice(0, this.length);
+        };
 
         var atPosition = function (position) {
             for (var i = 0; i < this.length; i++) {
@@ -33,12 +37,13 @@ var OnscreenSprites = Class.extend({
                     return sprite;
             }
             return false;
-        }
+        };
 
         _.each(this.sprites, function(sprite) {
             sprite.remove = remove;
             sprite.atPosition = atPosition;
             sprite.isAtPosition = isAtPosition;
+            sprite.removeAll = removeAll;
         })
     }
 });
