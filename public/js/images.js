@@ -7,6 +7,8 @@ var Images = Class.extend({
 
         this._loadImage("player", "RK01.png");
         this._loadImage("wall", "wall.png");
+        this._loadImage("endTurn", "stop.png");
+        this._loadImage("wait", "wait.png");
         this._loadImage("floor", "floor_dirt.png");
         this._loadImage("tiles", "tiles.png");
         this._loadImage("bubRight", "bub.png");

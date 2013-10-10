@@ -5,13 +5,27 @@ var PlayerTurn = Class.extend({
         this.onscreenSprites = onscreenSprites;;
     },
 
-    clicked: function (position) {
-				if (this.onscreenSprites.movementTiles.length > 0) {
+    clicked: function (leftClicked, position) {
+        if (leftClicked == false) {
+            return
+        }
+
+				if (this.playerSelected()) {
             this.movePlayerIfClickedTile(position);
         }
         else {
-            this.createMovementTiles(position);
+            if (this.onscreenSprites.menus.isAtPosition(position)) {
+                this.onscreenSprites.menus.splice(0, this.onscreenSprites.menus.length);
+                this.selectedPlayerUnit.disabled = true;
+            }
+            else {
+                this.createMovementTiles(position);
+            }
         }
+    },
+
+    playerSelected: function () {
+				return this.onscreenSprites.movementTiles.length > 0;
     },
 
     movePlayerIfClickedTile: function (position) {
@@ -21,6 +35,7 @@ var PlayerTurn = Class.extend({
         
         this.selectedPlayerUnit.position = position;
         this.onscreenSprites.movementTiles.splice(0, this.onscreenSprites.movementTiles.length);
+        this.onscreenSprites.menus.push(new Wait());
     },
 
     createMovementTiles: function (position) {
@@ -29,6 +44,8 @@ var PlayerTurn = Class.extend({
         }
 
         var playerUnit = this.onscreenSprites.playerUnits.atPosition(position);
+        if (playerUnit.disabled)
+            return;
 
         this.selectedPlayerUnit = playerUnit;
 

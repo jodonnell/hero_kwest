@@ -7,18 +7,24 @@ var GameInit = Class.extend({
 
     createCanvas: function () {
         this.width = 800;
-        this.height = 576;
+        this.height = 606;
 
         var left = $(window).width() / 2 - this.width / 2;
         var top = $(window).height() / 2 - this.height / 2;
 
-        var canvas = '<canvas id="gameCanvas" width="' + this.width + '" height="' + this.height + '"></canvas>';
-        $('body').append(canvas);
+        var canvasString = '<canvas id="gameCanvas" width="' + this.width + '" height="' + this.height + '"></canvas>';
+        var canvas = $('body').append(canvasString);
         $("#gameCanvas").css('position', 'absolute');
         $("#gameCanvas").css('top', top + 'px');
         $("#gameCanvas").css('left', left + 'px');
+
+        $('#gameCanvas').on('contextmenu', function() {return false});
         // $("#gameCanvas").css('width', '1066px');
         // $("#gameCanvas").css('height', '800px');
+
+        var canvasString = '<canvas id="effectsCanvas" width="' + TILE_SIZE * 2 + '" height="' + TILE_SIZE * 2 + '"></canvas>';
+        $('body').append(canvasString);
+
     },
 
     destroyCanvas: function () {

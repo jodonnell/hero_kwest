@@ -14,8 +14,8 @@ var GameController = Class.extend({
         this.currentTurn = this.playerTurn;
     },
 
-    mouseClick: function(position) {
-        this.currentTurn.clicked(position);
+    mouseClick: function(leftClicked, position) {
+        this.currentTurn.clicked(leftClicked, position);
     },
 
     draw: function () {

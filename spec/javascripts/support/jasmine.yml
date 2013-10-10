@@ -21,6 +21,8 @@ src_files:
     - public/js/game_init.js
     - public/js/control.js
     - public/js/wall.js
+    - public/js/menu.js
+    - public/js/wait.js
     - public/js/onscreen_sprites.js
     - public/js/player_turn.js
     - public/js/movement_tile.js
