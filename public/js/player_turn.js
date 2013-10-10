@@ -22,7 +22,7 @@ var PlayerTurn = Class.extend({
 				else if (this.isPlayerSelected()) {
             this.movePlayerIfClickedTile(position);
         }
-        else {
+        else if (!this.selectedPlayerUnit) {
             this.createMovementTiles(position);
         }
     },
@@ -30,6 +30,7 @@ var PlayerTurn = Class.extend({
     wait: function () {
 				this.onscreenSprites.menus.removeAll();
         this.selectedPlayerUnit.disabled = true;
+        this.selectedPlayerUnit = null;
     },
 
     isPlayerSelected: function () {

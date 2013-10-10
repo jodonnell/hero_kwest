@@ -87,4 +87,11 @@ describe("Player Turn", function() {
         expect(onscreenSprites.playerUnits[0].position).toBeTheSamePosition(playerPosition);
     });
 
+    it("you can not move a moved man", function() {
+        playerTurn.clicked(true, playerPosition);
+        playerTurn.clicked(true, newPosition);
+        playerTurn.clicked(true, newPosition);
+        expect(onscreenSprites.movementTiles.length).toBe(0);
+    });
+
 });
