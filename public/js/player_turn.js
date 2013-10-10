@@ -6,7 +6,13 @@ var PlayerTurn = Class.extend({
     },
 
     clicked: function (leftClicked, position) {
-        if (leftClicked == false) {
+        if (!leftClicked) {
+            this.onscreenSprites.menus.removeAll();
+            this.onscreenSprites.movementTiles.removeAll();
+            if (this.originalPosition)
+                this.selectedPlayerUnit.position = this.originalPosition;
+            this.originalPosition = null;
+            this.selectedPlayerUnit = null;
             return;
         }
 
@@ -34,7 +40,12 @@ var PlayerTurn = Class.extend({
 				if (!this.onscreenSprites.movementTiles.isAtPosition(position)) {
             return;
         }
-        
+
+        if (this.onscreenSprites.playerUnits.isAtPosition(position)) {
+            return;
+        }
+
+        this.originalPosition = this.selectedPlayerUnit.position;
         this.selectedPlayerUnit.position = position;
         this.onscreenSprites.movementTiles.removeAll();
         this.onscreenSprites.menus.push(new Wait());

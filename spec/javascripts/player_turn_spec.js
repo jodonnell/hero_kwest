@@ -39,6 +39,18 @@ describe("Player Turn", function() {
         expect(onscreenSprites.playerUnits[0].position).toBeTheSamePosition(playerPosition);
     });
 
+    it("you cannot move on top of another player unit", function() {
+        var secondPosition = new Position(8, 8);
+        var players = [new Player(playerPosition), new Player(secondPosition)];
+
+        onscreenSprites = new OnscreenSprites({playerUnits: players});
+        playerTurn = new PlayerTurn(onscreenSprites);
+
+        playerTurn.clicked(true, playerPosition);
+        playerTurn.clicked(true, new Position(8, 8));
+        expect(onscreenSprites.playerUnits[0].position).toBeTheSamePosition(playerPosition);
+    });
+
     it("a menu pops up", function() {
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);
@@ -57,6 +69,22 @@ describe("Player Turn", function() {
         playerTurn.clicked(true, newPosition);
         expect(onscreenSprites.movementTiles.length).toBe(0);
         expect(onscreenSprites.playerUnits[0].disabled).toBeTruthy();
+    });
+
+    it("right clicking cancels movement", function() {
+        playerTurn.clicked(true, playerPosition);
+        playerTurn.clicked(false, new Position(1, 1));
+
+        expect(onscreenSprites.movementTiles.length).toBe(0);
+    });
+
+    it("right clicking sends you back to original position", function() {
+        playerTurn.clicked(true, playerPosition);
+        playerTurn.clicked(true, newPosition);
+
+        playerTurn.clicked(false, new Position(1, 1));
+
+        expect(onscreenSprites.playerUnits[0].position).toBeTheSamePosition(playerPosition);
     });
 
 });
