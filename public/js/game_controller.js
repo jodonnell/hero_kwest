@@ -10,6 +10,10 @@ var GameController = Class.extend({
                                                    floors: level.floors});
 
         this.mouse = new Mouse(this);
+        this.newPlayerTurn();
+    },
+
+    newPlayerTurn: function () {
         this.playerTurn = new PlayerTurn(this.onscreenSprites);
         this.currentTurn = this.playerTurn;
     },
@@ -37,6 +41,10 @@ var GameController = Class.extend({
             this.onscreenSprites.sprites[i][j].update({onscreenSprites: this.onscreenSprites});
         }, this);
         this._eachSprite(updateMethod);
+
+        if (this.currentTurn.isTurnOver()) {
+            this.newPlayerTurn();
+        }
     },
 
     _eachSprite: function (spriteAction) {

@@ -2,6 +2,7 @@ describe("Player Turn", function() {
     var playerTurn, onscreenSprites;
     var playerPosition = new Position(10, 10);
     var newPosition = new Position(11, 11);
+    var waitPosition = new Position(0, 18);
 
     beforeEach(function() { 
         onscreenSprites = new OnscreenSprites();
@@ -61,7 +62,7 @@ describe("Player Turn", function() {
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);
 
-        playerTurn.clicked(true, new Position(0, 18));
+        playerTurn.clicked(true, waitPosition);
 
         expect(onscreenSprites.menus.length).toBe(0);
 
@@ -92,6 +93,13 @@ describe("Player Turn", function() {
         playerTurn.clicked(true, newPosition);
         playerTurn.clicked(true, newPosition);
         expect(onscreenSprites.movementTiles.length).toBe(0);
+    });
+
+    it("you knows when the turn is over", function() {
+        playerTurn.clicked(true, playerPosition);
+        playerTurn.clicked(true, newPosition);
+        playerTurn.clicked(true, waitPosition);
+        expect(playerTurn.isTurnOver()).toBeTruthy();
     });
 
 });

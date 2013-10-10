@@ -2,7 +2,10 @@
 
 var PlayerTurn = Class.extend({
     init: function (onscreenSprites) {
-        this.onscreenSprites = onscreenSprites;;
+        this.onscreenSprites = onscreenSprites;
+        _.each(this.onscreenSprites.playerUnits, function (playerUnit) {
+				    playerUnit.disabled = false;
+        });
     },
 
     clicked: function (leftClicked, position) {
@@ -35,6 +38,13 @@ var PlayerTurn = Class.extend({
 
     isPlayerSelected: function () {
 				return this.onscreenSprites.movementTiles.length > 0;
+    },
+
+    isTurnOver: function () {
+        var playerUnits = this.onscreenSprites.playerUnits;
+				return _.every(playerUnits, function (playerUnit) {
+				    return playerUnit.disabled;
+        });
     },
 
     movePlayerIfClickedTile: function (position) {
