@@ -29,6 +29,7 @@ src_files:
     - public/js/movement_tile.js
     - public/js/floor.js
     - public/js/wall.js
+    - public/js/skeleton.js
 
 
 # stylesheets

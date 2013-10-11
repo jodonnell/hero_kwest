@@ -96,6 +96,17 @@ describe("Player Turn", function() {
         expect(onscreenSprites.movementTiles.length).toBe(0);
     });
 
+    it("you can not move onto a skeleton", function() {
+        var skeleton = [new Skeleton(newPosition)];
+
+        onscreenSprites = new OnscreenSprites({enemies: skeleton});
+        playerTurn = new PlayerTurn(onscreenSprites);
+
+        playerTurn.clicked(true, playerPosition);
+        playerTurn.clicked(true, newPosition);
+        expect(onscreenSprites.movementTiles.length).toBeGreaterThan(0);
+    });
+
     it("you knows when the turn is over", function() {
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);

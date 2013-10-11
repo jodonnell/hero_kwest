@@ -44,19 +44,20 @@ var PlayerTurn = Class.extend({
     },
 
     movePlayerIfClickedTile: function (position) {
-				if (!this.onscreenSprites.movementTiles.isAtPosition(position)) {
+        if (!this.isValidMovementSpot(position))
             return;
-        }
-
-        if (this.onscreenSprites.playerUnits.isAtPosition(position)) {
-            return;
-        }
 
         this.originalPosition = this.selectedPlayerUnit.position;
         this.selectedPlayerUnit.position = position;
         this.onscreenSprites.movementTiles.removeAll();
         this.onscreenSprites.menus.push(new Wait());
         this.onscreenSprites.menus.push(new EndTurn());
+    },
+
+    isValidMovementSpot: function (position) {
+        return this.onscreenSprites.movementTiles.isAtPosition(position)
+            && !this.onscreenSprites.playerUnits.isAtPosition(position)
+            && !this.onscreenSprites.enemies.isAtPosition(position);
     },
 
     createMovementTiles: function (position) {

@@ -11,8 +11,9 @@ var OnscreenSprites = Class.extend({
         this.floors = sprites.floors || [];
         this.walls = sprites.walls || [];
         this.menus = sprites.menus || [];
+        this.enemies = sprites.enemies || [];
 
-        this.sprites = [this.walls].concat([this.floors], [this.movementTiles], [this.playerUnits], [this.menus]);
+        this.sprites = [this.walls].concat([this.floors], [this.movementTiles], [this.playerUnits], [this.enemies], [this.menus]);
 
         
         var remove = function (element) {
