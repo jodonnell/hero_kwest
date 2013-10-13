@@ -5,7 +5,9 @@ var Images = Class.extend({
         this._props = [];
         this._callback = callback;
 
-        this._loadImage("player", "RK01.png");
+        this._loadImage("player", "radishKnight01.png");
+        this._loadImage("cucumber", "cucumber01.png");
+        this._loadImage("broccolee", "BroccoLee01.png");
         this._loadImage("wall", "wall.png");
         this._loadImage("endTurn", "stop.png");
         this._loadImage("wait", "wait.png");

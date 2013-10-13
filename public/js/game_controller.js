@@ -15,8 +15,14 @@ var GameController = Class.extend({
     },
 
     newPlayerTurn: function () {
-        this.playerTurn = new PlayerTurn(this.onscreenSprites);
-        this.currentTurn = this.playerTurn;
+        if (this.currentTurn === this.enemyTurn) {
+            this.playerTurn = new PlayerTurn(this.onscreenSprites);
+            this.currentTurn = this.playerTurn;
+        }
+        else {
+            this.enemyTurn = new EnemyTurn(this.onscreenSprites);
+            this.currentTurn = this.enemyTurn;
+        }
     },
 
     mouseClick: function(leftClicked, position) {
@@ -42,7 +48,8 @@ var GameController = Class.extend({
             this.onscreenSprites.sprites[i][j].update({onscreenSprites: this.onscreenSprites});
         }, this);
         this._eachSprite(updateMethod);
-
+        
+        this.currentTurn.update();
         if (this.currentTurn.isTurnOver()) {
             this.newPlayerTurn();
         }

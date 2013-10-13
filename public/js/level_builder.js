@@ -85,7 +85,7 @@ var LevelBuilder = Class.extend({
     buildLevel1: function () {
         this.fillFloors();
         this.fillWalls();
-        this.playerUnits = [new Player(new Position(10, 10)), new Player(new Position(8, 8))];
+        this.playerUnits = [new Player(new Position(10, 10), 'player'), new Player(new Position(8, 8), 'broccolee'), new Player(new Position(6, 9), 'cucumber')];
         this.enemies = [new Skeleton(new Position(6, 6)), new Skeleton(new Position(11, 5))];
     },
 

@@ -1,6 +1,6 @@
 "use strict";
 
-var PlayerTurn = Class.extend({
+var EnemyTurn = Class.extend({
     init: function (onscreenSprites) {
         this.onscreenSprites = onscreenSprites;
         _.each(this.onscreenSprites.playerUnits, function (playerUnit) {
@@ -9,41 +9,19 @@ var PlayerTurn = Class.extend({
         this.onscreenSprites.menus.removeAll();
     },
 
-    update: function () {
-				
-    },
-
     clicked: function (leftClicked, position) {
-        if (!leftClicked) {
-            this.onscreenSprites.menus.removeAll();
-            this.onscreenSprites.movementTiles.removeAll();
-            if (this.originalPosition)
-                this.selectedPlayerUnit.position = this.originalPosition;
-            this.originalPosition = null;
-            this.selectedPlayerUnit = null;
-            return;
-        }
-
-        if (this.onscreenSprites.menus.isAtPosition(position)) {
-            var menu = this.onscreenSprites.menus.atPosition(position);
-            menu.action(this);
-        }
-				else if (this.isPlayerSelected()) {
-            this.movePlayerIfClickedTile(position);
-        }
-        else if (!this.selectedPlayerUnit) {
-            this.createMovementTiles(position);
-        }
     },
 
-    isPlayerSelected: function () {
-				return this.onscreenSprites.movementTiles.length > 0;
+    update: function () {
+        var firstEnemy = _.first(_.where(this.onscreenSprites.enemies, {disabled: false}));;
+				this.createMovementTiles(firstEnemy.position);
+				firstEnemy.disabled = true;
     },
 
     isTurnOver: function () {
-        var playerUnits = this.onscreenSprites.playerUnits;
-				return _.every(playerUnits, function (playerUnit) {
-				    return playerUnit.disabled;
+        var enemies = this.onscreenSprites.enemies;
+				return _.every(enemies, function (enemy) {
+				    return enemy.disabled;
         });
     },
 
@@ -65,11 +43,11 @@ var PlayerTurn = Class.extend({
     },
 
     createMovementTiles: function (position) {
-				if (!this.onscreenSprites.playerUnits.isAtPosition(position)) {
+				if (!this.onscreenSprites.enemies.isAtPosition(position)) {
             return;
         }
 
-        var playerUnit = this.onscreenSprites.playerUnits.atPosition(position);
+        var playerUnit = this.onscreenSprites.enemies.atPosition(position);
         if (playerUnit.disabled)
             return;
 

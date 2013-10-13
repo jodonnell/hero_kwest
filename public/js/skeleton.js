@@ -4,6 +4,7 @@ var Skeleton = Sprite.extend({
     init: function (position) {
         this.position = position;
         this.movement = 5;
+        this.disabled = false;
     },
 
     update: function (args) {
