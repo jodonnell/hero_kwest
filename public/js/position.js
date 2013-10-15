@@ -32,5 +32,12 @@ var Position = Class.extend({
 
     isEqual: function (position) {
 				return this.x() === position.x() && this.y() === position.y();
+    },
+
+    isNextTo: function (position) {
+				return position.x() - 1 === this.x() && position.y() === this.y()
+            || position.x() + 1 === this.x() && position.y() === this.y()
+            || position.x() === this.x() && position.y() - 1 === this.y()
+            || position.x() === this.x() && position.y() + 1 === this.y();
     }
 });

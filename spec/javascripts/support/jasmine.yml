@@ -30,6 +30,8 @@ src_files:
     - public/js/floor.js
     - public/js/wall.js
     - public/js/skeleton.js
+    - public/js/attack_icon.js
+    - public/js/battle_preview_menu.js
 
 
 # stylesheets

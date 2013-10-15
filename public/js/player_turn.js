@@ -56,6 +56,7 @@ var PlayerTurn = Class.extend({
         this.onscreenSprites.movementTiles.removeAll();
         this.onscreenSprites.menus.push(new Wait());
         this.onscreenSprites.menus.push(new EndTurn());
+        this.onscreenSprites.menus.push(new AttackIcon());
     },
 
     isValidMovementSpot: function (position) {

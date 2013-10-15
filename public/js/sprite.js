@@ -26,5 +26,11 @@ var Sprite = Class.extend({
 
     update: function () {
 
+    },
+
+    isNextToAny: function (sprites) {
+        return _.find(sprites, function (sprite) {
+				    return this.position.isNextTo(sprite.position);
+        }, this);
     }
 });

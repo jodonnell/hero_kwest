@@ -4,6 +4,7 @@ describe("Player Turn", function() {
     var newPosition = new Position(11, 11);
     var waitPosition = new Position(0, 18);
     var endPosition = new Position(1, 18);
+    var attackPosition = new Position(2, 18);
     var secondPosition = new Position(8, 8);
 
     beforeEach(function() { 
@@ -56,7 +57,7 @@ describe("Player Turn", function() {
     it("a menu pops up", function() {
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);
-        expect(onscreenSprites.menus.length).toBe(2);
+        expect(onscreenSprites.menus.length).toBeGreaterThan(0);
     });
 
     it("you can click on the wait icon to wait", function() {
@@ -125,5 +126,18 @@ describe("Player Turn", function() {
         playerTurn.clicked(true, endPosition);
 
         expect(playerTurn.isTurnOver()).toBeTruthy();
+    });
+
+    it("you can attack", function() {
+        var skeleton = [new Skeleton(newPosition)];
+
+        onscreenSprites = new OnscreenSprites({enemies: skeleton});
+        playerTurn = new PlayerTurn(onscreenSprites);
+
+        playerTurn.clicked(true, playerPosition);
+        playerTurn.clicked(true, new Position(10, 11));
+        playerTurn.clicked(true, attackPosition);
+
+        expect(onscreenSprites.menus.length).toBe(1);
     });
 });
