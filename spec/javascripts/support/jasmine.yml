@@ -29,6 +29,7 @@ src_files:
     - public/js/movement_tile.js
     - public/js/floor.js
     - public/js/wall.js
+    - public/js/move_unit.js
     - public/js/skeleton.js
     - public/js/attack_icon.js
     - public/js/battle_preview_menu.js
