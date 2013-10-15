@@ -14,8 +14,7 @@ var Wait = Sprite.extend({
 
     action: function (playerTurn) {
 				playerTurn.onscreenSprites.menus.removeAll();
-        playerTurn.selectedPlayerUnit.disabled = true;
-        playerTurn.selectedPlayerUnit = null;
-
+        playerTurn.moveUnit.disableUnit();
+        playerTurn.moveUnit = null;
     }
 });

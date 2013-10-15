@@ -23,13 +23,7 @@ var MoveUnit = Class.extend({
     },
 
     createMovementTiles: function (position) {
-				if (!this.onscreenSprites.playerUnits.isAtPosition(position)) {
-            return;
-        }
-
         var playerUnit = this.onscreenSprites.playerUnits.atPosition(position);
-        if (playerUnit.disabled)
-            return;
 
         this.selectedPlayerUnit = playerUnit;
 
@@ -54,5 +48,16 @@ var MoveUnit = Class.extend({
             && !this.onscreenSprites.playerUnits.isAtPosition(position)
             && !this.onscreenSprites.enemies.isAtPosition(position);
     },
+
+    disableUnit: function () {
+				this.selectedPlayerUnit.disabled = true;
+    },
+
+    reset: function () {
+				this.onscreenSprites.menus.removeAll();
+        this.onscreenSprites.movementTiles.removeAll();
+        if (this.originalPosition)
+            this.selectedPlayerUnit.position = this.originalPosition;
+    }
 
 });
