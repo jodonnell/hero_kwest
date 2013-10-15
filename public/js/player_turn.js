@@ -29,7 +29,9 @@ var PlayerTurn = Class.extend({
             menu.action(this);
         }
 				else if (this.isPlayerSelected()) {
-            this.movePlayerIfClickedTile(position);
+            var moveUnit = new MoveUnit(this.onscreenSprites);
+            moveUnit.selectedPlayerUnit = this.selectedPlayerUnit;
+            moveUnit.movePlayerIfClickedTile(position);
         }
         else if (!this.selectedPlayerUnit) {
             var moveUnit = new MoveUnit(this.onscreenSprites);
@@ -48,24 +50,5 @@ var PlayerTurn = Class.extend({
 				    return playerUnit.disabled;
         });
     },
-
-    movePlayerIfClickedTile: function (position) {
-        if (!this.isValidMovementSpot(position))
-            return;
-
-        this.originalPosition = this.selectedPlayerUnit.position;
-        this.selectedPlayerUnit.position = position;
-        this.onscreenSprites.movementTiles.removeAll();
-        this.onscreenSprites.menus.push(new Wait());
-        this.onscreenSprites.menus.push(new EndTurn());
-        this.onscreenSprites.menus.push(new AttackIcon());
-    },
-
-    isValidMovementSpot: function (position) {
-        return this.onscreenSprites.movementTiles.isAtPosition(position)
-            && !this.onscreenSprites.playerUnits.isAtPosition(position)
-            && !this.onscreenSprites.enemies.isAtPosition(position);
-    },
-
 
 });
