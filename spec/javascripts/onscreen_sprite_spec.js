@@ -20,7 +20,7 @@ describe("Onscreen sprites", function() {
     });
 
     it("can get the sprite at a position", function() {
-        var player = new Player(new Position(1, 2));
+        var player = new Player(new Position(1, 2), {hp: 20, strength: 12, defense: 5, speed: 7, evade: 7, critical: 2, criticalEvade: 2});
         var onscreenSprites = new OnscreenSprites({playerUnits: [player]});
 
         var position = new Position(1, 1);

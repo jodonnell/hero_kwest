@@ -6,7 +6,7 @@ var OnscreenSprites = Class.extend({
             sprites = {};
         }
 
-        this.playerUnits = sprites.playerUnits || [new Player(new Position(10, 10))];
+        this.playerUnits = sprites.playerUnits || [new Player(new Position(10, 10), {hp: 20, strength: 12, defense: 5, speed: 7, evade: 7, critical: 2, criticalEvade: 2})];
         this.movementTiles = sprites.movementTiles || [];
         this.floors = sprites.floors || [];
         this.walls = sprites.walls || [];

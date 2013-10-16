@@ -33,6 +33,7 @@ src_files:
     - public/js/skeleton.js
     - public/js/attack_icon.js
     - public/js/battle_preview_menu.js
+    - public/js/battle_calculator.js
 
 
 # stylesheets

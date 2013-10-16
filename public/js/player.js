@@ -6,44 +6,38 @@ var Player = Sprite.extend({
         this.movement = 5;
         this.disabled = false;
         this.image = image;
-        this._hp = stats.hp;
-        this._strength = stats.strength;
-        this._defense = stats.defense;
-        this._speed = stats.speed;
-        this._evade = stats.evade;
-        this._critical = stats.critical;
-        this._criticalEvade = stats.criticalEvade;
+        this.stats = stats;
     },
 
     update: function (args) {
     },
 
     hp: function () {
-				return this._hp;
+				return this.stats.hp;
     },
 
     strength: function () {
-				return this._strength;
+				return this.stats.strength;
     },
 
     defense: function () {
-				return this._defense;
+				return this.stats.defense;
     },
 
     speed: function () {
-				return this._speed;
+				return this.stats.speed;
     },
 
     evade: function () {
-				return this._evade;
+				return this.stats.evade;
     },
 
     critical: function () {
-				return this._critical;
+				return this.stats.critical;
     },
 
     criticalEvade: function () {
-				return this._criticalEvade;
+				return this.stats.criticalEvade;
     },
 
     getCurrentImage: function () {

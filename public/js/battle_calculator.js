@@ -7,21 +7,19 @@ var BattleCalculator = Sprite.extend({
     },
 
     damage: function () {
-        var damage = this.attacker.strength() - this.defender.defense();
-        if (damage < 1)
-            damage = 1;
-				return damage;
+        return this.calculate(this.attacker.strength(), this.defender.defense());
     },
 
     evade: function () {
-        var damage = this.attacker.evade() - this.defender.speed();
-        if (damage < 1)
-            damage = 1;
-				return damage;
+        return this.calculate(this.attacker.evade(), this.defender.speed());
     },
 
     critical: function () {
-        var damage = this.attacker.critical() - this.defender.criticalEvade();
+        return this.calculate(this.attacker.critical(), this.defender.criticalEvade());
+    },
+
+    calculate: function (strength, defense) {
+        var damage = strength - defense;
         if (damage < 1)
             damage = 1;
 				return damage;

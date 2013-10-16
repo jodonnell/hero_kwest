@@ -6,6 +6,7 @@ describe("Player Turn", function() {
     var endPosition = new Position(1, 18);
     var attackPosition = new Position(2, 18);
     var secondPosition = new Position(8, 8);
+    var stats = {hp: 20, strength: 12, defense: 5, speed: 7, evade: 7, critical: 2, criticalEvade: 2};
 
     beforeEach(function() { 
         onscreenSprites = new OnscreenSprites();
@@ -44,7 +45,7 @@ describe("Player Turn", function() {
     });
 
     it("you cannot move on top of another player unit", function() {
-        var players = [new Player(playerPosition), new Player(secondPosition)];
+        var players = [new Player(playerPosition, stats), new Player(secondPosition, stats)];
 
         onscreenSprites = new OnscreenSprites({playerUnits: players});
         playerTurn = new PlayerTurn(onscreenSprites);
