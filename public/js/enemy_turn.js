@@ -13,14 +13,14 @@ var EnemyTurn = Class.extend({
     },
 
     update: function () {
-        var firstEnemy = _.first(_.where(this.onscreenSprites.enemies, {disabled: false}));;
+        var firstEnemy = _.first(_.where(this.onscreenSprites.enemyUnits, {disabled: false}));;
 				this.createMovementTiles(firstEnemy.position);
 				firstEnemy.disabled = true;
     },
 
     isTurnOver: function () {
-        var enemies = this.onscreenSprites.enemies;
-				return _.every(enemies, function (enemy) {
+        var enemyUnits = this.onscreenSprites.enemyUnits;
+				return _.every(enemyUnits, function (enemy) {
 				    return enemy.disabled;
         });
     },
@@ -39,15 +39,15 @@ var EnemyTurn = Class.extend({
     isValidMovementSpot: function (position) {
         return this.onscreenSprites.movementTiles.isAtPosition(position)
             && !this.onscreenSprites.playerUnits.isAtPosition(position)
-            && !this.onscreenSprites.enemies.isAtPosition(position);
+            && !this.onscreenSprites.enemyUnits.isAtPosition(position);
     },
 
     createMovementTiles: function (position) {
-				if (!this.onscreenSprites.enemies.isAtPosition(position)) {
+				if (!this.onscreenSprites.enemyUnits.isAtPosition(position)) {
             return;
         }
 
-        var playerUnit = this.onscreenSprites.enemies.atPosition(position);
+        var playerUnit = this.onscreenSprites.enemyUnits.atPosition(position);
         if (playerUnit.disabled)
             return;
 

@@ -11,6 +11,7 @@ var Images = Class.extend({
         this._loadImage("wall", "wall.png");
         this._loadImage("endTurn", "stop.png");
         this._loadImage("wait", "wait.png");
+        this._loadImage("checkmark-icon", "check-icon.png");
         this._loadImage("attack-icon", "attack-icon.png");
         this._loadImage("skeleton", "skeleton.png");
         this._loadImage("floor", "floor_dirt.png");

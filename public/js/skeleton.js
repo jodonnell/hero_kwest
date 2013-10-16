@@ -1,39 +1,8 @@
 "use strict";
 
-var Skeleton = Sprite.extend({
+var Skeleton = Unit.extend({
     init: function (position, stats) {
-        this.position = position;
-        this.movement = 5;
-        this.disabled = false;
-        this.stats = stats;
-    },
-
-    hp: function () {
-				return this.stats.hp;
-    },
-
-    strength: function () {
-				return this.stats.strength;
-    },
-
-    defense: function () {
-				return this.stats.defense;
-    },
-
-    speed: function () {
-				return this.stats.speed;
-    },
-
-    evade: function () {
-				return this.stats.evade;
-    },
-
-    critical: function () {
-				return this.stats.critical;
-    },
-
-    criticalEvade: function () {
-				return this.stats.criticalEvade;
+        this.newUnit(position, stats)
     },
 
     update: function (args) {

@@ -46,7 +46,7 @@ var MoveUnit = Class.extend({
     isValidMovementSpot: function (position) {
         return this.onscreenSprites.movementTiles.isAtPosition(position)
             && !this.onscreenSprites.playerUnits.isAtPosition(position)
-            && !this.onscreenSprites.enemies.isAtPosition(position);
+            && !this.onscreenSprites.enemyUnits.isAtPosition(position);
     },
 
     disableUnit: function () {

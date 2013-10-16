@@ -101,7 +101,7 @@ describe("Player Turn", function() {
     it("you can not move onto a skeleton", function() {
         var skeleton = [new Skeleton(newPosition)];
 
-        onscreenSprites = new OnscreenSprites({enemies: skeleton});
+        onscreenSprites = new OnscreenSprites({enemyUnits: skeleton});
         playerTurn = new PlayerTurn(onscreenSprites);
 
         playerTurn.clicked(true, playerPosition);
@@ -130,9 +130,9 @@ describe("Player Turn", function() {
     });
 
     it("you can attack", function() {
-        var skeleton = [new Skeleton(newPosition)];
+        var skeleton = [new Skeleton(newPosition, stats)];
 
-        onscreenSprites = new OnscreenSprites({enemies: skeleton});
+        onscreenSprites = new OnscreenSprites({enemyUnits: skeleton});
         playerTurn = new PlayerTurn(onscreenSprites);
 
         playerTurn.clicked(true, playerPosition);
@@ -140,5 +140,7 @@ describe("Player Turn", function() {
         playerTurn.clicked(true, attackPosition);
 
         expect(onscreenSprites.menus.length).toBe(1);
+        playerTurn.clicked(true, new Position(0, 0));
+        expect(onscreenSprites.enemyUnits[0].hp()).toBe(13);
     });
 });
