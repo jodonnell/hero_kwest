@@ -41,15 +41,9 @@ var PlayerTurn = Class.extend({
 				if (!this.onscreenSprites.playerUnits.isAtPosition(position)) {
             return false;
         }
+
 				var playerUnit = this.onscreenSprites.playerUnits.atPosition(position);
-        if (playerUnit.disabled)
-            return false;
-
-        return true;
-    },
-
-    isPlayerSelected: function () {
-				return this.onscreenSprites.movementTiles.length > 0;
+        return !playerUnit.disabled;
     },
 
     isTurnOver: function () {
