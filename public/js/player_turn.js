@@ -33,6 +33,12 @@ var PlayerTurn = Class.extend({
         }
     },
 
+    finishUnitMove: function () {
+				this.onscreenSprites.menus.removeAll();
+        this.moveUnit.disableUnit();
+        this.moveUnit = null;
+    },
+
     selectedUnit: function () {
 				return this.moveUnit.selectedPlayerUnit;
     },

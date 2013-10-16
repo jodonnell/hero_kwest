@@ -142,5 +142,9 @@ describe("Player Turn", function() {
         expect(onscreenSprites.menus.length).toBe(1);
         playerTurn.clicked(true, new Position(0, 0));
         expect(onscreenSprites.enemyUnits[0].hp()).toBe(13);
+        expect(onscreenSprites.playerUnits[0].hp()).toBe(13);
+
+        expect(onscreenSprites.menus.length).toBe(0);
+        expect(onscreenSprites.playerUnits[0].disabled).toBeTruthy();
     });
 });
