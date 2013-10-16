@@ -33,6 +33,10 @@ var PlayerTurn = Class.extend({
         }
     },
 
+    selectedUnit: function () {
+				return this.moveUnit.selectedPlayerUnit;
+    },
+
     isPlayerMovable: function (position) {
 				if (!this.onscreenSprites.playerUnits.isAtPosition(position)) {
             return false;

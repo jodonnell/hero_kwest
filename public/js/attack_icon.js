@@ -13,7 +13,7 @@ var AttackIcon = Sprite.extend({
     },
 
     action: function (playerTurn) {
-        var enemy = playerTurn.selectedPlayerUnit.isNextToAny(playerTurn.onscreenSprites.enemies);
+        var enemy = playerTurn.selectedUnit().isNextToAny(playerTurn.onscreenSprites.enemies);
         if (!enemy)
             return;
 
