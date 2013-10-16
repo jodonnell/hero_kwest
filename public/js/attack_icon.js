@@ -18,7 +18,7 @@ var AttackIcon = Sprite.extend({
             return;
 
         playerTurn.onscreenSprites.menus.removeAll();
-        playerTurn.onscreenSprites.menus.push(new BattlePreviewMenu());
+        playerTurn.onscreenSprites.menus.push(new BattlePreviewMenu(playerTurn.selectedUnit(), enemy));
         
         // find enemy
         // create battle calculator

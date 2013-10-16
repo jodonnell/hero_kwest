@@ -1,14 +1,49 @@
 "use strict";
 
 var Player = Sprite.extend({
-    init: function (position, image) {
+    init: function (position, image, stats) {
         this.position = position;
         this.movement = 5;
         this.disabled = false;
         this.image = image;
+        this._hp = stats.hp;
+        this._strength = stats.strength;
+        this._defense = stats.defense;
+        this._speed = stats.speed;
+        this._evade = stats.evade;
+        this._critical = stats.critical;
+        this._criticalEvade = stats.criticalEvade;
     },
 
     update: function (args) {
+    },
+
+    hp: function () {
+				return this._hp;
+    },
+
+    strength: function () {
+				return this._strength;
+    },
+
+    defense: function () {
+				return this._defense;
+    },
+
+    speed: function () {
+				return this._speed;
+    },
+
+    evade: function () {
+				return this._evade;
+    },
+
+    critical: function () {
+				return this._critical;
+    },
+
+    criticalEvade: function () {
+				return this._criticalEvade;
     },
 
     getCurrentImage: function () {
