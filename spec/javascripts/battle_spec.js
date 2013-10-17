@@ -28,4 +28,14 @@ describe("Battle", function() {
         expect(turn.unitDied).toHaveBeenCalledWith(player);
     });
 
+    it("wont damage the attacker if it kills the defender", function() {
+        stats.hp = 3;
+        skeleton.damage(17);
+
+        var battle = new Battle(player, skeleton, turn);
+        expect(player.isDead()).toBeFalsy();
+        expect(skeleton.isDead()).toBeTruthy();
+        expect(turn.unitDied).toHaveBeenCalledWith(skeleton);
+    });
+
 });

@@ -18,7 +18,8 @@ var OnscreenSprites = Class.extend({
         
         var remove = function (element) {
             var index = this.indexOf(element);
-            this.splice(index, 1);
+            if (index !== -1)
+                this.splice(index, 1);
         };
 
         var isAtPosition = function (position) {

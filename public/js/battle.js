@@ -5,8 +5,13 @@ var Battle = Class.extend({
 				var calculator = new BattleCalculator(attackerUnit, defenderUnit);
         defenderUnit.damage(calculator.damage());
 
-        calculator = new BattleCalculator(defenderUnit, attackerUnit);
-        attackerUnit.damage(calculator.damage());
+        if (defenderUnit.isDead()) {
+            turn.unitDied(defenderUnit);
+        }
+        else {
+            calculator = new BattleCalculator(defenderUnit, attackerUnit);
+            attackerUnit.damage(calculator.damage());
+        }
 
         turn.finishUnitMove();
 

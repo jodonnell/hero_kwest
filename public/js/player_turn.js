@@ -34,7 +34,8 @@ var PlayerTurn = Class.extend({
     },
 
     unitDied: function (unit) {
-				
+				this.onscreenSprites.playerUnits.remove(unit);
+				this.onscreenSprites.enemyUnits.remove(unit);
     },
 
     finishUnitMove: function () {
