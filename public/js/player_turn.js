@@ -33,6 +33,10 @@ var PlayerTurn = Class.extend({
         }
     },
 
+    unitDied: function (unit) {
+				
+    },
+
     finishUnitMove: function () {
 				this.onscreenSprites.menus.removeAll();
         this.moveUnit.disableUnit();

@@ -14,7 +14,7 @@ var EnemyTurn = Class.extend({
 
     update: function () {
         var firstEnemy = _.first(_.where(this.onscreenSprites.enemyUnits, {disabled: false}));;
-				this.createMovementTiles(firstEnemy.position);
+				//this.createMovementTiles(firstEnemy.position);
 				firstEnemy.disabled = true;
     },
 

@@ -39,4 +39,8 @@ var Unit = Sprite.extend({
     damage: function (amount) {
 				this.stats.hp = this.stats.hp - amount;
     },
+
+    isDead: function () {
+        return !(this.hp() > 0);
+    }
 });

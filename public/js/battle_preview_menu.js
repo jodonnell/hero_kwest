@@ -36,12 +36,6 @@ var BattlePreviewMenu = Sprite.extend({
     },
 
     action: function (playerTurn) {
-        var calculator = new BattleCalculator(this.playerUnit, this.enemyUnit);
-        this.enemyUnit.damage(calculator.damage());
-
-        calculator = new BattleCalculator(this.enemyUnit, this.playerUnit);
-        this.playerUnit.damage(calculator.damage());
-
-        playerTurn.finishUnitMove();
+        new Battle(this.playerUnit, this.enemyUnit, playerTurn);
     }
 });
