@@ -1,0 +1,4 @@
+* Game
+** Animation
+*** First is standing still frame
+*** Next 6 is animation, 1/12 a second in between frames
