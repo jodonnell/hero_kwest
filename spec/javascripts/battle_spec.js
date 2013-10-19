@@ -21,6 +21,12 @@ describe("Battle", function() {
         expect(turn.finishUnitMove).toHaveBeenCalled();
     });
 
+    it("can evade attack", function() {
+        var battle = new Battle(player, skeleton, turn);
+        expect(player.hp()).toEqual(13);
+        expect(turn.finishUnitMove).toHaveBeenCalled();
+    });
+
     it("will die", function() {
         stats.hp = 3;
         var battle = new Battle(player, skeleton, turn);

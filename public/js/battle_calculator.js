@@ -11,7 +11,7 @@ var BattleCalculator = Sprite.extend({
     },
 
     evade: function () {
-        return this.calculate(this.attacker.evade(), this.defender.speed());
+        return this.calculate(this.defender.speed(), this.attacker.evade());
     },
 
     critical: function () {

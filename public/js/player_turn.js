@@ -10,7 +10,17 @@ var PlayerTurn = Class.extend({
     },
 
     update: function () {
-				
+				if (this.effect) {
+            this.effect.update();
+            if (this.effect.isDone())
+                this.effect = null;
+        }
+    },
+
+    damageDone: function (unit, damage) {
+        var text = new Text(unit.position.xPixels() + 8, unit.position.yPixels() - 12, damage);
+        this.effect = new RaisingAndDisappearingTextEffect(text, this.onscreenSprites.texts);
+				this.onscreenSprites.texts.push(text);
     },
 
     clicked: function (leftClicked, position) {

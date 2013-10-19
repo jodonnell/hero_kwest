@@ -3,14 +3,21 @@
 var Battle = Class.extend({
     init: function (attackerUnit, defenderUnit, turn) {
 				var calculator = new BattleCalculator(attackerUnit, defenderUnit);
-        defenderUnit.damage(calculator.damage());
+
+        if (!this.chanceGreaterThan(calculator.evade())) {
+            defenderUnit.damage(calculator.damage());
+            turn.damageDone(defenderUnit, calculator.damage());
+        }
 
         if (defenderUnit.isDead()) {
             turn.unitDied(defenderUnit);
         }
         else {
             calculator = new BattleCalculator(defenderUnit, attackerUnit);
-            attackerUnit.damage(calculator.damage());
+            if (!this.chanceGreaterThan(calculator.evade())) {
+                attackerUnit.damage(calculator.damage());
+                turn.damageDone(attackerUnit, calculator.damage());
+            }
         }
 
         turn.finishUnitMove();
@@ -18,6 +25,10 @@ var Battle = Class.extend({
         if (attackerUnit.isDead()) {
             turn.unitDied(attackerUnit);
         }
+    },
+
+    chanceGreaterThan: function (percent) {
+				return _.random(0, 100) <= percent;
     }
 
 });
