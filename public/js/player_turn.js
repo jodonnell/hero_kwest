@@ -1,12 +1,14 @@
 "use strict";
 
 var PlayerTurn = Class.extend({
-    init: function (onscreenSprites) {
-        this.onscreenSprites = onscreenSprites;
-        _.each(this.onscreenSprites.playerUnits, function (playerUnit) {
-				    playerUnit.disabled = false;
+    init: function (objects) {
+        this.objects = objects;
+
+        _.each(this.objects.where({unit: true}), function (unit) {
+				    unit.disabled = false;
         });
-        this.onscreenSprites.menus.removeAll();
+
+        this.objects.removeAll({menus: true});
     },
 
     update: function () {
@@ -19,8 +21,8 @@ var PlayerTurn = Class.extend({
 
     damageDone: function (unit, damage) {
         var text = new Text(unit.position.xPixels() + 8, unit.position.yPixels() - 12, damage);
-        this.effect = new RaisingAndDisappearingTextEffect(text, this.onscreenSprites.texts);
-				this.onscreenSprites.texts.push(text);
+        this.effect = new RaisingAndDisappearingTextEffect(text, this.objects);
+				this.objects.add(text, {damageNumber: true});
     },
 
     clicked: function (leftClicked, position) {
@@ -30,26 +32,26 @@ var PlayerTurn = Class.extend({
             return;
         }
 
-        if (this.onscreenSprites.menus.isAtPosition(position)) {
-            var menu = this.onscreenSprites.menus.atPosition(position);
+        if (this.objects.where({menus: true}).isAtPosition(position)) {
+            var menu = this.objects.where({menus: true}).atPosition(position);
             menu.action(this);
         }
         else if (this.moveUnit) {
             this.moveUnit.movePlayerIfClickedTile(position);
         }
         else if (this.isPlayerMovable(position)) {
-            this.moveUnit = new MoveUnit(this.onscreenSprites);
+            this.moveUnit = new MoveUnit(this.objects);
             this.moveUnit.createMovementTiles(position);
         }
     },
 
     unitDied: function (unit) {
-				this.onscreenSprites.playerUnits.remove(unit);
-				this.onscreenSprites.enemyUnits.remove(unit);
+				this.objects.playerUnits.remove(unit);
+				this.objects.enemyUnits.remove(unit);
     },
 
     finishUnitMove: function () {
-				this.onscreenSprites.menus.removeAll();
+				this.objects.removeAll({menus: true});
         this.moveUnit.disableUnit();
         this.moveUnit = null;
     },
@@ -59,16 +61,16 @@ var PlayerTurn = Class.extend({
     },
 
     isPlayerMovable: function (position) {
-				if (!this.onscreenSprites.playerUnits.isAtPosition(position)) {
+				if (!this.objects.where({playerControlled: true}).isAtPosition(position)) {
             return false;
         }
 
-				var playerUnit = this.onscreenSprites.playerUnits.atPosition(position);
+				var playerUnit = this.objects.where({playerControlled: true}).atPosition(position);
         return !playerUnit.disabled;
     },
 
     isTurnOver: function () {
-        var playerUnits = this.onscreenSprites.playerUnits;
+        var playerUnits = this.objects.where({playerControlled: true});
 				return _.every(playerUnits, function (playerUnit) {
 				    return playerUnit.disabled;
         });

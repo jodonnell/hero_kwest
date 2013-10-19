@@ -13,7 +13,7 @@ var Wait = Sprite.extend({
     },
 
     action: function (playerTurn) {
-				playerTurn.onscreenSprites.menus.removeAll();
+				playerTurn.objects.removeAll({menus: true});
         playerTurn.moveUnit.disableUnit();
         playerTurn.moveUnit = null;
     }

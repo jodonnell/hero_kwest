@@ -25,7 +25,7 @@ src_files:
     - public/js/menu.js
     - public/js/wait.js
     - public/js/end_turn.js
-    - public/js/onscreen_sprites.js
+    - public/js/objects.js
     - public/js/player_turn.js
     - public/js/movement_tile.js
     - public/js/floor.js
@@ -35,6 +35,8 @@ src_files:
     - public/js/attack_icon.js
     - public/js/battle_preview_menu.js
     - public/js/battle_calculator.js
+    - public/js/text.js
+    - public/js/raising_and_disappearing_text_effect.js
     - public/js/battle.js
 
 

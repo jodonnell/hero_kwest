@@ -1,5 +1,5 @@
 describe("Player Turn", function() {
-    var playerTurn, onscreenSprites;
+    var playerTurn, objects;
     var playerPosition = new Position(10, 10);
     var newPosition = new Position(11, 11);
     var waitPosition = new Position(0, 18);
@@ -9,56 +9,56 @@ describe("Player Turn", function() {
     var stats = {hp: 20, strength: 12, defense: 5, speed: 7, evade: 7, critical: 2, criticalEvade: 2};
 
     beforeEach(function() { 
-        onscreenSprites = new OnscreenSprites();
-        playerTurn = new PlayerTurn(onscreenSprites);
+        objects = new Objects();
+        objects.add(new Player(playerPosition, 'player', _.clone(stats)), {playerControlled: true, attackable: true, z: 1000, unit: true});
+        playerTurn = new PlayerTurn(objects);
     });
 
     it("when clicked not on a player nothing happens", function() {
         playerTurn.clicked(true, new Position(1, 1));
-        expect(onscreenSprites.movementTiles.length).toBe(0);
+        expect(objects.where({movementTile: true}).length).toBe(0);
     });
 
     it("when clicked on a player movement tiles are created", function() {
         playerTurn.clicked(true, new Position(10, 10));
-        expect(onscreenSprites.movementTiles.length).toBeGreaterThan(0);
+        expect(objects.where({movementTile: true}).length).toBeGreaterThan(0);
     });
 
     it("you have to click on movement tiles to move", function() {
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, new Position(20, 20));
-        expect(onscreenSprites.playerUnits[0].position).toBeTheSamePosition(playerPosition);
-        expect(onscreenSprites.movementTiles.length).toBeGreaterThan(0);
+        expect(_.first(objects.where({playerControlled: true})).position).toBeTheSamePosition(playerPosition);
+        expect(objects.where({movementTile: true}).length).toBeGreaterThan(0);
     });
 
     it("you can move", function() {
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);
-        expect(onscreenSprites.playerUnits[0].position).toBeTheSamePosition(newPosition);
-        expect(onscreenSprites.movementTiles.length).toBe(0);
+        expect(_.first(objects.where({playerControlled: true})).position).toBeTheSamePosition(newPosition);
+        expect(objects.where({movementTile: true}).length).toBe(0);
     });
 
     it("you cannot move into a wall", function() {
-        onscreenSprites.walls.push(new Wall(newPosition, 'top1'));
+        objects.add(new Wall(newPosition, 'top1'), {playerCannotMoveThrough: true});
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);
-        expect(onscreenSprites.playerUnits[0].position).toBeTheSamePosition(playerPosition);
+        expect(_.first(objects.where({playerControlled: true})).position).toBeTheSamePosition(playerPosition);
     });
 
     it("you cannot move on top of another player unit", function() {
         var players = [new Player(playerPosition, stats), new Player(secondPosition, stats)];
 
-        onscreenSprites = new OnscreenSprites({playerUnits: players});
-        playerTurn = new PlayerTurn(onscreenSprites);
+        playerTurn.objects.add(new Player(secondPosition, stats), {playerControlled: true, attackable: true, z: 1000, unit: true});
 
         playerTurn.clicked(true, playerPosition);
-        playerTurn.clicked(true, new Position(8, 8));
-        expect(onscreenSprites.playerUnits[0].position).toBeTheSamePosition(playerPosition);
+        playerTurn.clicked(true, secondPosition);
+        expect(_.first(objects.where({playerControlled: true})).position).toBeTheSamePosition(playerPosition);
     });
 
     it("a menu pops up", function() {
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);
-        expect(onscreenSprites.menus.length).toBeGreaterThan(0);
+        expect(objects.where({menus: true}).length).toBeGreaterThan(0);
     });
 
     it("you can click on the wait icon to wait", function() {
@@ -67,19 +67,19 @@ describe("Player Turn", function() {
 
         playerTurn.clicked(true, waitPosition);
 
-        expect(onscreenSprites.menus.length).toBe(0);
+        expect(objects.where({menus: true}).length).toBe(0);
 
         // clicking on player now does nothing
         playerTurn.clicked(true, newPosition);
-        expect(onscreenSprites.movementTiles.length).toBe(0);
-        expect(onscreenSprites.playerUnits[0].disabled).toBeTruthy();
+        expect(objects.where({movementTile: true}).length).toBe(0);
+        expect(_.first(objects.where({playerControlled: true})).disabled).toBeTruthy();
     });
 
     it("right clicking cancels movement", function() {
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(false, new Position(1, 1));
 
-        expect(onscreenSprites.movementTiles.length).toBe(0);
+        expect(objects.where({movementTile: true}).length).toBe(0);
     });
 
     it("right clicking sends you back to original position", function() {
@@ -88,25 +88,24 @@ describe("Player Turn", function() {
 
         playerTurn.clicked(false, new Position(1, 1));
 
-        expect(onscreenSprites.playerUnits[0].position).toBeTheSamePosition(playerPosition);
+        expect(_.first(objects.where({playerControlled: true})).position).toBeTheSamePosition(playerPosition);
     });
 
     it("you can not move a moved man", function() {
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);
         playerTurn.clicked(true, newPosition);
-        expect(onscreenSprites.movementTiles.length).toBe(0);
+        expect(objects.where({movementTile: true}).length).toBe(0);
     });
 
     it("you can not move onto a skeleton", function() {
         var skeleton = [new Skeleton(newPosition)];
 
-        onscreenSprites = new OnscreenSprites({enemyUnits: skeleton});
-        playerTurn = new PlayerTurn(onscreenSprites);
+        playerTurn.objects.add(skeleton, {enemyControlled: true, attackable: true, z: 1000, playerCannotMoveThrough: true, playerAttackable: true, unit: true});
 
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);
-        expect(onscreenSprites.movementTiles.length).toBeGreaterThan(0);
+        expect(objects.where({movementTile: true}).length).toBeGreaterThan(0);
     });
 
     it("you knows when the turn is over", function() {
@@ -119,8 +118,8 @@ describe("Player Turn", function() {
     it("you can end the turn early", function() {
         var players = [new Player(playerPosition), new Player(secondPosition)];
 
-        onscreenSprites = new OnscreenSprites({playerUnits: players});
-        playerTurn = new PlayerTurn(onscreenSprites);
+        objects = new Objects({playerUnits: players});
+        playerTurn = new PlayerTurn(objects);
 
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);
@@ -132,19 +131,18 @@ describe("Player Turn", function() {
     it("you can attack", function() {
         var skeleton = [new Skeleton(newPosition, stats)];
 
-        onscreenSprites = new OnscreenSprites({enemyUnits: skeleton});
-        playerTurn = new PlayerTurn(onscreenSprites);
+        playerTurn.objects.add(skeleton, {enemyControlled: true, attackable: true, z: 1000, playerCannotMoveThrough: true, playerAttackable: true, unit: true});
 
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, new Position(10, 11));
         playerTurn.clicked(true, attackPosition);
 
-        expect(onscreenSprites.menus.length).toBe(1);
+        expect(objects.where({menus: true}).length).toBe(1);
         playerTurn.clicked(true, new Position(0, 0));
-        expect(onscreenSprites.enemyUnits[0].hp()).toBe(13);
-        expect(onscreenSprites.playerUnits[0].hp()).toBe(13);
+        expect(_.first(objects.where({enemyControlled: true})).hp()).toBe(13);
+        expect(_.first(objects.where({playerControlled: true})).hp()).toBe(13);
 
-        expect(onscreenSprites.menus.length).toBe(0);
-        expect(onscreenSprites.playerUnits[0].disabled).toBeTruthy();
+        expect(objects.where({menus: true}).length).toBe(0);
+        expect(_.first(objects.where({playerControlled: true})).disabled).toBeTruthy();
     });
 });

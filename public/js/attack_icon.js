@@ -13,17 +13,11 @@ var AttackIcon = Sprite.extend({
     },
 
     action: function (playerTurn) {
-        var enemy = playerTurn.selectedUnit().isNextToAny(playerTurn.onscreenSprites.enemyUnits);
+        var enemy = playerTurn.selectedUnit().isNextToAny(playerTurn.objects.where({playerAttackable: true}));
         if (!enemy)
             return;
 
-        playerTurn.onscreenSprites.menus.removeAll();
-        playerTurn.onscreenSprites.menus.push(new BattlePreviewMenu(playerTurn.selectedUnit(), enemy));
-        
-        // find enemy
-        // create battle calculator
-        // show calculations
-        // confirm
-        // do attack and end turn
+        playerTurn.objects.removeAll({menus: true});
+        playerTurn.objects.add(new BattlePreviewMenu(playerTurn.selectedUnit(), enemy), {menus: true, z: 2000});
     }
 });

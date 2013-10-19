@@ -1,9 +1,9 @@
 "use strict";
 
 var RaisingAndDisappearingTextEffect = Class.extend({
-    init: function (text, texts) {
+    init: function (text, objects) {
         this.text = text;
-        this.texts = texts;
+        this.objects = objects;
         this.counter = 0;
     },
 
@@ -14,7 +14,7 @@ var RaisingAndDisappearingTextEffect = Class.extend({
             this.text.y--;
 
         if (this.isDone()) {
-            this.texts.remove(this.text);
+            this.objects.remove(this.text);
         }
     },
 

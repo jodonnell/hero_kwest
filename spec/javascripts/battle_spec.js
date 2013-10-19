@@ -8,7 +8,8 @@ describe("Battle", function() {
 
         turn = {
             finishUnitMove: function() {},
-            unitDied: function() {}
+            unitDied: function() {},
+            damageDone: function () {}
         };
         spyOn(turn, 'finishUnitMove');
         spyOn(turn, 'unitDied');
@@ -17,6 +18,7 @@ describe("Battle", function() {
 
     it("does damage", function() {
         var battle = new Battle(player, skeleton, turn);
+        // battle.chanceGreaterThan stub
         expect(player.hp()).toEqual(13);
         expect(turn.finishUnitMove).toHaveBeenCalled();
     });

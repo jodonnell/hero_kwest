@@ -5,10 +5,11 @@ var GameController = Class.extend({
         this.gameInit = gameInit;
         
         var level = new LevelBuilder();
-        this.onscreenSprites = new OnscreenSprites({playerUnits: level.playerUnits,
-                                                   walls: level.walls,
-                                                   enemyUnits: level.enemyUnits,
-                                                   floors: level.floors});
+        this.objects = new Objects();
+        this.objects.add(level.playerUnits, {playerControlled: true, attackable: true, z: 1000, unit: true});
+        this.objects.add(level.walls, {z: 1000, playerCannotMoveThrough: true});
+        this.objects.add(level.floors, {movableThrough: true, z: 100});
+        this.objects.add(level.enemyUnits, {enemyControlled: true, attackable: true, z: 1000, playerCannotMoveThrough: true, playerAttackable: true, unit: true});
 
         this.mouse = new Mouse(this);
         this.newPlayerTurn();
@@ -16,11 +17,11 @@ var GameController = Class.extend({
 
     newPlayerTurn: function () {
         if (this.currentTurn === this.enemyTurn) {
-            this.playerTurn = new PlayerTurn(this.onscreenSprites);
+            this.playerTurn = new PlayerTurn(this.objects);
             this.currentTurn = this.playerTurn;
         }
         else {
-            this.enemyTurn = new EnemyTurn(this.onscreenSprites);
+            this.enemyTurn = new EnemyTurn(this.objects);
             this.currentTurn = this.enemyTurn;
         }
     },
@@ -32,10 +33,7 @@ var GameController = Class.extend({
     draw: function () {
         this._clearBackground();
 
-        var drawMethod = $.proxy(function (i, j) {
-            this.onscreenSprites.sprites[i][j].draw();
-        }, this);
-        this._eachSprite(drawMethod);
+        this.objects.draw();
     },
 
     _clearBackground: function () {
@@ -44,25 +42,11 @@ var GameController = Class.extend({
     },
 
     update: function () {
-        var updateMethod = $.proxy(function (i, j) {
-            this.onscreenSprites.sprites[i][j].update({onscreenSprites: this.onscreenSprites});
-        }, this);
-        this._eachSprite(updateMethod);
+        this.objects.update();
         
         this.currentTurn.update();
         if (this.currentTurn.isTurnOver()) {
             this.newPlayerTurn();
-        }
-    },
-
-    _eachSprite: function (spriteAction) {
-        var i, j, sprites;
-
-        for (i = 0; i < this.onscreenSprites.sprites.length; i++) {
-            sprites = this.onscreenSprites.sprites[i];
-            for (j = 0; j < sprites.length; j++) {
-                spriteAction(i, j);
-            }
         }
     }
 });

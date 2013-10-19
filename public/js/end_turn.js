@@ -13,7 +13,7 @@ var EndTurn = Sprite.extend({
     },
 
     action: function (playerTurn) {
-				var playerUnits = playerTurn.onscreenSprites.playerUnits;
+				var playerUnits = playerTurn.objects.where({playerControlled: true});
 				_.each(playerUnits, function (playerUnit) {
 				    playerUnit.disabled = true;
         });

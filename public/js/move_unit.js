@@ -1,16 +1,16 @@
 "use strict";
 
 var MoveUnit = Class.extend({
-    init: function (onscreenSprites) {
-        this.onscreenSprites = onscreenSprites;
+    init: function (objects) {
+        this.objects = objects;
     },
 
     moveTiles: function (position, movement) {
-        if (this.onscreenSprites.walls.isAtPosition(position))
+        if (this.objects.where({playerCannotMoveThrough: true}).isAtPosition(position))
             return;
 
-        if (!this.onscreenSprites.movementTiles.isAtPosition(position))
-            this.onscreenSprites.movementTiles.push(new MovementTile(position));
+        if (!this.objects.where({movementTile: true}).isAtPosition(position))
+            this.objects.add(new MovementTile(position), {movementTile: true, z: 101});
 
         if (movement === 0)
             return;
@@ -19,11 +19,10 @@ var MoveUnit = Class.extend({
         this.moveTiles(new Position(position.x() - 1, position.y()), movement - 1);
         this.moveTiles(new Position(position.x(), position.y() + 1), movement - 1);
         this.moveTiles(new Position(position.x(), position.y() - 1), movement - 1);
-				
     },
 
     createMovementTiles: function (position) {
-        var playerUnit = this.onscreenSprites.playerUnits.atPosition(position);
+        var playerUnit = this.objects.where({playerControlled: true}).atPosition(position);
 
         this.selectedPlayerUnit = playerUnit;
 
@@ -37,16 +36,13 @@ var MoveUnit = Class.extend({
 
         this.originalPosition = this.selectedPlayerUnit.position;
         this.selectedPlayerUnit.position = position;
-        this.onscreenSprites.movementTiles.removeAll();
-        this.onscreenSprites.menus.push(new Wait());
-        this.onscreenSprites.menus.push(new EndTurn());
-        this.onscreenSprites.menus.push(new AttackIcon());
+        this.objects.removeAll({movementTile: true});
+        this.objects.add([new Wait(), new EndTurn(), new AttackIcon()], {menus: true});
     },
 
     isValidMovementSpot: function (position) {
-        return this.onscreenSprites.movementTiles.isAtPosition(position)
-            && !this.onscreenSprites.playerUnits.isAtPosition(position)
-            && !this.onscreenSprites.enemyUnits.isAtPosition(position);
+        return this.objects.where({movementTile: true}).isAtPosition(position)
+            && !this.objects.where({playerControlled: true}).isAtPosition(position);
     },
 
     disableUnit: function () {
@@ -54,8 +50,8 @@ var MoveUnit = Class.extend({
     },
 
     reset: function () {
-				this.onscreenSprites.menus.removeAll();
-        this.onscreenSprites.movementTiles.removeAll();
+        this.objects.removeAll({menus: true});
+        this.objects.removeAll({movementTile: true});
         if (this.originalPosition)
             this.selectedPlayerUnit.position = this.originalPosition;
     }

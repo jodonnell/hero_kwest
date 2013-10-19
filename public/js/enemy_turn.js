@@ -1,25 +1,27 @@
 "use strict";
 
 var EnemyTurn = Class.extend({
-    init: function (onscreenSprites) {
-        this.onscreenSprites = onscreenSprites;
-        _.each(this.onscreenSprites.playerUnits, function (playerUnit) {
-				    playerUnit.disabled = false;
+    init: function (objects) {
+        this.objects = objects;
+
+        _.each(this.objects.where({unit: true}), function (unit) {
+				    unit.disabled = false;
         });
-        this.onscreenSprites.menus.removeAll();
+
+        this.objects.removeAll({menus: true});
     },
 
     clicked: function (leftClicked, position) {
     },
 
     update: function () {
-        var firstEnemy = _.first(_.where(this.onscreenSprites.enemyUnits, {disabled: false}));;
+        var firstEnemy = _.first(_.where(this.objects.where({enemyControlled: true}), {disabled: false}));;
         if (firstEnemy)
 				    firstEnemy.disabled = true;
     },
 
     isTurnOver: function () {
-        var enemyUnits = this.onscreenSprites.enemyUnits;
+        var enemyUnits = this.objects.where({enemyControlled: true});
 				return _.every(enemyUnits, function (enemy) {
 				    return enemy.disabled;
         });
