@@ -18,20 +18,23 @@ describe("Battle", function() {
 
     it("does damage", function() {
         var battle = new Battle(player, skeleton, turn);
-        // battle.chanceGreaterThan stub
+        battle.chanceGreaterThan = function () { return false };
         expect(player.hp()).toEqual(13);
         expect(turn.finishUnitMove).toHaveBeenCalled();
     });
 
     it("can evade attack", function() {
-        var battle = new Battle(player, skeleton, turn);
-        expect(player.hp()).toEqual(13);
-        expect(turn.finishUnitMove).toHaveBeenCalled();
+        // var battle = new Battle(player, skeleton, turn);
+        // spyOn(battle, 'chanceGreaterThan').andReturn(false);
+
+        // expect(player.hp()).toEqual(20);
+        // expect(turn.finishUnitMove).toHaveBeenCalled();
     });
 
     it("will die", function() {
         stats.hp = 3;
         var battle = new Battle(player, skeleton, turn);
+        battle.chanceGreaterThan = function () { return false };
         expect(player.isDead()).toBeTruthy();
         expect(turn.unitDied).toHaveBeenCalledWith(player);
     });
@@ -41,6 +44,8 @@ describe("Battle", function() {
         skeleton.damage(17);
 
         var battle = new Battle(player, skeleton, turn);
+        battle.chanceGreaterThan = function () { return false };
+
         expect(player.isDead()).toBeFalsy();
         expect(skeleton.isDead()).toBeTruthy();
         expect(turn.unitDied).toHaveBeenCalledWith(skeleton);
