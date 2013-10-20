@@ -17,7 +17,7 @@ var PlayerTurn = Class.extend({
     damageDone: function (unit, damage) {
         var text = new Text(unit.position.xPixels() + 8, unit.position.yPixels() - 12, damage);
         this.objects.add(new RaisingAndDisappearingTextEffect(text, this.objects), {effect: true});
-				this.objects.add(text, {damageNumber: true, z: 1000});
+				this.objects.add(text, {damageNumber: true, z: 10000});
     },
 
     clicked: function (leftClicked, position) {
