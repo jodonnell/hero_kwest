@@ -1,6 +1,6 @@
 "use strict";
 
-var PlayerTurn = Class.extend({
+var PlayerTurn = Turn.extend({
     init: function (objects) {
         this.objects = objects;
 
@@ -12,12 +12,6 @@ var PlayerTurn = Class.extend({
     },
 
     update: function () {
-    },
-
-    damageDone: function (unit, damage) {
-        var text = new Text(unit.position.xPixels() + 8, unit.position.yPixels() - 12, damage);
-        this.objects.add(new RaisingAndDisappearingTextEffect(text, this.objects), {effect: true});
-				this.objects.add(text, {damageNumber: true, z: 10000});
     },
 
     clicked: function (leftClicked, position) {
@@ -35,23 +29,13 @@ var PlayerTurn = Class.extend({
             this.moveUnit.movePlayerIfClickedTile(position);
         }
         else if (this.isPlayerMovable(position)) {
-            this.moveUnit = new MoveUnit(this.objects);
+            this.moveUnit = new MoveUnit(this.objects, {playerControlled: true}, BLUE_TILES);
             this.moveUnit.createMovementTiles(position);
         }
     },
 
-    unitDied: function (unit) {
-				this.objects.remove(unit);
-    },
-
-    finishUnitMove: function () {
-				this.objects.removeAll({menus: true});
-        this.moveUnit.disableUnit();
-        this.moveUnit = null;
-    },
-
     selectedUnit: function () {
-				return this.moveUnit.selectedPlayerUnit;
+				return this.moveUnit.selectedUnit;
     },
 
     isPlayerMovable: function (position) {
@@ -63,11 +47,7 @@ var PlayerTurn = Class.extend({
         return !playerUnit.disabled;
     },
 
-    isTurnOver: function () {
-        var playerUnits = this.objects.where({playerControlled: true});
-				return _.every(playerUnits, function (playerUnit) {
-				    return playerUnit.disabled;
-        });
-    },
-
+    unitTypes: function () {
+				return this.objects.where({playerControlled: true});
+    }
 });

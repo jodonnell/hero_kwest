@@ -1,14 +1,7 @@
 "use strict";
 
-var EnemyTurn = Class.extend({
-    init: function (objects) {
-        this.objects = objects;
-
-        _.each(this.objects.where({unit: true}), function (unit) {
-				    unit.disabled = false;
-        });
-
-        this.objects.removeAll({menus: true});
+var EnemyTurn = Turn.extend({
+    initialize: function () {
     },
 
     clicked: function (leftClicked, position) {
@@ -16,14 +9,23 @@ var EnemyTurn = Class.extend({
 
     update: function () {
         var firstEnemy = _.first(_.where(this.objects.where({enemyControlled: true}), {disabled: false}));;
-        if (firstEnemy)
-				    firstEnemy.disabled = true;
+        if (firstEnemy) {
+            this.moveUnit = new MoveUnit(this.objects, {enemyControlled: true}, RED_TILES);
+            this.moveUnit.createMovementTiles(firstEnemy.position);
+            this.moveUnit.movePlayerIfClickedTile(firstEnemy.position);
+            var player = firstEnemy.isNextToAny(this.objects.where({enemyAttackable: true}));
+
+            if (player) {
+                new Battle(firstEnemy, player, this);
+            }
+            else {
+				        firstEnemy.disabled = true;
+            }
+        }
     },
 
-    isTurnOver: function () {
-        var enemyUnits = this.objects.where({enemyControlled: true});
-				return _.every(enemyUnits, function (enemy) {
-				    return enemy.disabled;
-        });
-    },
+    unitTypes: function () {
+				return this.objects.where({enemyControlled: true});
+    }
+
 });

@@ -6,10 +6,10 @@ var GameController = Class.extend({
         
         var level = new LevelBuilder();
         this.objects = new Objects();
-        this.objects.add(level.playerUnits, {playerControlled: true, attackable: true, z: 1000, unit: true});
-        this.objects.add(level.walls, {z: 1000, playerCannotMoveThrough: true});
+        this.objects.add(level.playerUnits, this.objects.playerUnit());
+        this.objects.add(level.walls, this.objects.walls());
         this.objects.add(level.floors, {movableThrough: true, z: 100});
-        this.objects.add(level.enemyUnits, {enemyControlled: true, attackable: true, z: 1000, playerCannotMoveThrough: true, playerAttackable: true, unit: true});
+        this.objects.add(level.enemyUnits, this.objects.enemyUnit());
 
         this.mouse = new Mouse(this);
         this.newPlayerTurn();

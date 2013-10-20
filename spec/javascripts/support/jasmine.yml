@@ -26,6 +26,7 @@ src_files:
     - public/js/wait.js
     - public/js/end_turn.js
     - public/js/objects.js
+    - public/js/turn.js
     - public/js/player_turn.js
     - public/js/movement_tile.js
     - public/js/floor.js
@@ -37,6 +38,7 @@ src_files:
     - public/js/battle_calculator.js
     - public/js/text.js
     - public/js/raising_and_disappearing_text_effect.js
+    - public/js/enemy_turn.js
     - public/js/battle.js
 
 

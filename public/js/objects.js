@@ -80,6 +80,18 @@ var Objects = Class.extend({
 				_.each(zOrdered, function (object) {
 				    object.object.draw(this);
         }, this);
+    },
+
+    playerUnit: function () {
+				return {playerControlled: true, attackable: true, z: 1000, unit: true, enemyAttackable: true};
+    },
+
+    enemyUnit: function () {
+				return {enemyControlled: true, attackable: true, z: 1000, cannotMoveThrough: true, playerAttackable: true, unit: true};
+    },
+
+    walls: function () {
+				return {z: 1000, cannotMoveThrough: true};
     }
 
 });

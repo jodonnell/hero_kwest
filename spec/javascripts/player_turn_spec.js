@@ -39,7 +39,7 @@ describe("Player Turn", function() {
     });
 
     it("you cannot move into a wall", function() {
-        objects.add(new Wall(newPosition, 'top1'), {playerCannotMoveThrough: true});
+        objects.add(new Wall(newPosition, 'top1'), objects.walls());
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);
         expect(_.first(objects.where({playerControlled: true})).position).toBeTheSamePosition(playerPosition);
@@ -101,7 +101,7 @@ describe("Player Turn", function() {
     it("you can not move onto a skeleton", function() {
         var skeleton = [new Skeleton(newPosition)];
 
-        playerTurn.objects.add(skeleton, {enemyControlled: true, attackable: true, z: 1000, playerCannotMoveThrough: true, playerAttackable: true, unit: true});
+        playerTurn.objects.add(skeleton, objects.enemyUnit());
 
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);

@@ -1,4 +1,4 @@
-describe("Battle", function() {
+describe("Enemy turn", function() {
     var stats, player, skeleton, turn;
 
     beforeEach(function() { 
@@ -17,10 +17,15 @@ describe("Battle", function() {
 
 
     it("does damage", function() {
-        var battle = new Battle(player, skeleton, turn);
-        spyOn(battle, 'chanceGreaterThan').andReturn(false);
-        expect(player.hp()).toEqual(13);
-        expect(turn.finishUnitMove).toHaveBeenCalled();
+        var objects = new Objects();
+        objects.add(player, objects.playerUnit());
+        objects.add(skeleton, objects.enemyUnit());
+        var enemyTurn = new EnemyTurn(objects);
+
+        spyOn(window, 'Battle').andCallThrough();
+        enemyTurn.update();
+
+        expect(window.Battle).toHaveBeenCalled();
     });
 
     it("can evade attack", function() {
