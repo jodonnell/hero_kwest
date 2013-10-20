@@ -66,7 +66,9 @@ var Objects = Class.extend({
     },
 
     draw: function () {
-        var zOrdered = _.sortBy(this.objects, 'z');
+        var zOrdered = _.sortBy(_.reject(this.objects, function (object) {
+				    return !('z' in object);
+        }), 'z');
 
 				_.each(zOrdered, function (object) {
 				    object.object.draw(this);

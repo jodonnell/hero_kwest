@@ -12,17 +12,12 @@ var PlayerTurn = Class.extend({
     },
 
     update: function () {
-				if (this.effect) {
-            this.effect.update();
-            if (this.effect.isDone())
-                this.effect = null;
-        }
     },
 
     damageDone: function (unit, damage) {
         var text = new Text(unit.position.xPixels() + 8, unit.position.yPixels() - 12, damage);
-        this.effect = new RaisingAndDisappearingTextEffect(text, this.objects);
-				this.objects.add(text, {damageNumber: true});
+        this.objects.add(new RaisingAndDisappearingTextEffect(text, this.objects), {effect: true});
+				this.objects.add(text, {damageNumber: true, z: 1000});
     },
 
     clicked: function (leftClicked, position) {
@@ -46,8 +41,7 @@ var PlayerTurn = Class.extend({
     },
 
     unitDied: function (unit) {
-				this.objects.playerUnits.remove(unit);
-				this.objects.enemyUnits.remove(unit);
+				this.objects.remove(unit);
     },
 
     finishUnitMove: function () {

@@ -15,6 +15,7 @@ var RaisingAndDisappearingTextEffect = Class.extend({
 
         if (this.isDone()) {
             this.objects.remove(this.text);
+            this.objects.remove(this);
         }
     },
 

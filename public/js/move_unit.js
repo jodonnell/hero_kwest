@@ -37,7 +37,7 @@ var MoveUnit = Class.extend({
         this.originalPosition = this.selectedPlayerUnit.position;
         this.selectedPlayerUnit.position = position;
         this.objects.removeAll({movementTile: true});
-        this.objects.add([new Wait(), new EndTurn(), new AttackIcon()], {menus: true});
+        this.objects.add([new Wait(), new EndTurn(), new AttackIcon()], {menus: true, z: 100});
     },
 
     isValidMovementSpot: function (position) {
