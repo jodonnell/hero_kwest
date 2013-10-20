@@ -20,6 +20,9 @@ var EnemyTurn = Turn.extend({
             else {
                 var movementTiles = this.objects.where({movementTile: true});
                 _.some(movementTiles, function (movementTile) {
+                    if (this.objects.where({enemyControlled: true}).isAtPosition(movementTile.position))
+                        return false;
+
 				            if (movementTile.isNextToAny(this.objects.where({playerControlled: true}))) {
                         this.moveUnit.movePlayerIfClickedTile(movementTile.position);
                         player = firstEnemy.isNextToAny(this.objects.where({enemyAttackable: true}));

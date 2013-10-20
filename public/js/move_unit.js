@@ -12,8 +12,9 @@ var MoveUnit = Class.extend({
         if (this.objects.where(this.cannotMoveThrough).isAtPosition(position))
             return;
 
-        if (!this.objects.where({movementTile: true}).isAtPosition(position))
+        if (!this.objects.where({movementTile: true}).isAtPosition(position)) {
             this.objects.add(new MovementTile(position, this.tileColor), {movementTile: true, z: 101});
+        }
 
         if (movement === 0)
             return;
