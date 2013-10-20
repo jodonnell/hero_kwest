@@ -83,15 +83,15 @@ var Objects = Class.extend({
     },
 
     playerUnit: function () {
-				return {playerControlled: true, attackable: true, z: 1000, unit: true, enemyAttackable: true};
+				return {playerControlled: true, attackable: true, z: 1000, unit: true, enemyAttackable: true, enemyCannotMoveThrough: true};
     },
 
     enemyUnit: function () {
-				return {enemyControlled: true, attackable: true, z: 1000, cannotMoveThrough: true, playerAttackable: true, unit: true};
+				return {enemyControlled: true, attackable: true, z: 1000, playerCannotMoveThrough: true, playerAttackable: true, unit: true};
     },
 
     walls: function () {
-				return {z: 1000, cannotMoveThrough: true};
+				return {z: 1000, playerCannotMoveThrough: true, enemyCannotMoveThrough: true};
     }
 
 });

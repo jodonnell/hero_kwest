@@ -1,14 +1,15 @@
 "use strict";
 
 var MoveUnit = Class.extend({
-    init: function (objects, unitController, tileColor) {
+    init: function (objects, unitController, cannotMoveThrough, tileColor) {
         this.objects = objects;
         this.unitController = unitController;
+        this.cannotMoveThrough = cannotMoveThrough;
         this.tileColor = tileColor;
     },
 
     moveTiles: function (position, movement) {
-        if (this.objects.where({cannotMoveThrough: true}).isAtPosition(position))
+        if (this.objects.where(this.cannotMoveThrough).isAtPosition(position))
             return;
 
         if (!this.objects.where({movementTile: true}).isAtPosition(position))

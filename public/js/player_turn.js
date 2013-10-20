@@ -29,7 +29,7 @@ var PlayerTurn = Turn.extend({
             this.moveUnit.movePlayerIfClickedTile(position);
         }
         else if (this.isPlayerMovable(position)) {
-            this.moveUnit = new MoveUnit(this.objects, {playerControlled: true}, BLUE_TILES);
+            this.moveUnit = new MoveUnit(this.objects, {playerControlled: true}, {playerCannotMoveThrough: true}, BLUE_TILES);
             this.moveUnit.createMovementTiles(position);
         }
     },

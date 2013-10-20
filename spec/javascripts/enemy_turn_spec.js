@@ -13,47 +13,27 @@ describe("Enemy turn", function() {
         };
         spyOn(turn, 'finishUnitMove');
         spyOn(turn, 'unitDied');
-    });
 
-
-    it("does damage", function() {
         var objects = new Objects();
         objects.add(player, objects.playerUnit());
         objects.add(skeleton, objects.enemyUnit());
-        var enemyTurn = new EnemyTurn(objects);
+        turn = new EnemyTurn(objects);
 
+    });
+
+
+    it("can attack", function() {
         spyOn(window, 'Battle').andCallThrough();
-        enemyTurn.update();
+        turn.update();
 
         expect(window.Battle).toHaveBeenCalled();
     });
 
-    it("can evade attack", function() {
-        // var battle = new Battle(player, skeleton, turn);
-        // spyOn(battle, 'chanceGreaterThan').andReturn(false);
 
-        // expect(player.hp()).toEqual(20);
-        // expect(turn.finishUnitMove).toHaveBeenCalled();
-    });
-
-    it("will die", function() {
-        stats.hp = 3;
-        var battle = new Battle(player, skeleton, turn);
-        battle.chanceGreaterThan = function () { return false };
-        expect(player.isDead()).toBeTruthy();
-        expect(turn.unitDied).toHaveBeenCalledWith(player);
-    });
-
-    it("wont damage the attacker if it kills the defender", function() {
-        stats.hp = 3;
-        skeleton.damage(17);
-
-        var battle = new Battle(player, skeleton, turn);
-        battle.chanceGreaterThan = function () { return false };
-
-        expect(player.isDead()).toBeFalsy();
-        expect(skeleton.isDead()).toBeTruthy();
-        expect(turn.unitDied).toHaveBeenCalledWith(skeleton);
+    it("will move to player", function() {
+        skeleton.position = new Position(4, 1);
+        turn.update();
+        expect(skeleton.position.isEqual(new Position(2, 1))).toBeTruthy();
     });
 
 });
