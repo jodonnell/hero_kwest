@@ -66,9 +66,16 @@ var Objects = Class.extend({
     },
 
     draw: function () {
-        var zOrdered = _.sortBy(_.reject(this.objects, function (object) {
+        var removeNoZ = _.reject(this.objects, function (object) {
 				    return !('z' in object);
-        }), 'z');
+        });
+
+        var zOrdered = _.sortBy(removeNoZ, function(object) {
+            var y = 0;
+            if ("position" in object.object)
+                y = object.object.position.y();
+            return object.z + y;
+        })
 
 				_.each(zOrdered, function (object) {
 				    object.object.draw(this);
