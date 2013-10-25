@@ -85,7 +85,7 @@ var LevelBuilder = Class.extend({
     buildLevel1: function () {
         this.fillFloors();
         this.fillWalls();
-        this.playerUnits = [new Player(new Position(10, 10), 'player', {hp: 20, strength: 12, defense: 5, speed: 7, evade: 7, critical: 2, criticalEvade: 2}), 
+        this.playerUnits = [new Player(new Position(10, 10), 'radish', {hp: 20, strength: 12, defense: 5, speed: 7, evade: 7, critical: 2, criticalEvade: 2}), 
                             new Player(new Position(8, 8), 'broccolee', {hp: 16, strength: 10, defense: 6, speed: 8, evade: 10, critical: 10, criticalEvade: 2}), 
                             new Player(new Position(6, 9), 'cucumber', {hp: 15, strength: 13, defense: 7, speed: 7, evade: 7, critical: 7, criticalEvade: 7})];
 
