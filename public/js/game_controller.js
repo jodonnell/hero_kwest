@@ -31,6 +31,8 @@ var GameController = Class.extend({
     },
 
     draw: function () {
+        if (!("_clearBackground" in this))
+            debugger
         this._clearBackground();
 
         this.objects.draw();

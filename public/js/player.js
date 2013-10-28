@@ -3,21 +3,34 @@
 var Player = Unit.extend({
     init: function (position, image, stats) {
         this.newUnit(position, stats)
-        this.image = image;
+        this.currentImage = image;
+
+        if (image === 'radish') {
+            this.spriteSheetX = TILE_SIZE * 0;
+            this.spriteSheetY = TILE_SIZE * 0;
+        }
     },
 
     update: function (args) {
     },
 
-    getCurrentImage: function () {
-        return gameImages[this.image];
+    offsetX: function () {
+				return -16;
+    },
+
+    offsetY: function () {
+				return -35;
+    },
+
+    tileSize: function () {
+				return TILE_SIZE * 2;
     },
 
     draw: function () {
         if (this.disabled)
             this.turnGray();
         else
-            gameContext.drawImage(this.getCurrentImage(), this.position.xPixels() - 16, this.position.yPixels() - 38);
+            this._super();
     },
 
     turnGray: function () {
@@ -35,6 +48,6 @@ var Player = Unit.extend({
         }
         context.putImageData(imgd, 0, 0);
 
-        gameContext.drawImage(context.canvas, this.position.xPixels() - 16, this.position.yPixels() - 38);
+        gameContext.drawImage(context.canvas, this.xPixels(), this.yPixels());
     }
 });

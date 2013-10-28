@@ -3,13 +3,10 @@
 var EndTurn = Sprite.extend({
     init: function () {
         this.position = new Position(1, 18);
+        this.currentImage = 'endTurn';
     },
 
     update: function (args) {
-    },
-
-    getCurrentImage: function () {
-        return 'endTurn';
     },
 
     action: function (playerTurn) {

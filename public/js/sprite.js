@@ -2,30 +2,50 @@
 
 var Sprite = Class.extend({
     draw: function () {
-        var image = gameImages[this.getCurrentImage()];
+        var image = this.getCurrentImage();
 
         if ((typeof this.spriteSheetX !== "undefined") && (typeof this.spriteSheetY !== "undefined")) {
-            gameContext.drawImage(image, this.spriteSheetX, this.spriteSheetY, TILE_SIZE, TILE_SIZE, this.position.xPixels(), this.position.yPixels(), TILE_SIZE, TILE_SIZE);
+            gameContext.drawImage(image, this.spriteSheetX, this.spriteSheetY, this.tileSize(), this.tileSize(), this.xPixels(), this.yPixels(), this.tileSize(), this.tileSize());
         }
         else {
-            gameContext.drawImage(image, this.position.xPixels(), this.position.yPixels());
+            gameContext.drawImage(image, this.xPixels(), this.yPixels());
         }
+    },
+
+    tileSize: function () {
+				return TILE_SIZE;
+    },
+
+    xPixels: function () {
+				return this.position.xPixels() + this.offsetX();
+    },
+
+    yPixels: function () {
+				return this.position.yPixels() + this.offsetY();
     },
 
     height: function () {
-        return gameImages[this.getCurrentImage()].height;
+        return gameImages[this.currentImage].height;
     },
 
     width: function () {
-        return gameImages[this.getCurrentImage()].width;
+        return gameImages[this.currentImage].width;
     },
 
     getCurrentImage: function () {
-        return this.currentImage;
+        return gameImages[this.currentImage];
     },
 
     update: function () {
 
+    },
+
+    offsetX: function () {
+				return 0;
+    },
+
+    offsetY: function () {
+				return 0;
     },
 
     isNextToAny: function (sprites) {
