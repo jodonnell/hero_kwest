@@ -39,8 +39,9 @@ var MoveUnit = Class.extend({
             return;
 
         this.originalPosition = this.selectedUnit.position;
-        this.selectedUnit.position = position;
         this.objects.removeAll({movementTile: true});
+
+        this.selectedUnit.position = position;
         this.objects.add([new Wait(), new EndTurn(), new AttackIcon()], {menus: true, z: 100});
     },
 
