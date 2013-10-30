@@ -33,6 +33,10 @@ var Turn = Class.extend({
 				return _.every(units, function (unit) {
 				    return unit.disabled;
         });
+    },
+
+    isGameOver: function () {
+        return this.objects.where({playerControlled: true}).length === 0;
     }
 
 });

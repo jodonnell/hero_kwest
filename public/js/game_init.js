@@ -6,8 +6,8 @@ var GameInit = Class.extend({
     },
 
     createCanvas: function () {
-        this.width = 800;
-        this.height = 606;
+        this.width = SCREEN_WIDTH;
+        this.height = SCREEN_HEIGHT;
 
         var left = $(window).width() / 2 - this.width / 2;
         var top = $(window).height() / 2 - this.height / 2;

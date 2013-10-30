@@ -9,3 +9,6 @@ var Y_MAX = 18
 
 var BLUE_TILES = 1;
 var RED_TILES = 2;
+
+var SCREEN_WIDTH=800;
+var SCREEN_HEIGHT=606;

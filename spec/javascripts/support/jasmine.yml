@@ -18,10 +18,14 @@ src_files:
     - public/js/sprite.js
     - public/js/unit.js
     - public/js/constants.js
+    - public/js/stairs.js
     - public/js/player.js
     - public/js/game_init.js
     - public/js/control.js
     - public/js/wall.js
+    - public/js/game_controller.js
+    - public/js/level_builder.js
+    - public/js/mouse.js
     - public/js/menu.js
     - public/js/wait.js
     - public/js/end_turn.js

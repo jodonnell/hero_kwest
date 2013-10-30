@@ -11,7 +11,7 @@ var GameController = Class.extend({
         this.objects.add(level.floors, {movableThrough: true, z: 100});
         this.objects.add(level.enemyUnits, this.objects.enemyUnit());
         this.objects.add(level.stairs, this.objects.stairs());
-
+        debugger
         this.mouse = new Mouse(this);
         this.newPlayerTurn();
     },
@@ -36,7 +36,20 @@ var GameController = Class.extend({
             debugger
         this._clearBackground();
 
+        if (this.currentTurn.isGameOver()) {
+            this.drawGameOver();
+            return;
+        }
+
         this.objects.draw();
+    },
+
+    drawGameOver: function () {
+				gameContext.fillStyle = '#ff0000';
+        gameContext.font = "bold 30px sans-serif";
+
+				gameContext.fillText('Game Over', SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2);
+
     },
 
     _clearBackground: function () {
@@ -45,6 +58,10 @@ var GameController = Class.extend({
     },
 
     update: function () {
+        if (this.currentTurn.isGameOver()) {
+            return;
+        }
+
         this.objects.update();
         
         this.currentTurn.update();

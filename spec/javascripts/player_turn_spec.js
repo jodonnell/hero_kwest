@@ -10,7 +10,7 @@ describe("Player Turn", function() {
 
     beforeEach(function() { 
         objects = new Objects();
-        objects.add(new Player(playerPosition, 'player', _.clone(stats)), {playerControlled: true, attackable: true, z: 1000, unit: true});
+        objects.add(new Player(playerPosition, 'player', _.clone(stats)), objects.playerUnit());
         playerTurn = new PlayerTurn(objects);
     });
 
@@ -48,7 +48,7 @@ describe("Player Turn", function() {
     it("you cannot move on top of another player unit", function() {
         var players = [new Player(playerPosition, stats), new Player(secondPosition, stats)];
 
-        playerTurn.objects.add(new Player(secondPosition, stats), {playerControlled: true, attackable: true, z: 1000, unit: true});
+        playerTurn.objects.add(new Player(secondPosition, stats), objects.playerUnit());
 
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, secondPosition);
@@ -131,7 +131,7 @@ describe("Player Turn", function() {
     it("you can attack", function() {
         var skeleton = [new Skeleton(newPosition, stats)];
 
-        playerTurn.objects.add(skeleton, {enemyControlled: true, attackable: true, z: 1000, playerCannotMoveThrough: true, playerAttackable: true, unit: true});
+        playerTurn.objects.add(skeleton, objects.enemyUnit());
 
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, new Position(10, 11));
@@ -144,5 +144,11 @@ describe("Player Turn", function() {
 
         expect(objects.where({menus: true}).length).toBe(0);
         expect(_.first(objects.where({playerControlled: true})).disabled).toBeTruthy();
+    });
+
+    it("is game over when you have no more units", function() {
+        expect(playerTurn.isGameOver()).toBeFalsy();
+        //objects.removeAll({playerControlled: true});
+        //expect(playerTurn.isGameOver()).toBeTruthy();
     });
 });

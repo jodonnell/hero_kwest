@@ -95,7 +95,7 @@ var Objects = Class.extend({
     },
 
     stairs: function () {
-				return {z: 1000, stairs: true};
+				return {z: 999, stairs: true};
     },
 
 });
