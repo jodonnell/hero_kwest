@@ -54,5 +54,9 @@ var Sprite = Class.extend({
         return _.find(sprites, function (sprite) {
 				    return this.position.isNextTo(sprite.position);
         }, this);
+    },
+
+    unitStoppedOn: function () {
+				
     }
 });

@@ -5,4 +5,8 @@ var Stairs = Sprite.extend({
         this.position = position;
         this.currentImage = 'stairs';
     },
+
+    unitStoppedOn: function (unit) {
+				debugger
+    }
 });

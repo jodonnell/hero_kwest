@@ -32,15 +32,29 @@ var Objects = Class.extend({
         }
     },
 
+    all: function () {
+        return this.returnObjects(this.objects);				
+    },
+
     length: function () {
 				return this.objects.length;
     },
 
     where: function (properties) {
+        return this.returnObjects(_.where(this.objects, properties));
+    },
+
+    returnObjects: function (objects) {
         var isAtPosition = function (position) {
             return _.any(this.map(function (wall) {
                 return position.isEqual(wall.position);
             }));
+        };
+
+        var allAtPosition = function (position) {
+            return _.select(this, function (object) {
+                return position.isEqual(object.position);
+            });
         };
 
         var atPosition = function (position) {
@@ -52,10 +66,11 @@ var Objects = Class.extend({
             return false;
         };
 
-				var objects = _.pluck(_.where(this.objects, properties), 'object');
+				var objects = _.pluck(objects, 'object');
 
         objects.atPosition = atPosition;
         objects.isAtPosition = isAtPosition;
+        objects.allAtPosition = allAtPosition;
         return objects;
     },
     
@@ -83,19 +98,19 @@ var Objects = Class.extend({
     },
 
     playerUnit: function () {
-				return {playerControlled: true, attackable: true, z: 1000, unit: true, enemyAttackable: true, enemyCannotMoveThrough: true};
+				return {playerControlled: true, attackable: true, z: 1000, unit: true, enemyAttackable: true, enemyCannotMoveThrough: true, tile: true};
     },
 
     enemyUnit: function () {
-				return {enemyControlled: true, attackable: true, z: 1000, playerCannotMoveThrough: true, playerAttackable: true, unit: true};
+				return {enemyControlled: true, attackable: true, z: 1000, playerCannotMoveThrough: true, playerAttackable: true, unit: true, tile: true};
     },
 
     walls: function () {
-				return {z: 1000, playerCannotMoveThrough: true, enemyCannotMoveThrough: true};
+				return {z: 1000, playerCannotMoveThrough: true, enemyCannotMoveThrough: true, tile: true};
     },
 
     stairs: function () {
-				return {z: 999, stairs: true};
+				return {z: 999, stairs: true, tile: true};
     },
 
 });

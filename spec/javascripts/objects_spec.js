@@ -41,10 +41,27 @@ describe("Objects", function() {
         wall2 = new Wall(position, 'left1');
         wall3 = new Wall(position, 'left1');
 
+        objects.add([wall, wall2, wall3], {property: 1});
+
+        expect(objects.all().length).toBe(3);
+    });
+
+    it("can get all objects", function () {
+        wall2 = new Wall(position, 'left1');
+        wall3 = new Wall(position, 'left1');
         objects.add([wall, wall2], {property: 1});
         objects.add(wall3, {property: 2});
-
+ 
         expect(objects.where({property: 1}).length).toBe(2);
+    });
+
+    it("can get all objects at position", function () {
+        wall2 = new Wall(position, 'left1');
+        wall3 = new Wall(new Position(2, 2), 'left1');
+
+        objects.add([wall, wall2, wall3], {property: 1});
+
+        expect(objects.all().allAtPosition(position).length).toBe(2);
     });
 
     // it("can tell if a wall is at a position", function() {
