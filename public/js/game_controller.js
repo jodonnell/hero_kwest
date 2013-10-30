@@ -10,6 +10,7 @@ var GameController = Class.extend({
         this.objects.add(level.walls, this.objects.walls());
         this.objects.add(level.floors, {movableThrough: true, z: 100});
         this.objects.add(level.enemyUnits, this.objects.enemyUnit());
+        this.objects.add(level.stairs, this.objects.stairs());
 
         this.mouse = new Mouse(this);
         this.newPlayerTurn();

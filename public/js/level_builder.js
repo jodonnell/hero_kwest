@@ -91,6 +91,8 @@ var LevelBuilder = Class.extend({
 
         this.enemyUnits = [new Skeleton(new Position(6, 6), {hp: 14, strength: 14, defense: 6, speed: 6, evade: 6, critical: 4, criticalEvade: 3}), 
                         new Skeleton(new Position(11, 5), {hp: 12, strength: 16, defense: 5, speed: 8, evade: 4, critical: 2, criticalEvade: 6})];
+
+        this.stairs = [new Stairs(new Position(12, 13))];
     },
 
     fillFloors: function () {

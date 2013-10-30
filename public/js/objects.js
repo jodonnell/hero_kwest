@@ -92,6 +92,10 @@ var Objects = Class.extend({
 
     walls: function () {
 				return {z: 1000, playerCannotMoveThrough: true, enemyCannotMoveThrough: true};
-    }
+    },
+
+    stairs: function () {
+				return {z: 1000, stairs: true};
+    },
 
 });

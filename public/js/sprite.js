@@ -3,6 +3,8 @@
 var Sprite = Class.extend({
     draw: function () {
         var image = this.getCurrentImage();
+        if (!image)
+            throw 'Image not found: ' + this.currentImage;
 
         if ((typeof this.spriteSheetX !== "undefined") && (typeof this.spriteSheetY !== "undefined")) {
             gameContext.drawImage(image, this.spriteSheetX, this.spriteSheetY, this.tileSize(), this.tileSize(), this.xPixels(), this.yPixels(), this.tileSize(), this.tileSize());

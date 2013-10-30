@@ -16,6 +16,7 @@ var Images = Class.extend({
         this._loadImage("skeleton", "skeleton.png");
         this._loadImage("floor", "floor_dirt.png");
         this._loadImage("tiles", "tiles.png");
+        this._loadImage("stairs", "stairs_down.png");
         this._loadImage("bubRight", "bub.png");
         //this.bubRight.onload = callback;
     },
