@@ -36,6 +36,6 @@ var BattlePreviewMenu = Sprite.extend({
     },
 
     action: function (playerTurn) {
-        new Battle(this.playerUnit, this.enemyUnit, playerTurn);
+        (new Battle(this.playerUnit, this.enemyUnit, playerTurn)).attack();
     }
 });

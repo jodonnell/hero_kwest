@@ -148,7 +148,7 @@ describe("Player Turn", function() {
 
     it("is game over when you have no more units", function() {
         expect(playerTurn.isGameOver()).toBeFalsy();
-        //objects.removeAll({playerControlled: true});
-        //expect(playerTurn.isGameOver()).toBeTruthy();
+        objects.removeAll({playerControlled: true});
+        expect(playerTurn.isGameOver()).toBeTruthy();
     });
 });

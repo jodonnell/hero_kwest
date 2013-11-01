@@ -2,29 +2,36 @@
 
 var Battle = Class.extend({
     init: function (attackerUnit, defenderUnit, turn) {
-				var calculator = new BattleCalculator(attackerUnit, defenderUnit);
+        this.attackerUnit = attackerUnit;
+        this.defenderUnit = defenderUnit;
+        this.turn = turn;
+    },
 
-        if (!this.chanceGreaterThan(calculator.evade())) {
-            defenderUnit.damage(calculator.damage());
-            turn.damageDone(defenderUnit, calculator.damage());
+    attack: function () {
+				var calculator = new BattleCalculator(this.attackerUnit, this.defenderUnit);
+        
+				if (!this.chanceGreaterThan(calculator.evade())) {
+            this.defenderUnit.damage(calculator.damage());
+            this.turn.damageDone(this.defenderUnit, calculator.damage());
         }
 
-        if (defenderUnit.isDead()) {
-            turn.unitDied(defenderUnit);
+        if (this.defenderUnit.isDead()) {
+            this.turn.unitDied(this.defenderUnit);
         }
         else {
-            calculator = new BattleCalculator(defenderUnit, attackerUnit);
+            calculator = new BattleCalculator(this.defenderUnit, this.attackerUnit);
             if (!this.chanceGreaterThan(calculator.evade())) {
-                attackerUnit.damage(calculator.damage());
-                turn.damageDone(attackerUnit, calculator.damage());
+                this.attackerUnit.damage(calculator.damage());
+                this.turn.damageDone(this.attackerUnit, calculator.damage());
             }
         }
 
-        turn.finishUnitMove();
+        this.turn.finishUnitMove();
 
-        if (attackerUnit.isDead()) {
-            turn.unitDied(attackerUnit);
+        if (this.attackerUnit.isDead()) {
+            this.turn.unitDied(this.attackerUnit);
         }
+
     },
 
     chanceGreaterThan: function (percent) {
