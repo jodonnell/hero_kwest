@@ -11,7 +11,6 @@ var Battle = Class.extend({
     },
 
     attack: function () {
-        debugger
         this.doAttack(this.attackerUnit, this.defenderUnit, this.attackerCalculator);
         this.doAttack(this.defenderUnit, this.attackerUnit, this.defenderCalculator);
 
@@ -26,8 +25,16 @@ var Battle = Class.extend({
     },
 
     damage: function (unit, calculator) {
-				unit.damage(calculator.damage());
-        this.turn.damageDone(unit, calculator.damage());
+        var damage = calculator.damage();
+        if (this.doesCritical(calculator))
+            damage *= 2;
+
+				unit.damage(damage);
+        this.turn.damageDone(unit, damage);
+    },
+
+    doesCritical: function (calculator) {
+        return this.chanceGreaterThan(calculator.critical());
     },
 
     doesEvade: function (calculator) {
