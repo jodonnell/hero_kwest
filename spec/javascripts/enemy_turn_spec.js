@@ -23,10 +23,13 @@ describe("Enemy turn", function() {
 
 
     it("can attack", function() {
-        spyOn(window, 'Battle').andCallThrough();
+        var battle = spyOn(window, 'Battle').andCallFake(function () {
+				    return {attack: function() {}};
+        });
+
         turn.update();
 
-        expect(window.Battle).toHaveBeenCalled();
+        expect(battle).toHaveBeenCalled();
     });
 
 

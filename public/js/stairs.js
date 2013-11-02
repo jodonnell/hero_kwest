@@ -7,6 +7,6 @@ var Stairs = Sprite.extend({
     },
 
     unitStoppedOn: function (unit) {
-				debugger
+        $(window).trigger('enteredStairs');
     }
 });
