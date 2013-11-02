@@ -11,20 +11,42 @@ var GameController = Class.extend({
         this.objects.add(level.floors, {movableThrough: true, z: 100});
         this.objects.add(level.enemyUnits, this.objects.enemyUnit());
         this.objects.add(level.stairs, this.objects.stairs());
-        debugger
+
         this.mouse = new Mouse(this);
+        this.newPlayerTurn();
+
+        $(window).bind('enteredStairs', $.proxy(this.descendLevel, this));
+    },
+
+    descendLevel: function () {
+        var level = new LevelBuilder();
+        this.objects = new Objects();
+        this.objects.add(level.playerUnits, this.objects.playerUnit());
+        this.objects.add(level.walls, this.objects.walls());
+        this.objects.add(level.floors, {movableThrough: true, z: 100});
+        this.objects.add(level.enemyUnits, this.objects.enemyUnit());
+        this.objects.add(level.stairs, this.objects.stairs());
+
         this.newPlayerTurn();
     },
 
-    newPlayerTurn: function () {
+    newTurn: function () {
         if (this.currentTurn === this.enemyTurn) {
-            this.playerTurn = new PlayerTurn(this.objects);
-            this.currentTurn = this.playerTurn;
+            this.newPlayerTurn();
         }
         else {
-            this.enemyTurn = new EnemyTurn(this.objects);
-            this.currentTurn = this.enemyTurn;
+            this.newEnemyTurn();
         }
+    },
+
+    newPlayerTurn: function () {
+				this.playerTurn = new PlayerTurn(this.objects);
+        this.currentTurn = this.playerTurn;
+    },
+
+    newEnemyTurn: function () {
+				this.enemyTurn = new EnemyTurn(this.objects);
+        this.currentTurn = this.enemyTurn;
     },
 
     mouseClick: function(leftClicked, position) {
@@ -66,7 +88,7 @@ var GameController = Class.extend({
         
         this.currentTurn.update();
         if (this.currentTurn.isTurnOver()) {
-            this.newPlayerTurn();
+            this.newTurn();
         }
     }
 });
