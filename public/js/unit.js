@@ -6,6 +6,7 @@ var Unit = Sprite.extend({
         this.movement = 5;
         this.disabled = false;
         this.stats = stats;
+        this.expToNextLevel = 5;
     },
 
     hp: function () {
@@ -45,6 +46,17 @@ var Unit = Sprite.extend({
     },
     
     gainExp: function (numExp) {
-				
+				this.expToNextLevel -= numExp;
+        if (this.expToNextLevel <= 0) {
+            this.gainLevel();
+				    this.expToNextLevel = 0;
+        }
+    },
+
+    gainLevel: function () {
+        this.stats.strength += 1;
+        this.stats.defense += 1;
+        this.stats.speed += 1;
+        this.stats.evade += 1;
     }
 });
