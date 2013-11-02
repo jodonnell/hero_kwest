@@ -19,7 +19,7 @@ var EnemyTurn = Turn.extend({
 
         if (player) {
             this.moveUnit.movePlayerIfClickedTile(enemy.position);
-            new Battle(enemy, player, this);
+            (new Battle(enemy, player, this)).attack();
         }
         else {
             this.moveEnemyToPlayer(enemy);
@@ -42,7 +42,7 @@ var EnemyTurn = Turn.extend({
 				    if (movementTile.isNextToAny(this.objects.where({playerControlled: true}))) {
                 this.moveUnit.movePlayerIfClickedTile(movementTile.position);
                 var player = enemy.isNextToAny(this.objects.where({enemyAttackable: true}));
-                new Battle(enemy, player, this);
+                (new Battle(enemy, player, this)).attack();
                 return true;
             }
         }, this);
