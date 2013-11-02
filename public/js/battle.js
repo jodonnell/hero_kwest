@@ -17,6 +17,7 @@ var Battle = Class.extend({
 
         if (this.defenderUnit.isDead()) {
             this.turn.unitDied(this.defenderUnit);
+            this.attackerUnit.gainExp(5);
         }
         else {
             calculator = new BattleCalculator(this.defenderUnit, this.attackerUnit);
@@ -30,6 +31,7 @@ var Battle = Class.extend({
 
         if (this.attackerUnit.isDead()) {
             this.turn.unitDied(this.attackerUnit);
+            this.defenderUnit.gainExp(5);
         }
 
     },

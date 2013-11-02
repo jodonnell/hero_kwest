@@ -56,4 +56,15 @@ describe("Battle", function() {
         expect(turn.unitDied).toHaveBeenCalledWith(skeleton);
     });
 
+    it("will gain experinence when killing", function() {
+        var exp = spyOn(player, 'gainExp');
+        skeleton.damage(17);
+
+        var battle = new Battle(player, skeleton, turn);
+        spyOn(battle, 'chanceGreaterThan').andReturn(false);
+        battle.attack();
+
+        expect(exp).toHaveBeenCalledWith(5);
+    });
+
 });

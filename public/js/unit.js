@@ -42,5 +42,9 @@ var Unit = Sprite.extend({
 
     isDead: function () {
         return !(this.hp() > 0);
+    },
+    
+    gainExp: function (numExp) {
+				
     }
 });
