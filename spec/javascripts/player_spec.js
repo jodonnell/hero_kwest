@@ -15,7 +15,7 @@ describe("Player", function() {
         var gainLevel = spyOn(player, 'gainLevel');
 				player.gainExp(player.expToNextLevel);
         expect(gainLevel).toHaveBeenCalled();
-        expect(player.expToNextLevel).toBe(0);
+        expect(player.expToNextLevel).toBe(10);
     });
 
     it("can gain a level", function () {

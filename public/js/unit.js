@@ -6,11 +6,12 @@ var Unit = Sprite.extend({
         this.movement = 5;
         this.disabled = false;
         this.stats = stats;
+        this.currentHp = this.stats.hp;
         this.expToNextLevel = 5;
     },
 
     hp: function () {
-				return this.stats.hp;
+				return this.currentHp;
     },
 
     strength: function () {
@@ -38,7 +39,7 @@ var Unit = Sprite.extend({
     },
 
     damage: function (amount) {
-				this.stats.hp = this.stats.hp - amount;
+				this.currentHp -= amount;
     },
 
     isDead: function () {
@@ -49,14 +50,19 @@ var Unit = Sprite.extend({
 				this.expToNextLevel -= numExp;
         if (this.expToNextLevel <= 0) {
             this.gainLevel();
-				    this.expToNextLevel = 0;
+				    this.expToNextLevel = 10;
         }
     },
 
     gainLevel: function () {
+        this.stats.hp += 1;
         this.stats.strength += 1;
         this.stats.defense += 1;
         this.stats.speed += 1;
         this.stats.evade += 1;
+        this.stats.critical += 1;
+        this.stats.criticalEvade += 1;
+
+        this.currentHp = this.stats.hp;
     }
 });

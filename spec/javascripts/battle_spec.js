@@ -34,7 +34,7 @@ describe("Battle", function() {
     });
 
     it("will die", function() {
-        stats.hp = 3;
+        player.damage(19);
         var battle = new Battle(player, skeleton, turn);
         spyOn(battle, 'chanceGreaterThan').andReturn(false);
         battle.attack();

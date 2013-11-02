@@ -46,9 +46,7 @@ describe("Player Turn", function() {
     });
 
     it("you cannot move on top of another player unit", function() {
-        var players = [new Player(playerPosition, stats), new Player(secondPosition, stats)];
-
-        playerTurn.objects.add(new Player(secondPosition, stats), objects.playerUnit());
+        playerTurn.objects.add(new Player(secondPosition, 'image', stats), objects.playerUnit());
 
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, secondPosition);
@@ -99,7 +97,7 @@ describe("Player Turn", function() {
     });
 
     it("you can not move onto a skeleton", function() {
-        var skeleton = [new Skeleton(newPosition)];
+        var skeleton = [new Skeleton(newPosition, stats)];
 
         playerTurn.objects.add(skeleton, objects.enemyUnit());
 
@@ -116,7 +114,7 @@ describe("Player Turn", function() {
     });
 
     it("you can end the turn early", function() {
-        var players = [new Player(playerPosition), new Player(secondPosition)];
+        var players = [new Player(playerPosition, 'image', stats), new Player(secondPosition, 'image', stats)];
 
         objects = new Objects({playerUnits: players});
         playerTurn = new PlayerTurn(objects);
