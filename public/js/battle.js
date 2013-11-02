@@ -5,39 +5,44 @@ var Battle = Class.extend({
         this.attackerUnit = attackerUnit;
         this.defenderUnit = defenderUnit;
         this.turn = turn;
+
+				this.attackerCalculator = new BattleCalculator(this.attackerUnit, this.defenderUnit);
+        this.defenderCalculator = new BattleCalculator(this.defenderUnit, this.attackerUnit);
     },
 
     attack: function () {
-				var calculator = new BattleCalculator(this.attackerUnit, this.defenderUnit);
-        
-				if (!this.chanceGreaterThan(calculator.evade())) {
-            this.defenderUnit.damage(calculator.damage());
-            this.turn.damageDone(this.defenderUnit, calculator.damage());
-        }
-
-        if (this.defenderUnit.isDead()) {
-            this.turn.unitDied(this.defenderUnit);
-            this.attackerUnit.gainExp(5);
-        }
-        else {
-            calculator = new BattleCalculator(this.defenderUnit, this.attackerUnit);
-            if (!this.chanceGreaterThan(calculator.evade())) {
-                this.attackerUnit.damage(calculator.damage());
-                this.turn.damageDone(this.attackerUnit, calculator.damage());
-            }
-        }
+        debugger
+        this.doAttack(this.attackerUnit, this.defenderUnit, this.attackerCalculator);
+        this.doAttack(this.defenderUnit, this.attackerUnit, this.defenderCalculator);
 
         this.turn.finishUnitMove();
+    },
 
-        if (this.attackerUnit.isDead()) {
-            this.turn.unitDied(this.attackerUnit);
-            this.defenderUnit.gainExp(5);
+    doAttack: function (attackerUnit, defenderUnit, calculator) {
+				if (!attackerUnit.isDead() && !this.doesEvade(calculator)) {
+            this.damage(defenderUnit, calculator);
+            this.checkForDeath(defenderUnit, attackerUnit);
         }
+    },
 
+    damage: function (unit, calculator) {
+				unit.damage(calculator.damage());
+        this.turn.damageDone(unit, calculator.damage());
+    },
+
+    doesEvade: function (calculator) {
+				return this.chanceGreaterThan(calculator.evade());
     },
 
     chanceGreaterThan: function (percent) {
 				return _.random(0, 100) <= percent;
+    },
+
+    checkForDeath: function (losingUnit, winningUnit) {
+        if (losingUnit.isDead()) {
+            this.turn.unitDied(losingUnit);
+            winningUnit.gainExp(5);
+        }
     }
 
 });
