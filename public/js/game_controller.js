@@ -20,8 +20,10 @@ var GameController = Class.extend({
 
     descendLevel: function () {
         var level = new LevelBuilder();
+        var players = this.objects.where({playerControlled: true});
+
         this.objects = new Objects();
-        this.objects.add(level.playerUnits, this.objects.playerUnit());
+        this.objects.add(players, this.objects.playerUnit());
         this.objects.add(level.walls, this.objects.walls());
         this.objects.add(level.floors, {movableThrough: true, z: 100});
         this.objects.add(level.enemyUnits, this.objects.enemyUnit());

@@ -18,4 +18,10 @@ describe("Game Controller", function() {
         gameController.draw();
         expect(gameController.drawGameOver).toHaveBeenCalled();
     });
+
+    it("can descend down a level", function() {
+        var playerTurn = spyOn(gameController, 'newPlayerTurn');
+        gameController.descendLevel();
+        expect(playerTurn).toHaveBeenCalled();
+    });
 });
