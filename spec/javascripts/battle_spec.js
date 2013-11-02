@@ -26,11 +26,11 @@ describe("Battle", function() {
     });
 
     it("can evade attack", function() {
-        // var battle = new Battle(player, skeleton, turn);
-        // spyOn(battle, 'chanceGreaterThan').andReturn(false);
+        var battle = new Battle(player, skeleton, turn);
+        spyOn(battle, 'chanceGreaterThan').andReturn(true);
+        battle.attack();
 
-        // expect(player.hp()).toEqual(20);
-        // expect(turn.finishUnitMove).toHaveBeenCalled();
+        expect(player.hp()).toEqual(20);
     });
 
     it("will die", function() {
