@@ -41,9 +41,13 @@ var MoveUnit = Class.extend({
         this.originalPosition = this.selectedUnit.position;
         this.objects.removeAll({movementTile: true});
 
-        this.selectedUnit.position = position;
+        this.selectedUnit.moveTo(position, $.proxy(function () {
+				    this.unitMovedTo(position);
+        }, this));
+    },
 
-        var landedOnObjects = this.objects.where({tile: true}).allAtPosition(position);
+    unitMovedTo: function (position) {
+				var landedOnObjects = this.objects.where({tile: true}).allAtPosition(position);
         _.each(landedOnObjects, function (landendOn) {
 				    landendOn.unitStoppedOn(this.selectedUnit);
         }, this);

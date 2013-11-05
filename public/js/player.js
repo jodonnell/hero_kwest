@@ -9,21 +9,36 @@ var Player = Unit.extend({
             this.spriteSheetX = TILE_SIZE * 0;
             this.spriteSheetY = TILE_SIZE * 0;
         }
+
+        this.restingOffsetX = -16;
+        this.restingOffsetY = -35;
+        this._offsetX = this.restingOffsetX;
+        this._offsetY = this.restingOffsetY;
     },
 
     update: function (args) {
+        if (this.animation)
+            this.animation.advance();
     },
 
     offsetX: function () {
-				return -16;
+				return this._offsetX;
     },
 
     offsetY: function () {
-				return -35;
+				return this._offsetY;
     },
 
     tileSize: function () {
 				return TILE_SIZE * 2;
+    },
+
+    moveRight: function () {
+				this._offsetX++;
+        if (this._offsetX === this.restingOffsetX + TILE_SIZE) {
+            this._offsetX = this.restingOffsetX;
+            this.position = new Position(this.position.x() + 1, this.position.y());
+        }
     },
 
     draw: function () {

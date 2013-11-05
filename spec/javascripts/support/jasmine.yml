@@ -41,6 +41,7 @@ src_files:
     - public/js/battle_preview_menu.js
     - public/js/battle_calculator.js
     - public/js/text.js
+    - public/js/animation.js
     - public/js/raising_and_disappearing_text_effect.js
     - public/js/enemy_turn.js
     - public/js/battle.js

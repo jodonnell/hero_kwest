@@ -64,5 +64,9 @@ var Unit = Sprite.extend({
         this.stats.criticalEvade += 1;
 
         this.currentHp = this.stats.hp;
+    },
+
+    moveTo: function (position, callback) {
+        this.animation = new Animation(this, position, callback);
     }
 });
