@@ -33,6 +33,8 @@ var GameController = Class.extend({
     },
 
     newTurn: function () {
+        this.currentTurn.destroy();
+
         if (this.currentTurn === this.enemyTurn) {
             this.newPlayerTurn();
         }

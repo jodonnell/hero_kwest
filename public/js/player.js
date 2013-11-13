@@ -21,24 +21,8 @@ var Player = Unit.extend({
             this.animation.advance();
     },
 
-    offsetX: function () {
-				return this._offsetX;
-    },
-
-    offsetY: function () {
-				return this._offsetY;
-    },
-
     tileSize: function () {
 				return TILE_SIZE * 2;
-    },
-
-    moveRight: function () {
-				this._offsetX++;
-        if (this._offsetX === this.restingOffsetX + TILE_SIZE) {
-            this._offsetX = this.restingOffsetX;
-            this.position = new Position(this.position.x() + 1, this.position.y());
-        }
     },
 
     draw: function () {

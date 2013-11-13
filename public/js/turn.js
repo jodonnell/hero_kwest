@@ -10,6 +10,11 @@ var Turn = Class.extend({
 
         this.objects.removeAll({menus: true});
         this.initialize();
+        $(window).bind('unitMovedTo', $.proxy(this.unitMovedTo, this));
+    },
+
+    destroy: function () {
+				$(window).unbind('unitMovedTo');
     },
 
     damageDone: function (unit, damage) {

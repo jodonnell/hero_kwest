@@ -14,6 +14,14 @@ var Sprite = Class.extend({
         }
     },
 
+    offsetX: function () {
+				return this._offsetX || 0;
+    },
+
+    offsetY: function () {
+				return this._offsetY || 0;
+    },
+
     tileSize: function () {
 				return TILE_SIZE;
     },
@@ -40,14 +48,6 @@ var Sprite = Class.extend({
 
     update: function () {
 
-    },
-
-    offsetX: function () {
-				return 0;
-    },
-
-    offsetY: function () {
-				return 0;
     },
 
     isNextToAny: function (sprites) {

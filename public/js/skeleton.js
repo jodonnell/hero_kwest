@@ -2,18 +2,17 @@
 
 var Skeleton = Unit.extend({
     init: function (position, stats) {
-        this.newUnit(position, stats)
+        this.newUnit(position, stats);
+        this.restingOffsetX = -2;
+        this.restingOffsetY = -20;
+        this._offsetX = this.restingOffsetX;
+        this._offsetY = this.restingOffsetY;
+        this.currentImage = 'skeleton';
     },
 
     update: function (args) {
-    },
-
-    getCurrentImage: function () {
-        return 'skeleton';
-    },
-
-    draw: function () {
-        var image = gameImages[this.getCurrentImage()];
-        gameContext.drawImage(image, this.position.xPixels() - 2, this.position.yPixels() - 20);
+        if (this.animation) {
+            this.animation.advance();
+        }
     }
 });

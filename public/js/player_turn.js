@@ -1,14 +1,7 @@
 "use strict";
 
 var PlayerTurn = Turn.extend({
-    init: function (objects) {
-        this.objects = objects;
-
-        _.each(this.objects.where({unit: true}), function (unit) {
-				    unit.disabled = false;
-        });
-
-        this.objects.removeAll({menus: true});
+    initialize: function () {
     },
 
     update: function () {
@@ -49,5 +42,14 @@ var PlayerTurn = Turn.extend({
 
     unitTypes: function () {
 				return this.objects.where({playerControlled: true});
+    },
+
+    unitMovedTo: function (event, selectedUnit, position) {
+				var landedOnObjects = this.objects.where({tile: true}).allAtPosition(position);
+        _.each(landedOnObjects, function (landendOn) {
+				    landendOn.unitStoppedOn(selectedUnit);
+        }, this);
+
+        this.objects.add([new Wait(), new EndTurn(), new AttackIcon()], {menus: true, z: 100});
     }
 });

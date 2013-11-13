@@ -68,5 +68,37 @@ var Unit = Sprite.extend({
 
     moveTo: function (position, callback) {
         this.animation = new Animation(this, position, callback);
+    },
+
+    moveRight: function () {
+				this._offsetX++;
+        if (this._offsetX === this.restingOffsetX + TILE_SIZE) {
+            this._offsetX = this.restingOffsetX;
+            this.position = new Position(this.position.x() + 1, this.position.y());
+        }
+    },
+
+    moveLeft: function () {
+				this._offsetX--;
+        if (this._offsetX === this.restingOffsetX - TILE_SIZE) {
+            this._offsetX = this.restingOffsetX;
+            this.position = new Position(this.position.x() - 1, this.position.y());
+        }
+    },
+    
+    moveUp: function () {
+				this._offsetY--;
+        if (this._offsetY === this.restingOffsetY - TILE_SIZE) {
+            this._offsetY = this.restingOffsetY;
+            this.position = new Position(this.position.x(), this.position.y() - 1);
+        }
+    },
+
+    moveDown: function () {
+				this._offsetY++;
+        if (this._offsetY === this.restingOffsetY + TILE_SIZE) {
+            this._offsetY = this.restingOffsetY;
+            this.position = new Position(this.position.x(), this.position.y() + 1);
+        }
     }
 });

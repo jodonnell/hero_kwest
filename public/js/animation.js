@@ -19,7 +19,19 @@ var Animation = Class.extend({
                 this.frameNum = 0;
         }
 
-        this.unit.moveRight();
+        if (this.toPosition.x() > this.unit.position.x()) {
+            this.unit.moveRight();
+        }
+        else if (this.toPosition.x() < this.unit.position.x()) {
+            this.unit.moveLeft();
+        }
+        else if (this.toPosition.y() < this.unit.position.y()) {
+            this.unit.moveUp();
+        }
+        else if (this.toPosition.y() > this.unit.position.y()) {
+            this.unit.moveDown();
+        }
+        
 
         if (this.unit.position.isEqual(this.toPosition)) {
             this.unit.spriteSheetX = 0;

@@ -42,17 +42,8 @@ var MoveUnit = Class.extend({
         this.objects.removeAll({movementTile: true});
 
         this.selectedUnit.moveTo(position, $.proxy(function () {
-				    this.unitMovedTo(position);
+            $(window).trigger('unitMovedTo', [this.selectedUnit, position]);
         }, this));
-    },
-
-    unitMovedTo: function (position) {
-				var landedOnObjects = this.objects.where({tile: true}).allAtPosition(position);
-        _.each(landedOnObjects, function (landendOn) {
-				    landendOn.unitStoppedOn(this.selectedUnit);
-        }, this);
-
-        this.objects.add([new Wait(), new EndTurn(), new AttackIcon()], {menus: true, z: 100});
     },
 
     isValidMovementSpot: function (position) {

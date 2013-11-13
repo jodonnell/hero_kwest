@@ -2,12 +2,16 @@
 
 var EnemyTurn = Turn.extend({
     initialize: function () {
+        this.enemyMoving = false;
     },
 
     clicked: function (leftClicked, position) {
     },
 
     update: function () {
+        if (this.enemyMoving)
+            return;
+
         var enemy = this.enemyToUpdate();
         if (!enemy)
             return;
@@ -19,14 +23,11 @@ var EnemyTurn = Turn.extend({
 
         if (player) {
             this.moveUnit.movePlayerIfClickedTile(enemy.position);
-            (new Battle(enemy, player, this)).attack();
         }
         else {
             this.moveEnemyToPlayer(enemy);
             this.objects.removeAll({movementTile: true});
         }
-
-				enemy.disabled = true;
     },
 
     enemyToUpdate: function () {
@@ -40,9 +41,8 @@ var EnemyTurn = Turn.extend({
                 return false;
 
 				    if (movementTile.isNextToAny(this.objects.where({playerControlled: true}))) {
+                this.enemyMoving = true;
                 this.moveUnit.movePlayerIfClickedTile(movementTile.position);
-                var player = enemy.isNextToAny(this.objects.where({enemyAttackable: true}));
-                (new Battle(enemy, player, this)).attack();
                 return true;
             }
         }, this);
@@ -50,6 +50,12 @@ var EnemyTurn = Turn.extend({
 
     unitTypes: function () {
 				return this.objects.where({enemyControlled: true});
-    }
+    },
 
+    unitMovedTo: function (event, enemy, position) {
+        var player = enemy.isNextToAny(this.objects.where({enemyAttackable: true}));
+        (new Battle(enemy, player, this)).attack();
+        this.enemyMoving = false;
+				enemy.disabled = true;
+    }
 });
