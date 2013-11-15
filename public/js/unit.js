@@ -100,5 +100,10 @@ var Unit = Sprite.extend({
             this._offsetY = this.restingOffsetY;
             this.position = new Position(this.position.x(), this.position.y() + 1);
         }
+    },
+
+    update: function (args) {
+				if (this.animation)
+            this.animation.advance();
     }
 });

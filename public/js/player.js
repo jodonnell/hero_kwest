@@ -16,11 +16,6 @@ var Player = Unit.extend({
         this._offsetY = this.restingOffsetY;
     },
 
-    update: function (args) {
-        if (this.animation)
-            this.animation.advance();
-    },
-
     tileSize: function () {
 				return TILE_SIZE * 2;
     },

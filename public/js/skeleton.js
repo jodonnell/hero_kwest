@@ -8,11 +8,5 @@ var Skeleton = Unit.extend({
         this._offsetX = this.restingOffsetX;
         this._offsetY = this.restingOffsetY;
         this.currentImage = 'skeleton';
-    },
-
-    update: function (args) {
-        if (this.animation) {
-            this.animation.advance();
-        }
     }
 });
