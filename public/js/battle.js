@@ -11,10 +11,13 @@ var Battle = Class.extend({
     },
 
     attack: function () {
-        this.doAttack(this.attackerUnit, this.defenderUnit, this.attackerCalculator);
-        this.doAttack(this.defenderUnit, this.attackerUnit, this.defenderCalculator);
+        this.attackerUnit.attack($.proxy(function () {
+            this.doAttack(this.attackerUnit, this.defenderUnit, this.attackerCalculator);
+            this.doAttack(this.defenderUnit, this.attackerUnit, this.defenderCalculator);
 
-        this.turn.finishUnitMove();
+            this.turn.finishUnitMove();
+        }, this));
+
     },
 
     doAttack: function (attackerUnit, defenderUnit, calculator) {

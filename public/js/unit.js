@@ -67,7 +67,7 @@ var Unit = Sprite.extend({
     },
 
     moveTo: function (position, callback) {
-        this.animation = new Animation(this, position, callback);
+        this.animation = new Animation(this, new WalkAnimation(this, position), callback);
     },
 
     moveRight: function () {
@@ -105,5 +105,9 @@ var Unit = Sprite.extend({
     update: function (args) {
 				if (this.animation)
             this.animation.advance();
+    },
+
+    attack: function (callback) {
+        this.animation = new Animation(this, new AttackAnimation(this), callback);
     }
 });

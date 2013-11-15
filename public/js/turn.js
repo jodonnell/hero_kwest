@@ -29,8 +29,10 @@ var Turn = Class.extend({
 
     finishUnitMove: function () {
 				this.objects.removeAll({menus: true});
-        this.moveUnit.disableUnit();
-        this.moveUnit = null;
+        if (this.moveUnit) {
+            this.moveUnit.disableUnit();
+            this.moveUnit = null;
+        }
     },
 
     isTurnOver: function () {

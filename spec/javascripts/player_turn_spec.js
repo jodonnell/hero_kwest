@@ -34,7 +34,7 @@ describe("Player Turn", function() {
     it("you can move", function() {
         playerTurn.clicked(true, playerPosition);
         playerTurn.clicked(true, newPosition);
-        expect(_.first(objects.where({playerControlled: true})).position).toBeTheSamePosition(newPosition);
+        expect(_.first(objects.where({playerControlled: true})).animation).toBeTruthy();
         expect(objects.where({movementTile: true}).length).toBe(0);
     });
 

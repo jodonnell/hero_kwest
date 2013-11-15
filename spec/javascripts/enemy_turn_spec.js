@@ -36,7 +36,7 @@ describe("Enemy turn", function() {
     it("will move to player", function() {
         skeleton.position = new Position(4, 1);
         turn.update();
-        expect(skeleton.position.isEqual(new Position(2, 1))).toBeTruthy();
+        expect(skeleton.animation.toPosition.isEqual(new Position(2, 1))).toBeTruthy();
     });
 
 });
