@@ -8,6 +8,8 @@ var Images = Class.extend({
         this._loadImage("radish", "radish_sheet.png");
         this._loadImage("cucumber", "cucumber01.png");
         this._loadImage("broccolee", "BroccoLee01.png");
+        this._loadImage("doggypoo", "doggyPoo.png");
+        this._loadImage("eggplanto", "eggplanto.png");
         this._loadImage("wall", "wall.png");
         this._loadImage("endTurn", "stop.png");
         this._loadImage("wait", "wait.png");
