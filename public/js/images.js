@@ -5,6 +5,15 @@ var Images = Class.extend({
         this._props = [];
         this._callback = callback;
 
+        this._loadImage("attack_icon1", "interface/attack_icon1.png");
+        this._loadImage("attack_icon2", "interface/attack_icon2.png");
+        this._loadImage("cursor1", "interface/cursor1.png");
+        this._loadImage("cursor2", "interface/cursor2.png");
+        this._loadImage("cursor3", "interface/cursor3.png");
+        this._loadImage("defend_icon1", "interface/defend_icon1.png");
+        this._loadImage("defend_icon2", "interface/defend_icon2.png");
+        this._loadImage("move_icon1", "interface/move_icon1.png");
+        this._loadImage("move_icon2", "interface/move_icon2.png");
         this._loadImage("radish", "radish_sheet.png");
         this._loadImage("cucumber", "cucumber01.png");
         this._loadImage("broccolee", "BroccoLee01.png");
