@@ -46,7 +46,7 @@ var EnemyTurn = Turn.extend({
         this.enemyMoving = true;
         
         var player = _.first(this.objects.where({playerControlled: true}));
-        var playerPosition = new Position(player.position.x() - 1, player.position.y());
+        var playerPosition = this.getOpenTileNextToPlayer(player);
 
         var cannotMoveThroughTiles = this.objects.where({enemyCannotMoveThrough: true});
         var pathFinder = new PathFinder(enemy.position, playerPosition, cannotMoveThroughTiles, $.proxy(function( path )  {
@@ -60,5 +60,28 @@ var EnemyTurn = Turn.extend({
             }
         }, this));
         pathFinder.findPath();
+    },
+
+    getOpenTileNextToPlayer: function (player) {
+				var playerPosition = new Position(player.position.x() - 1, player.position.y());
+
+        if (this.objects.where({movableThrough: true}).isAtPosition(playerPosition)) {
+            return playerPosition;
+        }
+
+        playerPosition = new Position(player.position.x() + 1, player.position.y());
+        if (this.objects.where({movableThrough: true}).isAtPosition(playerPosition)) {
+            return playerPosition;
+        }
+
+        playerPosition = new Position(player.position.x(), player.position.y() - 1);
+        if (this.objects.where({movableThrough: true}).isAtPosition(playerPosition)) {
+            return playerPosition;
+        }
+
+        playerPosition = new Position(player.position.x(), player.position.y() + 1);
+        if (this.objects.where({movableThrough: true}).isAtPosition(playerPosition)) {
+            return playerPosition;
+        }
     }
 });
