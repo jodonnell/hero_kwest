@@ -6,9 +6,17 @@ var MoveUnit = Class.extend({
         this.unitController = unitController;
         this.cannotMoveThrough = cannotMoveThrough;
         this.tileColor = tileColor;
+
+        this.cache = [];
     },
 
     moveTiles: function (position, movement) {
+        var cacheKey = position.x() + '_' + position.y() + '_' + movement;
+        if (cacheKey in this.cache)
+            return;
+
+        this.cache[cacheKey] = true;
+
         if (this.objects.where(this.cannotMoveThrough).isAtPosition(position))
             return;
 
