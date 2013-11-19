@@ -25,8 +25,9 @@ var EnemyTurn = Turn.extend({
             this.moveUnit.movePlayerIfClickedTile(enemy.position);
         }
         else {
-            this.moveEnemyToPlayer(enemy);
-            this.objects.removeAll({movementTile: true});
+            this.findPath(enemy);
+            // this.moveEnemyToPlayer(enemy);
+            // this.objects.removeAll({movementTile: true});
         }
     },
 
@@ -57,5 +58,38 @@ var EnemyTurn = Turn.extend({
         (new Battle(enemy, player, this)).attack();
         this.enemyMoving = false;
 				enemy.disabled = true;
+    },
+
+    findPath: function (enemy) {
+        this.enemyMoving = true;
+        var easystar = new EasyStar.js();
+        
+        var grid = [];
+        for (var y = 0; y < Y_MAX; y++) {
+            grid[y] = [];
+            for (var x = 0; x < X_MAX; x++) { 
+                grid[y][x] = 0;
+            }
+        }
+        var cannotMoveThroughTiles = this.objects.where({enemyCannotMoveThrough: true});
+        _.each(cannotMoveThroughTiles, function (cannotMoveThroughTile) {
+				    grid[cannotMoveThroughTile.position.y()][cannotMoveThroughTile.position.x()] = 1;
+        });
+        debugger
+        easystar.setGrid(grid);
+        easystar.setAcceptableTiles([0]);
+
+        var player = _.first(this.objects.where({playerControlled: true}));
+
+
+        easystar.findPath(enemy.position.x(), enemy.position.y(), player.position.x() - 1, player.position.y(), function( path )  {
+            if (path === null) {
+                console.log("Path was not found.");
+            } else {
+                console.log("Path was found. The first Point is " + path[0].x + " " + path[0].y);
+            }
+        });
+        easystar.calculate();
+				
     }
 });
