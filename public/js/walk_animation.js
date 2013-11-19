@@ -1,29 +1,33 @@
 "use strict";
 
 var WalkAnimation = Class.extend({
-    init: function (unit, toPosition) {
+    init: function (unit, path) {
         this.unit = unit;
-        this.toPosition = toPosition;
+        this.path = path;
         this.startingFrame = 0;
         this.numFrames = 6;
     },
 
     update: function () {
-			  if (this.toPosition.x() > this.unit.position.x()) {
+        var toPosition = _.first(this.path);
+			  if (toPosition.x() > this.unit.position.x()) {
             this.unit.moveRight();
         }
-        else if (this.toPosition.x() < this.unit.position.x()) {
+        else if (toPosition.x() < this.unit.position.x()) {
             this.unit.moveLeft();
         }
-        else if (this.toPosition.y() < this.unit.position.y()) {
+        else if (toPosition.y() < this.unit.position.y()) {
             this.unit.moveUp();
         }
-        else if (this.toPosition.y() > this.unit.position.y()) {
+        else if (toPosition.y() > this.unit.position.y()) {
             this.unit.moveDown();
+        }
+        else {
+            this.path.shift();
         }
     },
 
     finished: function () {
-        return this.unit.position.isEqual(this.toPosition);
+        return this.unit.position.isEqual(_.last(this.path));
     }
 });

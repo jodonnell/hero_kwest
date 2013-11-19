@@ -55,7 +55,8 @@ var EnemyTurn = Turn.extend({
 
     unitMovedTo: function (event, enemy, position) {
         var player = enemy.isNextToAny(this.objects.where({enemyAttackable: true}));
-        (new Battle(enemy, player, this)).attack();
+        if (player)
+            (new Battle(enemy, player, this)).attack();
         this.enemyMoving = false;
 				enemy.disabled = true;
     },
@@ -75,21 +76,22 @@ var EnemyTurn = Turn.extend({
         _.each(cannotMoveThroughTiles, function (cannotMoveThroughTile) {
 				    grid[cannotMoveThroughTile.position.y()][cannotMoveThroughTile.position.x()] = 1;
         });
-        debugger
+
         easystar.setGrid(grid);
         easystar.setAcceptableTiles([0]);
 
         var player = _.first(this.objects.where({playerControlled: true}));
 
-
-        easystar.findPath(enemy.position.x(), enemy.position.y(), player.position.x() - 1, player.position.y(), function( path )  {
+        easystar.findPath(enemy.position.x(), enemy.position.y(), player.position.x() - 1, player.position.y(), $.proxy(function( path )  {
             if (path === null) {
                 console.log("Path was not found.");
             } else {
-                console.log("Path was found. The first Point is " + path[0].x + " " + path[0].y);
+                this.objects.removeAll({movementTile: true});
+                path.shift(); // first one is where we start
+                var positions = _.collect(path, function(p) {return new Position(p.x, p.y)});
+                enemy.followPath(positions);
             }
-        });
+        }, this));
         easystar.calculate();
-				
     }
 });

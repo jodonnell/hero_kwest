@@ -109,5 +109,14 @@ var Unit = Sprite.extend({
 
     attack: function (callback) {
         this.animation = new Animation(this, new AttackAnimation(this), callback);
+    },
+
+    followPath: function (path, callback) {
+        var pathCanTravelInOneTurn = path.slice(0, this.movement);
+        debugger
+        var finalDestination = pathCanTravelInOneTurn[this.movement - 1];
+				this.animation = new Animation(this, new WalkAnimation(this, pathCanTravelInOneTurn), $.proxy(function() {
+            $(window).trigger('unitMovedTo', [this, finalDestination]);
+        }, this));
     }
 });
