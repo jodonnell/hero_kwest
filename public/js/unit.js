@@ -113,8 +113,7 @@ var Unit = Sprite.extend({
 
     followPath: function (path, callback) {
         var pathCanTravelInOneTurn = path.slice(0, this.movement);
-        debugger
-        var finalDestination = pathCanTravelInOneTurn[this.movement - 1];
+        var finalDestination = _.last(pathCanTravelInOneTurn);
 				this.animation = new Animation(this, new WalkAnimation(this, pathCanTravelInOneTurn), $.proxy(function() {
             $(window).trigger('unitMovedTo', [this, finalDestination]);
         }, this));

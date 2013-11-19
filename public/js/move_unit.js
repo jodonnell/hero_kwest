@@ -49,9 +49,19 @@ var MoveUnit = Class.extend({
         this.originalPosition = this.selectedUnit.position;
         this.objects.removeAll({movementTile: true});
 
-        this.selectedUnit.moveTo(position, $.proxy(function () {
-            $(window).trigger('unitMovedTo', [this.selectedUnit, position]);
+        var cannotMoveThroughTiles = this.objects.where({playerCannotMoveThrough: true});
+        
+        var pathFinder = new PathFinder(this.selectedUnit.position, position, cannotMoveThroughTiles, $.proxy(function( path )  {
+            if (path === null) {
+                console.log("Path was not found.");
+            } else {
+                this.objects.removeAll({movementTile: true});
+                path.shift(); // first one is where we start
+                var positions = _.collect(path, function(p) {return new Position(p.x, p.y)});
+                this.selectedUnit.followPath(positions);
+            }
         }, this));
+        pathFinder.findPath();
     },
 
     isValidMovementSpot: function (position) {
