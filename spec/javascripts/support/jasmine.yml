@@ -42,9 +42,13 @@ src_files:
     - public/js/battle_calculator.js
     - public/js/text.js
     - public/js/animation.js
+    - public/js/attack_animation.js
+    - public/js/walk_animation.js
     - public/js/raising_and_disappearing_text_effect.js
     - public/js/enemy_turn.js
     - public/js/battle.js
+    - public/js/easystar.js
+    - public/js/path_finder.js
 
 
 # stylesheets
