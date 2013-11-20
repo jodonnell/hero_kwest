@@ -13,8 +13,7 @@ var GameController = Class.extend({
         this.objects.add(level.stairs, this.objects.stairs());
 
         this.mouse = new Mouse(this);
-        //this.newPlayerTurn();
-        this.newEnemyTurn();
+        this.newPlayerTurn();
 
         $(window).bind('enteredStairs', $.proxy(this.descendLevel, this));
     },

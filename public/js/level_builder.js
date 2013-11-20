@@ -89,10 +89,9 @@ var LevelBuilder = Class.extend({
                             new Player(new Position(8, 8), 'broccolee', {hp: 16, strength: 9, defense: 11, speed: 8, evade: 10, critical: 30, criticalEvade: 2}), 
                             new Player(new Position(6, 9), 'cucumber', {hp: 15, strength: 13, defense: 4, speed: 57, evade: 47, critical: 7, criticalEvade: 7})];
 
-        // this.enemyUnits = [new Skeleton(new Position(6, 6), {hp: 14, strength: 14, defense: 6, speed: 6, evade: 6, critical: 4, criticalEvade: 3}), 
-        //                 new Skeleton(new Position(11, 5), {hp: 12, strength: 16, defense: 5, speed: 8, evade: 4, critical: 2, criticalEvade: 6})];
-
-        this.enemyUnits = [new Skeleton(new Position(23, 3), {hp: 14, strength: 14, defense: 6, speed: 6, evade: 6, critical: 4, criticalEvade: 3})];
+        this.enemyUnits = [new Skeleton(new Position(6, 6), {hp: 14, strength: 14, defense: 6, speed: 6, evade: 6, critical: 4, criticalEvade: 3}), 
+                           new Skeleton(new Position(11, 5), {hp: 12, strength: 16, defense: 5, speed: 8, evade: 4, critical: 2, criticalEvade: 6}),
+                           new Skeleton(new Position(23, 3), {hp: 14, strength: 14, defense: 6, speed: 6, evade: 6, critical: 4, criticalEvade: 3})];
 
         this.stairs = [new Stairs(new Position(12, 13))];
     },

@@ -38,6 +38,10 @@ var EnemyTurn = Turn.extend({
         var player = enemy.isNextToAny(this.objects.where({enemyAttackable: true}));
         if (player)
             (new Battle(enemy, player, this)).attack();
+        this.enemyDone(enemy);
+    },
+
+    enemyDone: function (enemy) {
         this.enemyMoving = false;
 				enemy.disabled = true;
     },
@@ -52,6 +56,7 @@ var EnemyTurn = Turn.extend({
         var pathFinder = new PathFinder(enemy.position, playerPosition, cannotMoveThroughTiles, $.proxy(function( path )  {
             if (path === null) {
                 console.log("Path was not found.");
+                this.enemyDone(enemy);
             } else {
                 this.objects.removeAll({movementTile: true});
                 path.shift(); // first one is where we start
