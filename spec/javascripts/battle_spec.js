@@ -1,3 +1,7 @@
+function Animation(unit, animation, callback) {
+    callback();
+}
+
 describe("Battle", function() {
     var stats, player, skeleton, turn;
 
@@ -14,7 +18,6 @@ describe("Battle", function() {
         spyOn(turn, 'finishUnitMove');
         spyOn(turn, 'unitDied');
     });
-
 
     it("does damage", function() {
         var battle = new Battle(player, skeleton, turn);

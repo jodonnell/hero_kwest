@@ -17,7 +17,6 @@ var Battle = Class.extend({
 
             this.turn.finishUnitMove();
         }, this));
-
     },
 
     doAttack: function (attackerUnit, defenderUnit, calculator) {
