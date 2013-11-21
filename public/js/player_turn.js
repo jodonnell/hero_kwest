@@ -10,21 +10,16 @@ var PlayerTurn = Turn.extend({
     clicked: function (leftClicked, position) {
         var canceledMove = !leftClicked && this.moveUnit;
         if (canceledMove) {
-            this.moveUnit.reset();
-            this.moveUnit = null;
-            return;
+            this.cancelMove();
         }
-
-        if (this.objects.where({menus: true}).isAtPosition(position)) {
-            var menu = this.objects.where({menus: true}).atPosition(position);
-            menu.action(this);
+        else if (this._didClickMenu(position)) {
+            this.clickMenu(position);
         }
         else if (this.moveUnit) {
             this.moveUnit.movePlayerIfClickedTile(position);
         }
         else if (this.isPlayerMovable(position)) {
-            this.moveUnit = new MoveUnit(this.objects, {playerControlled: true}, {playerCannotMoveThrough: true}, BLUE_TILES);
-            this.moveUnit.createMovementTiles(position);
+            this.createMovement(position);
         }
     },
 
@@ -52,5 +47,24 @@ var PlayerTurn = Turn.extend({
         }, this);
 
         this.objects.add([new Wait(), new EndTurn(), new AttackIcon()], {menus: true, z: 100});
+    },
+
+    _didClickMenu: function (position) {
+				return this.objects.where({menus: true}).isAtPosition(position);
+    },
+
+    cancelMove: function () {
+				this.moveUnit.reset();
+        this.moveUnit = null;
+    },
+
+    clickMenu: function (position) {
+				var menu = this.objects.where({menus: true}).atPosition(position);
+        menu.action(this);
+    },
+
+    createMovement: function (position) {
+				this.moveUnit = new MoveUnit(this.objects, {playerControlled: true}, {playerCannotMoveThrough: true}, BLUE_TILES);
+        this.moveUnit.createMovementTiles(position);
     }
 });
