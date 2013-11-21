@@ -1,6 +1,6 @@
 "use strict";
 
-var BattleCalculator = Sprite.extend({
+var BattleCalculator = Class.extend({
     init: function (attacker, defender) {
         this.attacker = attacker;
         this.defender = defender;
