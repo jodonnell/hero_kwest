@@ -15,7 +15,6 @@ src_files:
     - public/js/lib/underscore.js
     - public/js/lib/class.js
     - public/js/lib/easystar.js
-    - public/js/position.js
     - public/js/sprites/sprite.js
     - public/js/sprites/unit.js
     - public/js/sprites/stairs.js
@@ -30,6 +29,10 @@ src_files:
     - public/js/sprites/attack_icon.js
     - public/js/sprites/text.js
     - public/js/sprites/movement_tile.js
+    - public/js/animations/animation.js
+    - public/js/animations/attack_animation.js
+    - public/js/animations/walk_animation.js
+    - public/js/position.js
     - public/js/constants.js
     - public/js/game_init.js
     - public/js/control.js
@@ -42,9 +45,7 @@ src_files:
     - public/js/move_unit.js
     - public/js/battle_preview_menu.js
     - public/js/battle_calculator.js
-    - public/js/animation.js
-    - public/js/attack_animation.js
-    - public/js/walk_animation.js
+
     - public/js/raising_and_disappearing_text_effect.js
     - public/js/enemy_turn.js
     - public/js/battle.js
