@@ -8,7 +8,8 @@ var PlayerTurn = Turn.extend({
     },
 
     clicked: function (leftClicked, position) {
-        if (!leftClicked && this.moveUnit) {
+        var canceledMove = !leftClicked && this.moveUnit;
+        if (canceledMove) {
             this.moveUnit.reset();
             this.moveUnit = null;
             return;
