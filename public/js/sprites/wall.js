@@ -3,7 +3,7 @@
 var Wall = Sprite.extend({
     init: function (position, wallSide) {
         this.position = position;
-        this.currentImage = 'tiles';
+        this.currentImage = 'room_tiles';
 
         if (wallSide === 'topleft') {
             this.spriteSheetX = TILE_SIZE * 0;
@@ -18,7 +18,7 @@ var Wall = Sprite.extend({
             this.spriteSheetY = TILE_SIZE * 0;
         }
         else if (wallSide === 'topright') {
-            this.spriteSheetX = TILE_SIZE * 2;
+            this.spriteSheetX = TILE_SIZE * 3;
             this.spriteSheetY = TILE_SIZE * 0;
         }
         else if (wallSide === 'left1') {
@@ -61,6 +61,15 @@ var Wall = Sprite.extend({
             this.spriteSheetX = TILE_SIZE * 2;
             this.spriteSheetY = TILE_SIZE * 1;
         }
+        else if (wallSide === 'front3') {
+            this.spriteSheetX = TILE_SIZE * 1;
+            this.spriteSheetY = TILE_SIZE * 2;
+        }
+        else if (wallSide === 'front4') {
+            this.spriteSheetX = TILE_SIZE * 2;
+            this.spriteSheetY = TILE_SIZE * 2;
+        }
+
 
     }
 });

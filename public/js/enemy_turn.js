@@ -9,16 +9,13 @@ var EnemyTurn = Turn.extend({
     },
 
     update: function () {
-        if (this.enemyMoving)
-            return;
-
         var enemy = this.enemyToUpdate();
-        if (!enemy)
+        if (this.enemyMoving || !enemy)
             return;
 
-        var player = enemy.isNextToAny(this.objects.where({enemyAttackable: true}));
+        var playerNextToEnemy = enemy.isNextToAny(this.objects.where({enemyAttackable: true}));
 
-        if (player) {
+        if (playerNextToEnemy) {
             this.unitMovedTo(null, enemy, enemy.position);
         }
         else {
