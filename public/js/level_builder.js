@@ -172,6 +172,112 @@ var LevelBuilder = Class.extend({
         this.square(7, 15, 'hanging2');
         this.square(7, 15, 'hanging slime1');
 
+        this.square(8, 4, 'normal floor');
+        this.square(8, 5, 'normal floor');
+        this.square(8, 6, 'square floor');
+        this.square(8, 7, 'square floor');
+        this.square(8, 8, 'normal floor');
+        this.square(8, 9, 'normal floor');
+        this.square(8, 10, 'normal floor');
+        this.square(8, 11, 'rocks');
+        this.square(8, 12, 'normal floor');
+        this.square(8, 13, 'slime top right');
+        this.square(8, 14, 'slime bottom right');
+
+        this.square(9, 4, 'normal floor');
+        this.square(9, 5, 'square floor');
+        this.square(9, 6, 'square floor');
+        this.square(9, 7, 'square floor');
+        this.square(9, 8, 'normal floor');
+        this.square(9, 9, 'rocks');
+        this.square(9, 10, 'normal floor');
+        this.square(9, 11, 'normal floor');
+        this.square(9, 12, 'normal floor');
+        this.square(9, 13, 'normal floor');
+        this.square(9, 14, 'normal floor');
+
+        this.square(10, 4, 'normal floor');
+        this.square(10, 5, 'normal floor');
+        this.square(10, 6, 'normal floor');
+        this.square(10, 7, 'normal floor');
+        this.square(10, 8, 'normal floor');
+        this.square(10, 9, 'normal floor');
+        this.square(10, 10, 'normal floor');
+        this.square(10, 11, 'normal floor');
+        this.square(10, 12, 'normal floor');
+        this.square(10, 13, 'normal floor');
+        this.square(10, 14, 'normal floor');
+
+        this.square(11, 4, 'normal floor');
+        this.square(11, 5, 'normal floor');
+        this.square(11, 6, 'normal floor');
+        this.square(11, 7, 'normal floor');
+        this.square(11, 8, 'normal floor');
+        this.square(11, 9, 'normal floor');
+        this.square(11, 10, 'normal floor');
+        this.square(11, 11, 'normal floor');
+        this.square(11, 12, 'normal floor');
+        this.square(11, 13, 'normal floor');
+        this.square(11, 14, 'normal floor');
+
+        this.square(12, 4, 'normal floor');
+        this.square(12, 5, 'normal floor');
+        this.square(12, 6, 'normal floor');
+        this.square(12, 7, 'normal floor');
+        this.square(12, 8, 'normal floor');
+        this.square(12, 9, 'normal floor');
+        this.square(12, 10, 'normal floor');
+        this.square(12, 11, 'normal floor');
+        this.square(12, 12, 'normal floor');
+        this.square(12, 13, 'normal floor');
+        this.square(12, 14, 'normal floor');
+
+        this.square(13, 4, 'normal floor');
+        this.square(13, 5, 'normal floor');
+        this.square(13, 6, 'normal floor');
+        this.square(13, 7, 'normal floor');
+        this.square(13, 8, 'normal floor');
+        this.square(13, 9, 'normal floor');
+        this.square(13, 10, 'normal floor');
+        this.square(13, 11, 'normal floor');
+        this.square(13, 12, 'normal floor');
+        this.square(13, 13, 'normal floor');
+        this.square(13, 14, 'normal floor');
+
+        this.square(14, 4, 'normal floor');
+        this.square(14, 5, 'normal floor');
+        this.square(14, 6, 'normal floor');
+        this.square(14, 7, 'normal floor');
+        this.square(14, 8, 'normal floor');
+        this.square(14, 9, 'normal floor');
+        this.square(14, 10, 'normal floor');
+        this.square(14, 11, 'normal floor');
+        this.square(14, 12, 'normal floor');
+        this.square(14, 13, 'normal floor');
+        this.square(14, 14, 'normal floor');
+
+        this.square(15, 4, 'normal floor');
+        this.square(15, 5, 'normal floor');
+        this.square(15, 6, 'normal floor');
+        this.square(15, 7, 'normal floor');
+        this.square(15, 8, 'normal floor');
+        this.square(15, 9, 'normal floor');
+        this.square(15, 10, 'normal floor');
+        this.square(15, 11, 'normal floor');
+        this.square(15, 12, 'normal floor');
+        this.square(15, 13, 'normal floor');
+        this.square(15, 14, 'normal floor');
+
+        this.square(16, 5, 'normal floor');
+        this.square(16, 6, 'normal floor');
+        this.square(16, 7, 'normal floor');
+        this.square(16, 8, 'normal floor');
+        this.square(16, 9, 'normal floor');
+        this.square(16, 10, 'normal floor');
+        this.square(16, 11, 'normal floor');
+        this.square(16, 12, 'normal floor');
+        this.square(16, 13, 'normal floor');
+
         this.fillShadow(5, 5, 5, 13, 'shadow', 'shadow');
 
         // this.floors.push(new Floor((new Position(9, 11)), 'dark brown'));

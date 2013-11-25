@@ -18,8 +18,8 @@ var Floor = Sprite.extend({
             this.spriteSheetY = TILE_SIZE * 0;
         }
         else if (color === 'rocks') {
-            this.spriteSheetX = TILE_SIZE * 1;
-            this.spriteSheetY = TILE_SIZE * 4;
+            this.spriteSheetX = TILE_SIZE * 3;
+            this.spriteSheetY = TILE_SIZE * 5;
         }
         else if (color === 'cracked floor') {
             this.spriteSheetX = TILE_SIZE * 7;
@@ -31,6 +31,14 @@ var Floor = Sprite.extend({
         }
         else if (color === 'slime bottom left') {
             this.spriteSheetX = TILE_SIZE * 6;
+            this.spriteSheetY = TILE_SIZE * 5;
+        }
+        else if (color === 'slime top right') {
+            this.spriteSheetX = TILE_SIZE * 7;
+            this.spriteSheetY = TILE_SIZE * 4;
+        }
+        else if (color === 'slime bottom right') {
+            this.spriteSheetX = TILE_SIZE * 7;
             this.spriteSheetY = TILE_SIZE * 5;
         }
         else if (color === 'hanging1') {
