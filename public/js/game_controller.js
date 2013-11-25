@@ -9,7 +9,7 @@ var GameController = Class.extend({
         this.objects.add(level.playerUnits, this.objects.playerUnit());
         this.objects.add(level.walls, this.objects.walls());
         this.objects.add(level.floors, {movableThrough: true, z: 100});
-        this.objects.add(level.shadows, {movableThrough: true, z: 101});
+        this.objects.add(level.shadows, {movableThrough: true, z: 1001});
         this.objects.add(level.enemyUnits, this.objects.enemyUnit());
         this.objects.add(level.stairs, this.objects.stairs());
 

@@ -271,6 +271,12 @@ var LevelBuilder = Class.extend({
         this.square(15, 13, 'normal floor');
 
         this.fillShadow(5, 5, 5, 13, 'shadow', 'shadow');
+        this.fillShadow(6, 6, 4, 4, 'shadow', 'shadow');
+        this.fillShadow(5, 5, 3, 3, 'shadow wall left1', 'shadow');
+        this.fillShadow(5, 5, 4, 4, 'shadow wall left2', 'shadow');
+
+        this.fillShadow(6, 6, 2, 2, 'shadow wall left1', 'shadow');
+        this.fillShadow(6, 6, 3, 3, 'shadow wall left2', 'shadow');
 
         this.embellishment(6, 12, 'slime emb1');
         this.embellishment(7, 12, 'slime emb2');

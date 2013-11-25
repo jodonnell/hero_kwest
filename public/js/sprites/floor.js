@@ -69,6 +69,15 @@ var Floor = Sprite.extend({
             this.spriteSheetX = TILE_SIZE * 0;
             this.spriteSheetY = TILE_SIZE * 6;
         }
+        else if (color === 'shadow wall left1') {
+            this.spriteSheetX = TILE_SIZE * 1;
+            this.spriteSheetY = TILE_SIZE * 6;
+        }
+        else if (color === 'shadow wall left2') {
+            this.spriteSheetX = TILE_SIZE * 1;
+            this.spriteSheetY = TILE_SIZE * 7;
+        }
+
         else if (color === 'slime emb1') {
             this.spriteSheetX = TILE_SIZE * 5;
             this.spriteSheetY = TILE_SIZE * 3;
