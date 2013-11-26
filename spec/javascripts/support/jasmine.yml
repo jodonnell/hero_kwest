@@ -29,6 +29,7 @@ src_files:
     - public/js/sprites/attack_icon.js
     - public/js/sprites/text.js
     - public/js/sprites/movement_tile.js
+    - public/js/sprites/torch.js
     - public/js/animations/animation.js
     - public/js/animations/attack_animation.js
     - public/js/animations/walk_animation.js

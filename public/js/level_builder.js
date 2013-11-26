@@ -83,6 +83,32 @@ var LevelBuilder = Class.extend({
         }
     },
 
+    fillTorch: function (startX, finishX, startY, finishY, color1, color2) {
+        for (var x = startX; x <= finishX; x++) {
+            for (var y = startY; y <= finishY; y++) {
+                var yEven = ((y - startY) % 2) === 0;
+                var xEven = ((x - startX) % 2) === 0;
+
+                if (yEven) {
+                    if (xEven) {
+                        this.embellishments.push(new Torch((new Position(x, y)), color1));
+                    }
+                    else {
+                        this.embellishments.push(new Torch((new Position(x, y)), color2));
+                    }
+                }
+                else {
+                    if (xEven) {
+                        this.embellishments.push(new Torch((new Position(x, y)), color2));
+                    }
+                    else {
+                        this.embellishments.push(new Torch((new Position(x, y)), color1));
+                    }
+                }
+            }
+        }
+    },
+
     embellishment: function (x, y, color) {
 				this.fillEmbellishment(x, x, y, y, color, color);
     },
@@ -306,6 +332,9 @@ var LevelBuilder = Class.extend({
         this.embellishment(12, 13, 'slime emb10');
         this.embellishment(11, 12, 'slime emb11');
         this.embellishment(11, 14, 'slime emb12');
+
+        this.fillTorch(12, 12, 2, 2, 'torch');
+        this.fillTorch(8, 8, 2, 2, 'torch');
 
         // this.floors.push(new Floor((new Position(9, 11)), 'dark brown'));
 

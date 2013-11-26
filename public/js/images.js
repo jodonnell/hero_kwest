@@ -31,6 +31,7 @@ var Images = Class.extend({
         this._loadImage("tiles", "tiles.png");
         this._loadImage("room_tiles", "tiles_room_NEW.png");
         this._loadImage("stairs", "stairs_down.png");
+        this._loadImage("torch", "torch.png");
         this._loadImage("gem", "gem.png");
         //this.bubRight.onload = callback;
     },
