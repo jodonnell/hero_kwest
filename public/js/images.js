@@ -41,7 +41,7 @@ var Images = Class.extend({
 
         this[prop] = new Image();
         this[prop].src = "images/" + imageFile;
-        if (prop === 'bubRight')
+        if (prop === 'gem')
             this[prop].onload = this._callback;
     }
 
