@@ -4,7 +4,7 @@ var LevelBuilder = Class.extend({
     init: function () {
         this.floors = [];
         this.walls = [];
-        this.shadows = [];
+        this.embellishments = [];
         this.playerUnits = [];
         this.buildLevel1();
     },
@@ -57,7 +57,7 @@ var LevelBuilder = Class.extend({
         }
     },
 
-    fillShadow: function (startX, finishX, startY, finishY, color1, color2) {
+    fillEmbellishment: function (startX, finishX, startY, finishY, color1, color2) {
         for (var x = startX; x <= finishX; x++) {
             for (var y = startY; y <= finishY; y++) {
                 var yEven = ((y - startY) % 2) === 0;
@@ -65,18 +65,18 @@ var LevelBuilder = Class.extend({
 
                 if (yEven) {
                     if (xEven) {
-                        this.shadows.push(new Floor((new Position(x, y)), color1));
+                        this.embellishments.push(new Floor((new Position(x, y)), color1));
                     }
                     else {
-                        this.shadows.push(new Floor((new Position(x, y)), color2));
+                        this.embellishments.push(new Floor((new Position(x, y)), color2));
                     }
                 }
                 else {
                     if (xEven) {
-                        this.shadows.push(new Floor((new Position(x, y)), color2));
+                        this.embellishments.push(new Floor((new Position(x, y)), color2));
                     }
                     else {
-                        this.shadows.push(new Floor((new Position(x, y)), color1));
+                        this.embellishments.push(new Floor((new Position(x, y)), color1));
                     }
                 }
             }
@@ -84,7 +84,7 @@ var LevelBuilder = Class.extend({
     },
 
     embellishment: function (x, y, color) {
-				this.fillShadow(x, x, y, y, color, color);
+				this.fillEmbellishment(x, x, y, y, color, color);
     },
 
     square: function (x, y, color) {
@@ -270,13 +270,13 @@ var LevelBuilder = Class.extend({
         this.square(15, 12, 'normal floor');
         this.square(15, 13, 'normal floor');
 
-        this.fillShadow(5, 5, 5, 13, 'shadow', 'shadow');
-        this.fillShadow(6, 6, 4, 4, 'shadow', 'shadow');
-        this.fillShadow(5, 5, 3, 3, 'shadow wall left1', 'shadow');
-        this.fillShadow(5, 5, 4, 4, 'shadow wall left2', 'shadow');
+        this.fillEmbellishment(5, 5, 5, 13, 'shadow', 'shadow');
+        this.fillEmbellishment(6, 6, 4, 4, 'shadow', 'shadow');
+        this.fillEmbellishment(5, 5, 3, 3, 'shadow wall left1', 'shadow');
+        this.fillEmbellishment(5, 5, 4, 4, 'shadow wall left2', 'shadow');
 
-        this.fillShadow(6, 6, 2, 2, 'shadow wall left1', 'shadow');
-        this.fillShadow(6, 6, 3, 3, 'shadow wall left2', 'shadow');
+        this.fillEmbellishment(6, 6, 2, 2, 'shadow wall left1', 'shadow');
+        this.fillEmbellishment(6, 6, 3, 3, 'shadow wall left2', 'shadow');
 
         this.embellishment(6, 12, 'slime emb1');
         this.embellishment(7, 12, 'slime emb2');
