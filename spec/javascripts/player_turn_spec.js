@@ -97,7 +97,7 @@ describe("Player Turn", function() {
     });
 
     it("you can not move onto a skeleton", function() {
-        var skeleton = [new Skeleton(newPosition, stats)];
+        var skeleton = [new Skeleton(newPosition, 'skeleton', stats)];
 
         playerTurn.objects.add(skeleton, objects.enemyUnit());
 
@@ -127,7 +127,7 @@ describe("Player Turn", function() {
     });
 
     it("you can attack", function() {
-        var skeleton = [new Skeleton(newPosition, stats)];
+        var skeleton = [new Skeleton(newPosition, 'skeleton', stats)];
 
         playerTurn.objects.add(skeleton, objects.enemyUnit());
 

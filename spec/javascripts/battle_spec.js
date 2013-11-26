@@ -8,7 +8,7 @@ describe("Battle", function() {
     beforeEach(function() { 
         stats = {hp: 20, strength: 12, defense: 5, speed: 7, evade: 7, critical: 2, criticalEvade: 2};
         player = new Player(new Position(1, 1), 'player', stats);
-        skeleton = new Skeleton(new Position(2, 1), _.clone(stats));
+        skeleton = new Skeleton(new Position(2, 1), 'skeleton', _.clone(stats));
 
         turn = {
             finishUnitMove: function() {},

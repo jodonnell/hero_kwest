@@ -25,11 +25,13 @@ var Images = Class.extend({
         this._loadImage("checkmark-icon", "check-icon.png");
         this._loadImage("attack-icon", "attack-icon.png");
         this._loadImage("skeleton", "skeleton.png");
+        this._loadImage("skeleton_red", "skeleton_red_1.png");
+        this._loadImage("mummy", "mummy.png");        
         this._loadImage("floor", "floor_dirt.png");
         this._loadImage("tiles", "tiles.png");
         this._loadImage("room_tiles", "tiles_room_NEW.png");
         this._loadImage("stairs", "stairs_down.png");
-        this._loadImage("bubRight", "bub.png");
+        this._loadImage("gem", "gem.png");
         //this.bubRight.onload = callback;
     },
 
